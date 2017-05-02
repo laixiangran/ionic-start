@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			适配规则
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="tools_img">
+		<img src="assets/img/mobileAdapter.png"/>
+	</div>
+	<div class="tools_word">
+		移动适配规则，总结起来就一句话： 文字流式（fluid），控件弹性（flexible），图片等比缩放（scale）
+	</div>
+	<div class="tools_itme" *ngFor="let item of items;">
+		<span class="item_icon" [style.background-color]="item.color">
+			<span>
+				<ion-icon [name]="item.icon"></ion-icon>
+			</span>
+		</span>
+		<span>{{item.name}}</span>
+		<span>
+			<ion-icon name="arrow-forward"></ion-icon>
+		</span>
+	</div>
+</ion-content>

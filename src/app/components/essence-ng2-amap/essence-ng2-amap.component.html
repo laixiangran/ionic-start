@@ -1,0 +1,18 @@
+<div class="amap_main">
+	<div class="amap" #amap></div>
+	<div class="amap_toolbar">
+		<div class="toolbar full_btn" (click)="fullMap()">
+			<div class="icon_div">
+				<ion-icon name="md-globe"></ion-icon>
+			</div>
+		</div>
+		<div class="toolbar location_btn" (click)="currentLocation()">
+			<div class="icon_div" *ngIf="isStartLocation">
+				<ion-spinner name="bubbles"></ion-spinner>
+			</div>
+			<div class="icon_div" *ngIf="!isStartLocation">
+				<ion-icon name="md-locate" [style.color]="tempLocation && '#1D89DA'"></ion-icon>
+			</div>
+		</div>
+	</div>
+</div>

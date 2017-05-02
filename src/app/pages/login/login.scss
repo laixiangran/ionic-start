@@ -1,0 +1,87 @@
+/**
+ * Created by laixiangran on 2016/7/2
+ * homepage：http://www.laixiangran.cn
+ */
+
+$login-div-width: 28rem;
+$login-border-radius-5: 0.5rem;
+
+page-login {
+
+    ion-content {
+        background: url("../assets/img/login/login_bg.jpg") top center no-repeat;
+        background-size: 100%;
+    }
+
+    .login-content {
+        width: $login-div-width;
+        margin: 0 auto;
+
+        .logo {
+            text-align: center;
+            margin: 60px 0 40px 0;
+        }
+
+        .formDiv {
+            width: 100%;
+            border-radius: $login-border-radius-5;
+            padding: 0 10px;
+            background-color: #549bc5;
+
+            ion-list {
+                margin: 0;
+
+                ion-item {
+                    padding: 0;
+                    border: 0;
+                    background-color: #549bc5;
+
+                    &.item-input {
+                        font-size: 1.6rem;
+                        color: color($colors, light);
+                        border: 0;
+
+                        ion-label {
+                            font-size: 2.5rem;
+                            width: 2.5rem;
+                            height: 3.5rem;
+                            font-weight: bold;
+                        }
+
+                        &:first-child .item-inner {
+                            border-bottom: 1px solid #83c5ed;
+                        }
+                    }
+                }
+            }
+        }
+
+        .infoDiv {
+            width: 100%;
+            margin-top: 10px;
+
+            span {
+                color: #C8E6FD;
+                font-size: 1.4rem;
+            }
+        }
+
+        .loginBtnDiv {
+            width: 100%;
+            margin: 20px 0;
+
+            button {
+                height: 5rem;
+                font-size: 2rem;
+                font-weight: bold;
+                background: #0D71CF;
+                color: #FFFFFF;
+            }
+
+            .button-full {
+                border-radius: $login-border-radius-5;
+            }
+        }
+    }
+}
+

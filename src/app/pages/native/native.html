@@ -1,0 +1,77 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			插件应用
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<p style="color: red; font-size: 1.4rem; margin: 10px 10px;">注意：必须在虚拟机/真机上运行！</p>
+	<ion-card>
+		<ion-card-header>
+			<a href="http://ionicframework.com/docs/v2/native/app-version/" target="_blank">cordova-plugin-app-version</a>
+			<p>应用版本插件</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>app名称：{{configService.appName}}</p>
+			<p>版本号：{{configService.versionNumber}}</p>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
+			<a href="http://ionicframework.com/docs/v2/native/background-mode/" target="_blank">cordova-plugin-background-mode</a>
+			<p>后台模式插件</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>
+				后台模式是否启用：{{backgroundMode.isEnabled() | json}}
+			</p>
+			<p>
+				是否处于后台模式：{{backgroundMode.isActive() | json}}
+			</p>
+			<p>
+				<button ion-button (click)="enableBackgroundMode()">启用后台模式</button>
+				<button ion-button color="danger" (click)="disableBackgroundMode()">禁用后台模式</button>
+			</p>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
+			<a href="http://ionicframework.com/docs/v2/native/barcode-scanner/" target="_blank">phonegap-plugin-barcodescanner</a>
+			<p>二维码/条形码扫描插件</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>
+				<button ion-button (click)="openBarcodeScanner()">扫一扫</button>
+				<br>
+				<span *ngIf="barcodeData">
+					扫描结果：{{barcodeData | json}}
+				</span>
+			</p>
+			<div>
+				<p>生成不同类型的二维码/条形码</p>
+				<button ion-button (click)="encodeToBarcodeScanner(barcodeScanner.Encode.TEXT_TYPE, '我是条形码的内容，是纯文本的哦！')">纯文本</button>
+				<button ion-button (click)="encodeToBarcodeScanner(barcodeScanner.Encode.PHONE_TYPE, 13269635471)">电话号码</button>
+				<button ion-button (click)="encodeToBarcodeScanner(barcodeScanner.Encode.EMAIL_TYPE, 'laixiangran@163.com')">邮箱</button>
+				<button ion-button (click)="encodeToBarcodeScanner(barcodeScanner.Encode.SMS_TYPE, '我是条形码的内容，是短信类型的哦！')">短信</button>
+			</div>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
+			<a href="http://ionicframework.com/docs/v2/native/battery-status/" target="_blank">cordova-plugin-battery-status</a>
+			<p>电池状态插件</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>
+				是否连接电源：{{batteryStatusResponse?.isPlugged}}
+			</p>
+			<p>
+				当前电量：{{batteryStatusResponse?.level}}%
+			</p>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

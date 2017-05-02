@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>统计分析</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="statisTabsContainer">
+		<ion-row>
+			<ion-col width-25 *ngFor="let tabInfo of tabInfos" (click)="tabclick(tabInfo)">
+				<div [class.selected]="tabName === tabInfo.code ? true : false">
+					<p>
+						<i [class]="tabInfo.css" [style.color]="tabInfo.color"></i>
+					</p>
+					<p>
+						{{tabInfo.title}}
+					</p>
+				</div>
+			</ion-col>
+		</ion-row>
+	</div>
+	<div class="statisChartContainer">
+		<div class="essence-ng2-chart" essence-ng2-chart [chart]="monthWaterChart"></div>
+		<div class="essence-ng2-chart" essence-ng2-chart [chart]="monthWaterChart1"></div>
+	</div>
+</ion-content>

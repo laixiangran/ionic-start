@@ -1,0 +1,52 @@
+page-statistic {
+
+    ion-content {
+        background-color: #F5F5F5 !important;
+    }
+
+    .statisTabsContainer {
+        border-bottom: 1px solid #DDDDDD;
+        background-color: #FFFFFF;
+        width: 100%;
+        text-align: center;
+
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        ion-col {
+			cursor: pointer;
+            padding: 0;
+
+            i {
+                font-size: 3rem;
+            }
+
+            div {
+                padding: 10px 0;
+                font-size: 1.4rem;
+            }
+
+            div.selected {
+                border-bottom: 2px solid #1D89DA;
+            }
+        }
+    }
+
+    .statisChartContainer {
+        background-color: #FFFFFF;
+
+		div.essence-ng2-chart {
+			width: 100%;
+			height: 300px;
+			padding: 0;
+			float: left;
+			margin: 10px auto 10px auto;
+		}
+
+        div.essence-ng2-chart:last-child {
+            margin-top: 0;
+        }
+    }
+}

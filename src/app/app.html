@@ -1,0 +1,31 @@
+<ion-menu [content]="content">
+	<ion-content>
+		<div class="menu_content">
+			<div class="userInfo">
+				<ion-icon name="ios-contact"></ion-icon>
+				<p>
+					{{authService.userInfo.name}}
+				</p>
+			</div>
+			<div class="pageTab">
+				<ion-row>
+					<ion-col width-50 *ngFor="let p of pages" (click)="openPage(p)">
+						<div>
+							<ion-icon *ngIf="p.code == 'setting'" name="ios-settings"></ion-icon>
+							<ion-icon *ngIf="p.code == 'notice'" name="ios-notifications"></ion-icon>
+						</div>
+						<div>
+							{{p.title}}
+						</div>
+					</ion-col>
+				</ion-row>
+			</div>
+			<div class="logoutBtn" padding>
+				<button ion-button full color="danger" (click)="onLogout()">退出登录</button>
+			</div>
+		</div>
+	</ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
