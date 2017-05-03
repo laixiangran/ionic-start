@@ -37,7 +37,7 @@ export class RequestService {
             'URMS_LOGIN_TOKEN': this.authService.token
         });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.formateUrl(url), JSON.stringify(body), options).map((res: Response) => {
+        return this.http.post(this.formateUrl(url), body && JSON.stringify(body), options).map((res: Response) => {
             this.tips.dismiss(this.loader);
             return res.json();
         }).catch((error: Response): Observable<any> => {
