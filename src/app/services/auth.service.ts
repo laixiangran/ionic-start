@@ -34,7 +34,7 @@ export class AuthService {
     }
 
     setUserInfo (value: any): Promise<any> {
-        this.token = value;
+        this.userInfo = value;
         return this.storage.set(this.userInfoItemName, value);
     }
 

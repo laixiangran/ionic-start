@@ -10,20 +10,19 @@
                         <ion-label color="light">
                             <ion-icon name="contact-outline"></ion-icon>
                         </ion-label>
-                        <ion-input type="text" name="username" [(ngModel)]="user.username" placeholder="请输入用户名"></ion-input>
+                        <ion-input type="text" name="username" #username="ngModel" [(ngModel)]="user.username" placeholder="请输入用户名" required></ion-input>
                     </ion-item>
-
                     <ion-item>
                         <ion-label color="light">
                             <ion-icon name="lock-outline"></ion-icon>
                         </ion-label>
-                        <ion-input type="password" name="password" [(ngModel)]="user.password" placeholder="请输入密码"></ion-input>
+                        <ion-input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="请输入密码" required></ion-input>
                     </ion-item>
                 </ion-list>
             </form>
         </div>
         <div class="loginBtnDiv">
-            <button ion-button full (click)="onSubmit()">登录</button>
+            <button ion-button full (click)="onLogin(username.valid && password.valid)">登录</button>
         </div>
     </div>
 </ion-content>

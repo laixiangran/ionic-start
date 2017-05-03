@@ -1,0 +1,62 @@
+<ion-header no-border>
+    <ion-navbar [color]="'weather-' + weatherType"></ion-navbar>
+</ion-header>
+<ion-content [class]="'weather-' + weatherType">
+    <header>
+        <p class="city">
+            {{weatherReport ? weatherReport.city : '--'}}
+        </p>
+        <p class="weather">
+            {{live ? live[dayType + 'weather'] : '--'}}
+        </p>
+        <p class="temp">
+            &nbsp;{{live ? live[dayType + 'temp'] + '°' : '--°'}}
+        </p>
+        <p class="elseInfo">
+            <span class="weathertime">
+                {{live ? live.date : '--'}}&nbsp;
+                {{live ? weekArr[live.week] : '--'}}&nbsp;
+                今天
+            </span>
+            <span class="weathertemp">
+                <span [style.color]="dayType != 'day' ? 'rgba(255,255,255,0.6)' : ''">
+                    {{live ? live.daytemp : '--'}}
+                </span>
+                &nbsp;&nbsp;
+                <span [style.color]="dayType != 'night' ? 'rgba(255,255,255,0.6)' : ''">
+                    {{live ? live.nighttemp : '--'}}
+                </span>
+            </span>
+        </p>
+    </header>
+    <article padding>
+        <p>
+            <ion-row *ngFor="let fore of forecasts;">
+                <ion-col width-25>
+                    <span>
+                        {{fore.date}}
+                    </span>
+                </ion-col>
+                <ion-col width-25>
+                    <span>
+                        {{weekArr[fore.week]}}
+                    </span>
+                </ion-col>
+                <ion-col width-25>
+                    <span>
+                         {{fore[dayType + 'weather']}}
+                    </span>
+                </ion-col>
+                <ion-col width-25>
+                    <span [style.color]="dayType != 'day' ? 'rgba(255,255,255,0.6)' : ''">
+                        {{fore.daytemp}}
+                    </span>
+                    &nbsp;&nbsp;
+                    <span [style.color]="dayType != 'night' ? 'rgba(255,255,255,0.6)' : ''">
+                        {{fore.nighttemp}}
+                    </span>
+                </ion-col>
+            </ion-row>
+        </p>
+    </article>
+</ion-content>

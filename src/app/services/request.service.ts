@@ -4,50 +4,61 @@
  * 请求服务
  */
 
-import {Injectable} from "@angular/core";
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
-import {App} from "ionic-angular";
-import {Observable} from "rxjs";
+import { Injectable } from "@angular/core";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Observable } from "rxjs";
 
-import {AuthService} from "./auth.service";
-import {ConfigService} from "./config.service";
-import {LoginPage} from "../pages/login/login";
-import {TipsService} from "./tips.service";
+import { AuthService } from "./auth.service";
+import { ConfigService } from "./config.service";
+import { TipsService } from "./tips.service";
+import { App, Loading } from "ionic-angular";
+import { LoginPage } from "../pages/login/login";
 
 @Injectable()
 export class RequestService {
 
-    constructor (private http: Http,
-                 private appCtrl: App,
-                 private tips: TipsService,
-                 private authService: AuthService,
-                 private configService: ConfigService) {
+    loader: Loading;
+
+    constructor(
+        private http: Http,
+        private appCtrl: App,
+        private tips: TipsService,
+        private authService: AuthService,
+        private configService: ConfigService) {
 
     }
 
-    post (url: string, body: any): Observable<any> {
+    post(url: string, body: any, showLoader: boolean = true): Observable<any> {
+        if (showLoader) {
+            this.loader = this.tips.loader();
+        }
         let headers = new Headers({
             'Content-Type': 'application/json',
             'URMS_LOGIN_TOKEN': this.authService.token
         });
-        let options = new RequestOptions({headers: headers});
-        return this.http.post(this.formateUrl(url), JSON.stringify(body), options).map(
-            (res: Response) => res.json()
-        ).catch((error: Response): Observable<any> => {
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.formateUrl(url), JSON.stringify(body), options).map((res: Response) => {
+            this.tips.dismiss(this.loader);
+            return res.json();
+        }).catch((error: Response): Observable<any> => {
             this.handlerError(error);
             return Observable.throw(error.json().error || "Server Error");
         });
     }
 
-    get (url: string): Observable<any> {
+    get(url: string, showLoader: boolean = true): Observable<any> {
+        if (showLoader) {
+            this.loader = this.tips.loader();
+        }
         let headers = new Headers({
             'Content-Type': 'application/json',
             'URMS_LOGIN_TOKEN': this.authService.token
         });
-        let options = new RequestOptions({headers: headers});
-        return this.http.get(this.formateUrl(url), options).map(
-            (res: Response) => res.json()
-        ).catch((error: Response): Observable<any> => {
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.formateUrl(url), options).map((res: Response) => {
+            this.tips.dismiss(this.loader);
+            return res.json();
+        }).catch((error: Response): Observable<any> => {
             this.handlerError(error);
             return Observable.throw(error.json().error || "Server Error");
         });
@@ -57,8 +68,9 @@ export class RequestService {
      * 请求报错之后的操作
      * @param error 错误信息
      */
-    private handlerError (error: Response) {
+    private handlerError(error: Response) {
         console.log(error);
+        this.tips.dismiss(this.loader);
         if (error.status === 0) {
             this.tips.alert({
                 title: '连接超时',
@@ -94,7 +106,7 @@ export class RequestService {
         }
     }
 
-    private formateUrl (url: string): string {
+    private formateUrl(url: string): string {
         let newUrl: string;
         if (url.indexOf(".json") > 0) {
             newUrl = url;

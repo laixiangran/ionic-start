@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-buttons>
+			<button ion-button menuToggle>
+				<ion-icon name="contact"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>
+			常用工具
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="tools_itme" *ngFor="let item of items;" (click)="itemSelected(item)">
+		<span class="item_icon" [style.background-color]="item.color">
+			<span>
+				<ion-icon [name]="item.icon"></ion-icon>
+			</span>
+		</span>
+		<span>{{item.name}}</span>
+		<span>
+			<ion-icon name="arrow-forward"></ion-icon>
+		</span>
+	</div>
+</ion-content>

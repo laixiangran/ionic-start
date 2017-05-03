@@ -36,7 +36,10 @@ $colors: (
     bright: #FFC125,
     custom-primary: #3C6FD8,
     custom-light: #777777,
-    custom-border-color: #dedede
+    custom-border-color: #dedede,
+	custom-white: #FFFFFF,
+    weather-fine: #0f69bd,
+    weather-cloudy: #4b5967
 );
 
 $text-input-placeholder-color: #FFFFFF;
@@ -45,6 +48,10 @@ $text-input-placeholder-color: #FFFFFF;
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
+
+$loading-ios-text-color: #FFFFFF;
+$loading-ios-spinner-color: #FFFFFF;
+$loading-ios-background: rgba(0,0,0,0.8);
 
 
 

@@ -4,6 +4,18 @@ This is an ionic app project.
 
 ## 实现功能
 
+- 统一配置API路径、新版本APP下载路径，获取是否连接网络、获取APP基本信息等（[config.service.ts](.\src\app\services\config.service.ts)）
+
+- 每个请求统一默认显示加载动画、请求header添加令牌属性URMS_LOGIN_TOKEN、请求错误统一处理等（[request.service.ts](.\src\app\services\request.service.ts)）
+
+- 检测网络是否断开及重连等（[app.component.ts](.\src\app\app.component.ts)）
+
+- 检测服务器是否有新版本、可下载APP并打开安装（只支持android）、检测是否已经登录等（[login.ts](.\src\app\pages\login\login.ts)）
+
+- 持久化保存token及用户信息（[auth.service.ts](.\src\app\services\auth.service.ts)）
+
+- 集成高德地图、highchart，实现简单天气预报（调用高德api）
+
 ## setup project（[详细教程](./SETUP.md)）
 
 - Install [Nodejs](https://nodejs.org/zh-cn/) (v6)
@@ -14,11 +26,11 @@ This is an ionic app project.
 
 - Install [Android SDK]( http://developer.android.com/sdk/index.html)
 
-- `npm install -g ionic cordova`
+- `npm install -g ionic cordova` 全局安装ionic及cordova
 
-- `npm install`
+- `npm install` 安装依赖包
 
-- `npm run platform:md` or `npm run platform:ios`
+- `npm run platform:md` 添加android平台
 
 ## run project
 
