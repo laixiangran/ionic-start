@@ -4,26 +4,26 @@
  * 登录服务
  */
 
-import { Injectable } from "@angular/core"
-import { Observable } from "rxjs/Observable";
-import { RequestService } from "../../services/request.service";
-import { ServerData } from "../../models/server-data";
-import { Subscriber } from "rxjs/Subscriber";
+import {Injectable} from "@angular/core"
+import {Observable} from  "rxjs/Observable";
+import {RequestService} from "../../services/request.service";
+import {ServerData} from "../../models/server-data";
+import {Subscriber} from "rxjs/Subscriber";
 
 @Injectable()
 export class LoginService {
 
-    constructor(private rs: RequestService) { }
+    constructor (private rs: RequestService) {}
 
-    login(user: any): Observable<ServerData> {
+    login (user: any): Observable<ServerData> {
         return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-            subscriber.next(new ServerData('登录成功', 'ok', { token: '123456789' }));
-            subscriber.complete();
+        	subscriber.next(new ServerData('登录成功', 'ok', {token: '123456789'}));
+        	subscriber.complete();
         });
         // return this.rs.post("LoginAction/Login", user);
     }
 
-    logout(): Observable<ServerData> {
+    logout (): Observable<ServerData> {
         return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
             subscriber.next(new ServerData('退出成功', 'ok', null));
             subscriber.complete();
@@ -35,9 +35,9 @@ export class LoginService {
      * 获取用户信息
      * @returns {Observable<any>}
      */
-    getUserInfo(): Observable<ServerData> {
+    getUserInfo (): Observable<ServerData> {
         return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-            subscriber.next(new ServerData('退出成功', 'ok', { name: '管理员' }));
+            subscriber.next(new ServerData('退出成功', 'ok', {name: '管理员'}));
             subscriber.complete();
         });
         // return this.rs.post("SysUserAction/getMyInfo", null);
@@ -45,15 +45,16 @@ export class LoginService {
 
     /**
      * 检测服务器最新的APP版本号
-     * 
-     * @returns {Observable<ServerData>} 
-     * 
+     *
+     * @returns {Observable<ServerData>}
+     *
      * @memberof LoginService
      */
-    checkLatestVesion(): Observable<ServerData> {
+    checkLatestVersion(): Observable<ServerData> {
         return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-            subscriber.next(new ServerData('检测成功！', 'ok', { version: '1.0.0' }));
+            subscriber.next(new ServerData('检查成功！', 'ok', '1.0.0'));
             subscriber.complete();
         });
+        // return this.rs.post("appVersionAction/getLatestVersion", null, false);
     }
 }

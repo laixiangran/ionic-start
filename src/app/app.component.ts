@@ -1,16 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
-import { Alert, Nav, Platform, Events } from 'ionic-angular';
-import { Network } from '@ionic-native/network';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component, ViewChild} from '@angular/core';
+import {Alert, Nav, Platform, Events} from 'ionic-angular';
+import {Network} from '@ionic-native/network';
 
-import { SettingsPage } from './pages/settings/settings';
-import { LoginPage } from "./pages/login/login";
-import { AuthService } from "./services/auth.service";
-import { TipsService } from "./services/tips.service";
-import { ConfigService } from "./services/config.service";
-import { LoginService } from "./pages/login/login.service";
-import { ServerData } from "./models/server-data";
+import {SettingsPage} from './pages/settings/settings';
+import {LoginPage} from "./pages/login/login";
+import {AuthService} from "./services/auth.service";
+import {TipsService} from "./services/tips.service";
+import {ConfigService} from "./services/config.service";
+import {LoginService} from "./pages/login/login.service";
+import {ServerData} from "./models/server-data";
 
 @Component({
     templateUrl: 'app.html'
@@ -21,41 +19,39 @@ export class AppComponent {
 
     disconnectAlert: Alert = null;
     connectAlert: Alert = null;
-    rootPage = LoginPage;
+    rootPage = null;
     pages: Array<{ code: string, title: string, component: any }>;
 
-    constructor(
-        public platform: Platform,
-        public events: Events,
-        public network: Network,
-        public loginService: LoginService,
-        public statusBar: StatusBar,
-        public splashScreen: SplashScreen,
-        public tipsService: TipsService,
-        public configService: ConfigService,
-        public authService: AuthService) {
+    constructor (public platform: Platform,
+                 public network: Network,
+                 public events: Events,
+                 public loginService: LoginService,
+                 public tipsService: TipsService,
+                 public config: ConfigService,
+                 public authService: AuthService) {
 
         this.initializeApp();
 
         this.pages = [
-            { code: 'setting', title: '设置', component: SettingsPage },
-            { code: 'notice', title: '通知', component: SettingsPage }
+            {code: 'setting', title: '设置', component: SettingsPage},
+            {code: 'notice', title: '通知', component: SettingsPage}
         ];
     }
 
-    openPage(page) {
+    openPage (page) {
         this.nav.push(page.component);
     }
 
-    initializeApp() {
+    initializeApp () {
         this.platform.ready().then(() => {
-            this.statusBar.styleDefault(); // 设置状态栏样式
-            this.splashScreen.hide(); // 隐藏启动页
             this.checkDisConnect(); // 检查网络是否断开
+            this.config.initAppInfo().then(() => {
+                this.nav.setRoot(LoginPage);
+            });
         });
     }
 
-    onLogout() {
+    onLogout () {
         this.loginService.logout().subscribe((serverData: ServerData) => {
             if (serverData.code == 'ok') {
                 this.authService.removeToken().then(() => {
@@ -68,10 +64,10 @@ export class AppComponent {
     /**
      * 检查网络是否断开
      */
-    checkDisConnect() {
+    checkDisConnect () {
         this.network.onDisconnect().subscribe(() => {
-            this.configService.network = false;
-            this.events.publish('network', this.configService.network);
+            this.config.network = false;
+            this.events.publish('network', this.config.network);
             if (!this.disconnectAlert) {
                 this.disconnectAlert = this.tipsService.alert({
                     title: '无网络连接',
@@ -106,8 +102,8 @@ export class AppComponent {
         this.connectAlert = null;
         let connectSubscription: any = this.network.onConnect().subscribe(() => {
             setTimeout(() => {
-                this.configService.network = true;
-                this.events.publish('network', this.configService.network);
+                this.config.network = true;
+                this.events.publish('network', this.config.network);
                 this.addAmapScript();
                 connectSubscription.unsubscribe();
                 if (!this.connectAlert) {

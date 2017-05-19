@@ -26,7 +26,7 @@ This is an ionic app project.
 
 - Install [Android SDK]( http://developer.android.com/sdk/index.html)
 
-- `npm install -g ionic cordova` 全局安装ionic及cordova
+- `npm install -g ionic cordova` 全局安装ionic(>=3.1.2)及cordova
 
 - `npm install` 安装依赖包
 
