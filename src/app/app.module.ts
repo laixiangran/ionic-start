@@ -10,6 +10,9 @@ import {BatteryStatus} from '@ionic-native/battery-status';
 import {Network} from '@ionic-native/network';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
+import {Transfer} from "@ionic-native/transfer";
+import {FileOpener} from "@ionic-native/file-opener";
+import {File} from "@ionic-native/file";
 
 import {AppComponent} from './app.component';
 
@@ -29,6 +32,9 @@ import {EssenceNg2AMapModule} from "./components/essence-ng2-amap/essence-ng2-am
 import {EssenceNg2ChartModule} from "essence-ng2-chart";
 import {TipsService} from "./services/tips.service";
 import {LoginService} from "./pages/login/login.service";
+import {ToolsPage} from "./pages/tools/tools";
+import {RealTimeTrafficPage} from "./pages/tools/subpages/realTimeTraffic/realTimeTraffic";
+import {WeatherReportPage} from "./pages/tools/subpages/weatherReport/weatherReport";
 
 @NgModule({
     imports: [
@@ -38,6 +44,7 @@ import {LoginService} from "./pages/login/login.service";
             mode: 'ios',
             iconMode: 'ios',
             backButtonText: '返回',
+            tabsHideOnSubPages: 'true',
             modalEnter: 'modal-slide-in',
             modalLeave: 'modal-slide-out',
             tabsPlacement: 'bottom',
@@ -55,7 +62,10 @@ import {LoginService} from "./pages/login/login.service";
         MapPage,
         StatisticPage,
         RulesPage,
-        SettingsPage
+        SettingsPage,
+        ToolsPage,
+        RealTimeTrafficPage,
+        WeatherReportPage
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -66,7 +76,10 @@ import {LoginService} from "./pages/login/login.service";
         MapPage,
         StatisticPage,
         RulesPage,
-        SettingsPage
+        SettingsPage,
+        ToolsPage,
+        RealTimeTrafficPage,
+        WeatherReportPage
     ],
     providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
@@ -81,7 +94,10 @@ import {LoginService} from "./pages/login/login.service";
         BatteryStatus,
         Network,
         StatusBar,
-        SplashScreen
+        SplashScreen,
+        Transfer,
+        FileOpener,
+        File
     ]
 })
 export class AppModule {

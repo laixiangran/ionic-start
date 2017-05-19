@@ -1,8 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {Alert, Nav, Platform} from 'ionic-angular';
+import {Alert, Nav, Platform, Events} from 'ionic-angular';
 import {Network} from '@ionic-native/network';
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {SettingsPage} from './pages/settings/settings';
 import {LoginPage} from "./pages/login/login";
@@ -21,16 +19,15 @@ export class AppComponent {
 
     disconnectAlert: Alert = null;
     connectAlert: Alert = null;
-    rootPage = LoginPage;
+    rootPage = null;
     pages: Array<{ code: string, title: string, component: any }>;
 
     constructor (public platform: Platform,
                  public network: Network,
+                 public events: Events,
                  public loginService: LoginService,
-                 public statusBar: StatusBar,
-                 public splashScreen: SplashScreen,
                  public tipsService: TipsService,
-                 public configService: ConfigService,
+                 public config: ConfigService,
                  public authService: AuthService) {
 
         this.initializeApp();
@@ -47,9 +44,10 @@ export class AppComponent {
 
     initializeApp () {
         this.platform.ready().then(() => {
-            this.statusBar.styleDefault(); // 设置状态栏样式
-            this.splashScreen.hide(); // 隐藏启动页
             this.checkDisConnect(); // 检查网络是否断开
+            this.config.initAppInfo().then(() => {
+                this.nav.setRoot(LoginPage);
+            });
         });
     }
 
@@ -68,7 +66,8 @@ export class AppComponent {
      */
     checkDisConnect () {
         this.network.onDisconnect().subscribe(() => {
-            this.configService.network = false;
+            this.config.network = false;
+            this.events.publish('network', this.config.network);
             if (!this.disconnectAlert) {
                 this.disconnectAlert = this.tipsService.alert({
                     title: '无网络连接',
@@ -83,6 +82,14 @@ export class AppComponent {
                         }
                     ]
                 });
+                // 3秒之后隐藏
+                let id: number = setTimeout(() => {
+                    clearTimeout(id);
+                    if (this.disconnectAlert) {
+                        this.disconnectAlert.dismiss();
+                        this.disconnectAlert = null;
+                    }
+                }, 3000);
                 this.checkConnect();
             }
         });
@@ -90,14 +97,14 @@ export class AppComponent {
 
     /**
      * 检查网络是否重新连接
-     * @param callback
      */
-    checkConnect (callback?: any): any {
+    checkConnect(): any {
         this.connectAlert = null;
         let connectSubscription: any = this.network.onConnect().subscribe(() => {
             setTimeout(() => {
-                this.configService.network = true;
-                callback && callback();
+                this.config.network = true;
+                this.events.publish('network', this.config.network);
+                this.addAmapScript();
                 connectSubscription.unsubscribe();
                 if (!this.connectAlert) {
                     this.connectAlert = this.tipsService.alert({
@@ -111,10 +118,34 @@ export class AppComponent {
                             }
                         }]
                     });
+                    // 3秒之后隐藏
+                    let id: number = setTimeout(() => {
+                        clearTimeout(id);
+                        if (this.connectAlert) {
+                            this.connectAlert.dismiss();
+                            this.connectAlert = null;
+                        }
+                    }, 3000);
                     this.disconnectAlert = null;
                 }
             }, 1000);
         });
         return connectSubscription;
+    }
+
+    /**
+     * 动态添加高德地图api
+     */
+    addAmapScript() {
+        let head = document.getElementsByTagName('head')[0],
+            script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://webapi.amap.com/maps?v=1.3&key=92876784ab731cccce8ebd5a8030290f";
+        if (!window['AMap']) {
+            head.appendChild(script);
+        }
+        script.onload = () => {
+            this.events.publish('reloadAMap');
+        };
     }
 }

@@ -7,17 +7,11 @@
 import { Injectable } from "@angular/core";
 import {
 	AlertController, ActionSheetController, LoadingController, ToastController, Alert,
-	ActionSheet, ActionSheetOptions, Loading, LoadingOptions, Toast, ToastOptions, AlertOptions
+	ActionSheet, ActionSheetOptions, Loading, LoadingOptions, Toast, ToastOptions, AlertOptions, ViewController
 } from "ionic-angular";
 
 @Injectable()
 export class TipsService {
-
-	currentAlert: Alert;
-	currentConfirm: Alert;
-	currentLoader: Loading;
-	currentActionSheet: ActionSheet;
-	currentToast: Toast;
 
 	constructor(
 		public alertCtrl: AlertController,
@@ -27,14 +21,13 @@ export class TipsService {
 	}
 
 	/**
-	 * 隐藏所有的弹出视图控件
+	 * 隐藏控件
+	 * 
+	 * 
+	 * @memberof TipsService
 	 */
-	hideAllViewController() {
-		this.dismissAlert();
-		this.dismissConfirm();
-		this.dismissActionSheet();
-		this.dismissLoader();
-		this.dismissToast();
+	dismiss(currentViewer: ViewController): Promise<any> {
+		return currentViewer && currentViewer.dismiss();
 	}
 
 	/**
@@ -43,25 +36,10 @@ export class TipsService {
 	 * @returns {Alert}
 	 */
 	alert(alertOptions: AlertOptions): Alert {
-		this.hideAllViewController();
-		this.currentAlert = this.alertCtrl.create(alertOptions);
-		this.currentAlert.present();
-		return this.currentAlert;
+		let currentAlert: Alert = this.alertCtrl.create(alertOptions);
+		currentAlert.present();
+		return currentAlert;
 	}
-
-	/**
-	 * 隐藏弹出警告框
-	 * 
-	 * 
-	 * @memberof TipsService
-	 */
-	dismissAlert() {
-		if (this.currentAlert) {
-			this.currentAlert.dismiss();
-			this.currentAlert = null;
-		}
-	}
-
 
 	/**
 	 * 弹出确认框
@@ -69,23 +47,9 @@ export class TipsService {
 	 * @returns {Alert}
 	 */
 	confirm(alertOptions: AlertOptions): Alert {
-		this.hideAllViewController();
-		this.currentConfirm = this.alertCtrl.create(alertOptions);
-		this.currentConfirm.present();
-		return this.currentConfirm;
-	}
-
-	/**
-	 * 隐藏弹出确认框
-	 * 
-	 * 
-	 * @memberof TipsService
-	 */
-	dismissConfirm() {
-		if (this.currentConfirm) {
-			this.currentConfirm.dismiss();
-			this.currentConfirm = null;
-		}
+		let currentConfirm: Alert = this.alertCtrl.create(alertOptions);
+		currentConfirm.present();
+		return currentConfirm;
 	}
 
 	/**
@@ -94,23 +58,9 @@ export class TipsService {
 	 * @returns {ActionSheet}
 	 */
 	actionSheet(actionSheetOptions: ActionSheetOptions): ActionSheet {
-		this.hideAllViewController();
-		this.currentActionSheet = this.actionSheetCtrl.create(actionSheetOptions);
-		this.currentActionSheet.present();
-		return this.currentActionSheet;
-	}
-
-	/**
-	 * 隐藏工作表控件
-	 * 
-	 * 
-	 * @memberof TipsService
-	 */
-	dismissActionSheet() {
-		if (this.currentActionSheet) {
-			this.currentActionSheet.dismiss();
-			this.currentActionSheet = null;
-		}
+		let currentActionSheet: ActionSheet = this.actionSheetCtrl.create(actionSheetOptions);
+		currentActionSheet.present();
+		return currentActionSheet;
 	}
 
 	/**
@@ -118,24 +68,12 @@ export class TipsService {
 	 * @param loadingOptions
 	 * @returns {Loading}
 	 */
-	loader(loadingOptions?: LoadingOptions): Loading {
-		this.hideAllViewController();
-		this.currentLoader = this.loadingCtrl.create(loadingOptions);
-		this.currentLoader.present();
-		return this.currentLoader;
-	}
-
-	/**
-	 * 隐藏加载控件
-	 * 
-	 * 
-	 * @memberof TipsService
-	 */
-	dismissLoader() {
-		if (this.currentLoader) {
-			this.currentLoader.dismiss();
-			this.currentLoader = null;
-		}
+	loader(loadingOptions: LoadingOptions = {}): Loading {
+		loadingOptions.showBackdrop = false;
+		loadingOptions.dismissOnPageChange = true;
+		let currentLoader: Loading = this.loadingCtrl.create(loadingOptions);
+		currentLoader.present();
+		return currentLoader;
 	}
 
 	/**
@@ -144,22 +82,8 @@ export class TipsService {
 	 * @returns {Toast}
 	 */
 	toast(toastOptions: ToastOptions): Toast {
-		this.hideAllViewController();
-		this.currentToast = this.toastCtrl.create(toastOptions);
-		this.currentToast.present();
-		return this.currentToast;
-	}
-
-	/**
-	 * 隐藏提示横幅
-	 * 
-	 * 
-	 * @memberof TipsService
-	 */
-	dismissToast() {
-		if (this.currentToast) {
-			this.currentToast.dismiss();
-			this.currentToast = null;
-		}
+		let currentToast: Toast = this.toastCtrl.create(toastOptions);
+		currentToast.present();
+		return currentToast;
 	}
 }
