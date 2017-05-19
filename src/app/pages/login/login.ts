@@ -164,6 +164,7 @@ export class LoginPage {
         });
         fileTransfer.onProgress((event: ProgressEvent) => {
             let scale: string = Math.floor((event.loaded / event.total) * 100) + '%';
+            // TODO 待解决 - 不能动态改变内容
             loader.setContent(`已下载${scale}`);
         });
     }

@@ -88,7 +88,7 @@ export class ConfigService {
 	 * @type {string}
 	 * @memberof ConfigService
 	 */
-	loginStatusBarColor: string = '#1D89DA';
+	loginStatusBarColor: string = '#50C6F4';
 
 	/**
 	 * 主页的状态栏颜色
