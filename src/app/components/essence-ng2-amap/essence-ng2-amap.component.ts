@@ -6,7 +6,6 @@
 
 import { Component, OnInit, OnDestroy, EventEmitter, Output, Input, ViewChild, ElementRef } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { Geolocation, Geoposition } from 'ionic-native';
 import { Observable } from "rxjs";
 
 import { TransformService } from "./transform.service";
@@ -162,7 +161,20 @@ export class EssenceNg2AMapComponent implements OnInit, OnDestroy {
     currentLocation(): void {
         if (this.initParams()) {
             this.isStartLocation = true;
-            Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then((position: Geoposition) => {
+            this.getCurrentPosition().then(() => {
+                this.isStartLocation = false;
+            });
+        }
+    }
+
+    getCurrentPosition(): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            let options: PositionOptions = {
+                enableHighAccuracy: true,  // 是否使用 GPS
+                maximumAge: 30000,         // 缓存时间
+                timeout: 27000            // 超时时间
+            };
+            navigator.geolocation.getCurrentPosition((position: Position) => {
                 let currLocation: any = this.transformService.gcj2wgs(position.coords.latitude, position.coords.longitude);
                 this.tempLocation = {
                     x: currLocation.lng,
@@ -180,22 +192,22 @@ export class EssenceNg2AMapComponent implements OnInit, OnDestroy {
                         });
                         this.locationMarker.setMap(this.map);
                     }
-                    this.isStartLocation = false;
                     this.location.emit({
                         code: 'ok',
                         info: '定位成功',
                         result: this.tempLocation
                     });
+                    resolve();
                 });
-            }).catch((error: any) => {
-                this.isStartLocation = false;
+            }, (error: PositionError) => {
                 this.location.emit({
                     code: 'error',
                     info: '定位失败',
                     result: error
                 });
-            });
-        }
+                reject();
+            }, options);
+        });
     }
 
 	/**

@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {BackgroundMode, BackgroundModeConfiguration} from '@ionic-native/background-mode';
-import {BarcodeScanner} from "@ionic-native/barcode-scanner";
-import {BatteryStatus, BatteryStatusResponse} from '@ionic-native/battery-status';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { BackgroundMode, BackgroundModeConfiguration } from '@ionic-native/background-mode';
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { BatteryStatusResponse, BatteryStatus } from "@ionic-native/battery-status";
 
-import {ConfigService} from "../../services/config.service";
+import { ConfigService } from "../../services/config.service";
+import { VideoPlayer } from "@ionic-native/video-player";
 
 @Component({
 	selector: 'page-native',
@@ -15,14 +16,15 @@ export class NativePage {
 	barcodeData: any;
 	batteryStatusResponse: BatteryStatusResponse;
 
-	constructor (public navCtrl: NavController,
-				 public backgroundMode: BackgroundMode,
-				 public barcodeScanner: BarcodeScanner,
-				 public batteryStatus: BatteryStatus,
-				 public configService: ConfigService) {
+	constructor(public navCtrl: NavController,
+		public backgroundMode: BackgroundMode,
+		public barcodeScanner: BarcodeScanner,
+		public batteryStatus: BatteryStatus,
+		public videoPlayer: VideoPlayer,
+		public configService: ConfigService) {
 	}
 
-	ionViewDidLoad () {
+	ionViewDidLoad() {
 		if (this.configService.hasCordova) {
 
 			// 监听后台模式事件
@@ -50,16 +52,30 @@ export class NativePage {
 	}
 
 	/**
+	 * 播放视频
+	 * 
+	 * 
+	 * @memberof NativePage
+	 */
+	playVideo() {
+		this.videoPlayer.play('http://www.w3school.com.cn/i/movie.mp4').then(() => {
+			console.log('video completed');
+		}).catch(err => {
+			console.log(err);
+		});
+	}
+
+	/**
 	 * 启用后台模式
 	 */
-	enableBackgroundMode () {
+	enableBackgroundMode() {
 		this.backgroundMode.enable();
 	}
 
 	/**
 	 * 禁用后台模式
 	 */
-	disableBackgroundMode () {
+	disableBackgroundMode() {
 		this.backgroundMode.disable();
 	}
 
@@ -67,7 +83,7 @@ export class NativePage {
 	 * 覆盖默认标题，代码和文本
 	 * @param configure
 	 */
-	setBackgroundModeConfigure (configure: BackgroundModeConfiguration) {
+	setBackgroundModeConfigure(configure: BackgroundModeConfiguration) {
 		this.backgroundMode.setDefaults(configure);
 	}
 
@@ -75,14 +91,14 @@ export class NativePage {
 	 * 修改显示的内容
 	 * @param options
 	 */
-	configureBackgroundMode (options: BackgroundModeConfiguration) {
+	configureBackgroundMode(options: BackgroundModeConfiguration) {
 		this.backgroundMode.configure(options);
 	}
 
 	/**
 	 * 扫码
 	 */
-	openBarcodeScanner () {
+	openBarcodeScanner() {
 		this.barcodeScanner.scan({
 			showFlipCameraButton: true,
 			showTorchButton: true,
@@ -98,7 +114,7 @@ export class NativePage {
 	/**
 	 * 编码
 	 */
-	encodeToBarcodeScanner (type: string, text: any) {
+	encodeToBarcodeScanner(type: string, text: any) {
 		this.barcodeScanner.encode(type, text).then((data: any) => {
 			console.log(data);
 		});

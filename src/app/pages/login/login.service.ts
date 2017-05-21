@@ -13,48 +13,34 @@ import {Subscriber} from "rxjs/Subscriber";
 @Injectable()
 export class LoginService {
 
-    constructor (private rs: RequestService) {}
+	constructor(private rs: RequestService) {
+	}
 
-    login (user: any): Observable<ServerData> {
-        return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-        	subscriber.next(new ServerData('登录成功', 'ok', {token: '123456789'}));
-        	subscriber.complete();
-        });
-        // return this.rs.post("LoginAction/Login", user);
-    }
+	login(user: any): Observable<ServerData> {
+		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
+			subscriber.next(new ServerData('登录成功', 'ok', {token: '123456789'}));
+			subscriber.complete();
+		});
+		// return this.rs.post("LoginAction/Login", user);
+	}
 
-    logout (): Observable<ServerData> {
-        return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-            subscriber.next(new ServerData('退出成功', 'ok', null));
-            subscriber.complete();
-        });
-        // return this.rs.post("LoginAction/Logout", null);
-    }
+	logout(): Observable<ServerData> {
+		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
+			subscriber.next(new ServerData('退出成功', 'ok', null));
+			subscriber.complete();
+		});
+		// return this.rs.post("LoginAction/Logout", null);
+	}
 
-    /**
-     * 获取用户信息
-     * @returns {Observable<any>}
-     */
-    getUserInfo (): Observable<ServerData> {
-        return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-            subscriber.next(new ServerData('退出成功', 'ok', {name: '管理员'}));
-            subscriber.complete();
-        });
-        // return this.rs.post("SysUserAction/getMyInfo", null);
-    }
-
-    /**
-     * 检测服务器最新的APP版本号
-     *
-     * @returns {Observable<ServerData>}
-     *
-     * @memberof LoginService
-     */
-    checkLatestVersion(): Observable<ServerData> {
-        return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-            subscriber.next(new ServerData('检查成功！', 'ok', '1.0.0'));
-            subscriber.complete();
-        });
-        // return this.rs.post("appVersionAction/getLatestVersion", null, false);
-    }
+	/**
+	 * 获取用户信息
+	 * @returns {Observable<any>}
+	 */
+	getUserInfo(): Observable<ServerData> {
+		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
+			subscriber.next(new ServerData('退出成功', 'ok', {name: '管理员'}));
+			subscriber.complete();
+		});
+		// return this.rs.post("SysUserAction/getMyInfo", null);
+	}
 }

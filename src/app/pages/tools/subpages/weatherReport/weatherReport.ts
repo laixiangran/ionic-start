@@ -5,9 +5,8 @@
 
 import { Component } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
-import { Geolocation, Geoposition } from 'ionic-native';
 import { Observable } from "rxjs/Observable";
-import {StatusBar} from '@ionic-native/status-bar';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { RequestService } from "../../../../services/request.service";
 import { TransformService } from "../../../../components/essence-ng2-amap/transform.service";
@@ -28,10 +27,10 @@ export class WeatherReportPage {
     weekArr: string[] = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
 
     constructor(
-		public http: Http,
-		public rs: RequestService,
-		public statusBar: StatusBar,
-		public transform: TransformService) {
+        public http: Http,
+        public rs: RequestService,
+        public statusBar: StatusBar,
+        public transform: TransformService) {
     }
 
     ionViewDidEnter() {
@@ -43,7 +42,7 @@ export class WeatherReportPage {
             this.dayType = 'night';
         }
 
-		this.statusBar.backgroundColorByHexString("#0f69bd");
+        this.statusBar.backgroundColorByHexString("#0f69bd");
 
         this.currentLocation().then((currLocation: any) => {
             this.currentPosition = `${currLocation.lng},${currLocation.lat}`;
@@ -57,10 +56,10 @@ export class WeatherReportPage {
                             this.forecasts = this.weatherReport.casts.slice(1);
                             if (this.live[`${this.dayType}weather`].indexOf('晴') >= 0) {
                                 this.weatherType = 'fine';
-								this.statusBar.backgroundColorByHexString("#0f69bd");
+                                this.statusBar.backgroundColorByHexString("#0f69bd");
                             } else {
                                 this.weatherType = 'cloudy';
-								this.statusBar.backgroundColorByHexString("#4b5967");
+                                this.statusBar.backgroundColorByHexString("#4b5967");
                             }
                         }
                     });
@@ -69,9 +68,9 @@ export class WeatherReportPage {
         });
     }
 
-	ionViewDidLeave() {
-		this.statusBar.backgroundColorByHexString("#1D89DA");
-	}
+    ionViewDidLeave() {
+        this.statusBar.backgroundColorByHexString("#1D89DA");
+    }
 
     /**
      * 获取当前坐标信息
@@ -81,9 +80,18 @@ export class WeatherReportPage {
      * @memberOf WeatherReportPage
      */
     currentLocation(): Promise<any> {
-        return Geolocation.getCurrentPosition({ enableHighAccuracy: true }).then((position: Geoposition) => {
-            let currLocation: any = this.transform.gcj2wgs(position.coords.latitude, position.coords.longitude);
-            return currLocation;
+        let options: PositionOptions = {
+            enableHighAccuracy: true,  // 是否使用 GPS
+            maximumAge: 30000,         // 缓存时间
+            timeout: 27000            // 超时时间
+        };
+        return new Promise<any>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition((position: Position) => {
+                let currLocation: any = this.transform.gcj2wgs(position.coords.latitude, position.coords.longitude);
+                resolve(currLocation);
+            }, (error: PositionError) => {
+                reject(error);
+            }, options)
         });
     }
 
