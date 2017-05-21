@@ -9,7 +9,7 @@ import { Observable } from "rxjs/Observable";
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { RequestService } from "../../../../services/request.service";
-import { TransformService } from "../../../../components/essence-ng2-amap/transform.service";
+import { TransformService } from "../../../../components/essence-ion-amap/transform.service";
 
 @Component({
     selector: 'page-weatherReport',

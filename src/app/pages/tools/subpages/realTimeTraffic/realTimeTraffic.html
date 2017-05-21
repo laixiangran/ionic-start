@@ -2,12 +2,12 @@
     <ion-navbar color="primary"></ion-navbar>
 </ion-header>
 <ion-content>
-    <essence-ng2-amap
+    <essence-ion-amap
 		[options]="amapOpts"
         [showTraffic]="true"
         [showCurrentLocation]="true"
 		(location)="amapLocation($event)"
 		(ready)="amapReady($event)"
 		(destroy)="amapDestroy($event)">
-	</essence-ng2-amap>
+	</essence-ion-amap>
 </ion-content>

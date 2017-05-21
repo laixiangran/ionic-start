@@ -11,10 +11,10 @@ import { Observable } from "rxjs";
 import { TransformService } from "./transform.service";
 
 @Component({
-    selector: "essence-ng2-amap",
-    templateUrl: "essence-ng2-amap.component.html"
+    selector: "essence-ion-amap",
+    templateUrl: "essence-ion-amap.component.html"
 })
-export class EssenceNg2AMapComponent implements OnInit, OnDestroy {
+export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     private map: any;
     private convertAPI = "http://restapi.amap.com/v3/assistant/coordinate/convert?key=0df36377c23e75585d4ed4fcb4baf807";
     private tempLocation: any = null;

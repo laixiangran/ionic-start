@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {NavController} from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 @Component({
     selector: 'page-rules',
     templateUrl: 'rules.html'
 })
 export class RulesPage {
-
+    videoUrl: string = 'http://www.w3school.com.cn/i/movie.mp4';
     items = [
         {
             name: "天气预报",
@@ -21,10 +21,14 @@ export class RulesPage {
         }
     ];
 
-    itemSelected (item: string) {
+    constructor(public navCtrl: NavController) { }
+
+    itemSelected(item: string) {
         console.log("Selected Item", item);
     }
 
-    constructor (public navCtrl: NavController) {}
+    videoViewerReady($event: any) {
+        console.log($event);
+    }
 
 }

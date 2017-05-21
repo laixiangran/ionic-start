@@ -6,7 +6,7 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from '@angular/core';
 import {IonicModule} from 'ionic-angular';
-import {EssenceNg2AMapComponent} from "./essence-ng2-amap.component";
+import {EssenceIonAMapComponent} from "./essence-ion-amap.component";
 import {TransformService} from "./transform.service";
 
 @NgModule({
@@ -15,17 +15,17 @@ import {TransformService} from "./transform.service";
         IonicModule
     ],
     declarations: [
-        EssenceNg2AMapComponent
+        EssenceIonAMapComponent
     ],
     entryComponents: [
-        EssenceNg2AMapComponent
+        EssenceIonAMapComponent
     ],
     exports: [
-        EssenceNg2AMapComponent
+        EssenceIonAMapComponent
     ],
 	providers: [
 		TransformService
 	]
 })
-export class EssenceNg2AMapModule {
+export class EssenceIonAMapModule {
 }

@@ -29,13 +29,14 @@ import { SettingsPage } from './pages/settings/settings';
 import { AuthService } from "./services/auth.service";
 import { RequestService } from "./services/request.service";
 import { ConfigService } from "./services/config.service";
-import { EssenceNg2AMapModule } from "./components/essence-ng2-amap/essence-ng2-amap.module";
 import { EssenceNg2ChartModule } from "essence-ng2-chart";
 import { TipsService } from "./services/tips.service";
 import { LoginService } from "./pages/login/login.service";
 import { ToolsPage } from "./pages/tools/tools";
 import { RealTimeTrafficPage } from "./pages/tools/subpages/realTimeTraffic/realTimeTraffic";
 import { WeatherReportPage } from "./pages/tools/subpages/weatherReport/weatherReport";
+import { EssenceIonAMapModule } from "./components/essence-ion-amap/essence-ion-amap.module";
+import { EssenceIonVideoplayerModule } from "./components/essence-ion-videoplayer/essence-ion-videoplayer.module";
 
 @NgModule({
     imports: [
@@ -53,7 +54,8 @@ import { WeatherReportPage } from "./pages/tools/subpages/weatherReport/weatherR
         }),
         IonicStorageModule.forRoot(),
         EssenceNg2ChartModule,
-        EssenceNg2AMapModule
+        EssenceIonAMapModule,
+        EssenceIonVideoplayerModule
     ],
     declarations: [
         AppComponent,

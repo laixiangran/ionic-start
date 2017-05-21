@@ -9,6 +9,9 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
+	<div style="width: 100%;" #videoDiv>
+		<essence-ion-videoplayer (ready)="videoViewerReady($event)" [source]="videoUrl" [width]="videoDiv.offsetWidth"></essence-ion-videoplayer>
+	</div>
 	<div class="tools_img">
 		<img src="assets/img/mobileAdapter.png"/>
 	</div>

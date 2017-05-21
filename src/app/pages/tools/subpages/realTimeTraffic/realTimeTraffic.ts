@@ -4,7 +4,7 @@
  */
 
 import { Component } from "@angular/core";
-import { EssenceNg2AMapComponent } from "../../../../components/essence-ng2-amap/essence-ng2-amap.component";
+import { EssenceIonAMapComponent } from "../../../../components/essence-ion-amap/essence-ion-amap.component";
 
 @Component({
     selector: 'page-realTimeTraffic',
@@ -16,7 +16,7 @@ export class RealTimeTrafficPage {
 
     constructor() { }
 
-    amapReady(amapComponent: EssenceNg2AMapComponent) {}
+    amapReady(amapComponent: EssenceIonAMapComponent) {}
 
     amapDestroy($event) {}
 
