@@ -1,13 +1,12 @@
 <div class="videoViewerContainer" (mouseover)="videoMouseover($event)" (mouseout)="videoMouseout($event)" [style.width]="width + 'px'"
  #videoViewerContainer>
-	<div class="videoViewer">
-		<video (click)="playOrPause()" [width]="width" [poster]="poster" (loadedmetadata)="onLoadedmetadata($event)" (ended)="OnPlayEnded($event)"
+	<div class="videoViewer" [style.min-height]="video.offsetHeight + 'px'">
+		<video #video (click)="playOrPause()" [width]="width" [poster]="poster" (loadedmetadata)="onLoadedmetadata($event)" (ended)="OnPlayEnded($event)"
 		 (timeupdate)="onTimeupdate($event)" (progress)="onProgress($event)" (canplaythrough)="onCanplaythrough($event)" (play)="onPlay($event)">
 			<source [src]="videoUrl" type="video/mp4" />
 		</video>
 		<div *ngIf="videoElem && videoElem.paused">
-			<span class="fa" (click)="playOrPause()" [ngClass]="{'fa-repeat': videoElem.ended, 'fa-play-circle-o': !videoElem.ended}">
-			</span>
+			<span class="fa" (click)="playOrPause()" [ngClass]="{'fa-repeat': videoElem.ended, 'fa-play-circle-o': !videoElem.ended}"></span>
 		</div>
 	</div>
 	<div class="videoToolbar" *ngIf="videoElem" #videoToolbar>
