@@ -37,6 +37,7 @@ import { RealTimeTrafficPage } from "./pages/tools/subpages/realTimeTraffic/real
 import { WeatherReportPage } from "./pages/tools/subpages/weatherReport/weatherReport";
 import { EssenceIonAMapModule } from "./components/essence-ion-amap/essence-ion-amap.module";
 import { EssenceIonVideoplayerModule } from "./components/essence-ion-videoplayer/essence-ion-videoplayer.module";
+import { TransformService } from "./services/transform.service";
 
 @NgModule({
     imports: [
@@ -91,6 +92,7 @@ import { EssenceIonVideoplayerModule } from "./components/essence-ion-videoplaye
         TipsService,
         LoginService,
         RequestService,
+        TransformService,
         AppVersion,
         BackgroundMode,
         BarcodeScanner,

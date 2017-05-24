@@ -8,11 +8,12 @@ import { Component, OnInit, OnDestroy, EventEmitter, Output, Input, ViewChild, E
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { Observable } from "rxjs";
 
-import { TransformService } from "./transform.service";
+import { EssenceIonAMapTransformService } from "./essence-ion-amap-transform.service";
 
 @Component({
     selector: "essence-ion-amap",
-    templateUrl: "essence-ion-amap.component.html"
+    templateUrl: "essence-ion-amap.component.html",
+    providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     private map: any;
@@ -45,7 +46,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 
     constructor(
         private http: Http,
-        private transformService: TransformService) {
+        private transformService: EssenceIonAMapTransformService) {
 
     }
 

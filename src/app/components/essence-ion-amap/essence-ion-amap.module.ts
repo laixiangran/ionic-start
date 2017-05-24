@@ -7,7 +7,6 @@ import {CommonModule} from "@angular/common";
 import {NgModule} from '@angular/core';
 import {IonicModule} from 'ionic-angular';
 import {EssenceIonAMapComponent} from "./essence-ion-amap.component";
-import {TransformService} from "./transform.service";
 
 @NgModule({
     imports: [
@@ -22,10 +21,7 @@ import {TransformService} from "./transform.service";
     ],
     exports: [
         EssenceIonAMapComponent
-    ],
-	providers: [
-		TransformService
-	]
+    ]
 })
 export class EssenceIonAMapModule {
 }
