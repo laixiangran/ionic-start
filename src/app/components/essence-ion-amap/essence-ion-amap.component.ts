@@ -21,14 +21,24 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     private locationMarker: any;
     private locationZoom: number = 16;
     private isStartLocation: boolean = false;
+    private trafficTileLayer: any;
+    private isShowTraffic: boolean = false;
+    initZoom: number;
+    initCenter: any;
+    vertrefresh: number = 10;
 
-    public initZoom: number;
-    public initCenter: any;
     @ViewChild("amap") elRef: ElementRef;
     @Input() options: any;
     @Input() showCurrentLocation: boolean = false;
     @Input() showLocationMarker: boolean = true;
-    @Input() showTraffic: boolean = false;
+    @Input() set showTraffic(value: boolean) {
+        this.isShowTraffic = value;
+        if (value) {
+            this.trafficTileLayer && this.trafficTileLayer.show();
+        } else {
+            this.trafficTileLayer && this.trafficTileLayer.hide();
+        }
+    };
     @Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
     @Output() destroy: EventEmitter<any> = new EventEmitter<any>(false);
     @Output() location: EventEmitter<any> = new EventEmitter<any>(false);
@@ -54,11 +64,15 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     initMap() {
         if (window['AMap']) {
             this.map = new AMap.Map(this.elRef.nativeElement, this.options);
-            if (this.showTraffic) {
-                new AMap.TileLayer.Traffic({
-                    map: this.map,
-                    interval: 60
-                });
+            this.trafficTileLayer = new AMap.TileLayer.Traffic({
+                map: this.map,
+                autoRefresh: true,
+                interval: this.vertrefresh
+            });
+            if (this.isShowTraffic) {
+                this.trafficTileLayer.show();
+            } else {
+                this.trafficTileLayer.hide();
             }
             this.showCurrentLocation && this.currentLocation();
             this.initZoom = this.map.getZoom();
@@ -80,6 +94,21 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * 设置地图范围
+     * 
+     * @param {number[]} southWest 
+     * @param {number[]} northEast 
+     * 
+     * @memberof EssenceNg2AMapComponent
+     */
+    setBounds(southWest: number[], northEast: number[]) {
+        let bounds: any = new AMap.Bounds(southWest, northEast)
+        this.map.setBounds(bounds);
+        this.initZoom = this.map.getZoom();
+        this.initCenter = this.map.getCenter();
+    }
+
+    /**
      * 创建覆盖物
      * @param markerOptions
      * @returns {AMap.Marker}
@@ -95,6 +124,10 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 */
     creatIcon(iconOptions: any): any {
         return new AMap.Icon(iconOptions);
+    }
+
+    creatPixel(x: Number, y: Number): any {
+        return new AMap.Pixel(x, y);
     }
 
 	/**
@@ -156,8 +189,8 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * 定位
-     */
+	 * 定位
+	 */
     currentLocation(): void {
         if (this.initParams()) {
             this.isStartLocation = true;
@@ -233,13 +266,11 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
         const opts: RequestOptions = new RequestOptions();
         headers.append("Content-Type", "application/json");
         opts.headers = headers;
-        return this.http.get(url, opts).map(
-            (res: Response) => res.json()
-        ).catch(this.handleError);
-    }
-
-    private handleError(error: Response): Observable<any> {
-        return Observable.throw(error.json().error || "Server Error");
+        return this.http.get(url, opts).map((res: Response) => {
+            return res.json()
+        }).catch((error: Response) => {
+            return Observable.throw(error.json().error || "Server Error");
+        });
     }
 }
 
