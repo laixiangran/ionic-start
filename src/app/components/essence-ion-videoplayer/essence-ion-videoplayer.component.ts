@@ -46,6 +46,7 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 	 * @param e
 	 */
 	onCanPlay(e: any) {
+		this.canPlay = true;
 		console.log('can play');
 	}
 
@@ -109,8 +110,12 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 		console.log('canplaythrough');
 	}
 
+	/**
+	 * 返回表示视频错误状态的 MediaError 对象
+	 * @param e 
+	 */
 	onError(e: any) {
-		console.error(e.target.networkState, e.target.readyState);
+		console.error('error');
 	}
 
 	/**
@@ -141,6 +146,9 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 	 * 重新加载video元素
 	 */
 	reload(videoElem: HTMLVideoElement) {
+		if (videoElem.networkState != 3) {
+			this.canPlay = false
+		};
 		videoElem.load();
 	}
 

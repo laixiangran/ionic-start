@@ -18,8 +18,8 @@
 			<span class="fa" [ngClass]="{'fa-repeat': videoElem.ended, 'fa-play-circle-o': !videoElem.ended}"></span>
 			<span class="time">{{currentTime}}/{{totalTime}}</span>
 		</div>
-		<div *ngIf="!videoElem || !canPlay && video.networkState != 3">
-			<span class="loading" class="fa fa-circle-o-notch fa-spin"></span>
+		<div *ngIf="video.networkState != 3 && !videoElem || !canPlay">
+			<span class="fa fa-circle-o-notch fa-spin loading"></span>
 		</div>
 		<div *ngIf="video.networkState === 3" tappable (click)="reload(video)">
 			<span class="fa fa-refresh"></span>
