@@ -1,6 +1,7 @@
 {
   "name": "ionic-start",
   "author": "Essence",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve",
