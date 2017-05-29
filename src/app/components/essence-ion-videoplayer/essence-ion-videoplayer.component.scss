@@ -1,3 +1,5 @@
+$playBtnSize: 40px;
+
 essence-ion-videoplayer {
 
 	.videoViewerContainer {
@@ -9,7 +11,6 @@ essence-ion-videoplayer {
 
 		.videoViewer {
 			position: relative;
-			margin-bottom: 34px;
 
 			div {
 				position: absolute;
@@ -20,18 +21,29 @@ essence-ion-videoplayer {
 				background: rgba(62, 62, 62, 0.5);
 
 				span {
-					font-size: 40px;
+					font-size: $playBtnSize;
 					position: absolute;
 					left: 50%;
 					top: 50%;
-					margin-left: -20px;
-					margin-top: -20px;
+					margin-left: -$playBtnSize/2;
+					margin-top: -$playBtnSize/2-10;
 					color: #E2E2E2;
 					transition: color 0.8s;
 
-					&:hover {
-						color: #4BCEF2;
-						cursor: pointer;
+					&.time {
+						margin-left: -44px;
+						margin-top: $playBtnSize/2-10;
+						font-size: 10px;
+					}
+
+					&.loading {
+						margin-top: -$playBtnSize/2;
+					}
+
+					&.reload_info {
+						margin-left: -42px;
+						margin-top: $playBtnSize/2-10;
+						font-size: 12px;
 					}
 				}
 			}
@@ -45,99 +57,6 @@ essence-ion-videoplayer {
 			font-size: 25px;
 			color: #BFB9B9;
 
-			.videoToolbar_play_btn {
-				float: left;
-				padding: 0 10px;
-
-				& > span {
-					display: inline-block;
-					margin-right: 20px;
-				}
-
-				& > span.playBtn:hover {
-					color: #45bdde;
-					cursor: pointer;
-				}
-
-				& > span.playTime {
-					font-size: 0.5em;
-					vertical-align: middle;
-
-					span {
-						color: #E2E2E2;
-					}
-				}
-			}
-
-			.videoToolbar_volume_btn {
-				float: right;
-				padding: 0 15px;
-
-				span {
-					display: inline-block;
-					cursor: pointer;
-					font-size: 0.8em;
-
-					&.mutedBtn {
-						height: 32px;
-						width: 32px;
-						text-align: left;
-						line-height: 32px;
-					}
-
-					&.volume_val {
-						position: relative;
-						width: 100px;
-						margin-bottom: 3px;
-						height: 4px;
-						vertical-align: middle;
-						cursor: pointer;
-
-						& > span {
-							width: 100%;
-							height: 100%;
-							position: absolute;
-							border-radius: 2px;
-
-							&.volume_val_ball {
-								bottom: 0;
-								height: 12px;
-								width: 12px;
-								border-radius: 12px;
-								background: #E2E2E2;
-								z-index: 3;
-								margin-bottom: -4px;
-
-								span {
-									position: absolute;
-									display: none;
-									font-size: 12px;
-									top: -25px;
-									left: -8px;
-									padding: 2px;
-									background: #000000;
-									color: #FFFFFF;
-								}
-
-								&:hover span {
-									display: inline-block;
-								}
-							}
-
-							&.volume_val_active {
-								z-index: 2;
-								background: #45bdde;
-							}
-
-							&.volume_val_notActive {
-								z-index: 1;
-								background: #989393;
-							}
-						}
-					}
-				}
-			}
-
 			.videoToolbar_progress {
 				position: relative;
 				width: 100%;
@@ -146,68 +65,14 @@ essence-ion-videoplayer {
 				transition: height 0.5s;
 				cursor: pointer;
 
-				.timeTip {
-					position: absolute;
-					display: none;
-					top: -25px;
-					left: -16px;
-					padding: 2px;
-					background: #000000;
-					font-size: 12px;
-					color: #FFFFFF;
-				}
-
-				.progress_val_ball {
-					position: absolute;
-					left: 0;
-					bottom: 0;
-					height: 16px;
-					width: 16px;
-					border-radius: 16px;
-					background: #f7f7f7;
-					z-index: 3;
-					opacity: 0;
-					transition: opacity 0.5s;
-					font-size: 12px;
-
-					span {
-						position: absolute;
-						display: none;
-						top: -25px;
-						left: -16px;
-						padding: 2px;
-						background: #000000;
-						color: #FFFFFF;
-					}
-
-					&:hover span {
-						display: inline-block;
-					}
-				}
-
 				div {
 					position: absolute;
 					width: 0;
 					height: 100%;
-					border-radius: 16px;
 
 					&.videoToolbar_play_progress {
 						z-index: 2;
 						background: #45bdde;
-
-						&:hover ~ .timeTip {
-							display: inline-block;
-						}
-					}
-
-					&.videoToolbar_buffer_progress {
-						width: 100%;
-						z-index: 1;
-						background: rgba(191, 185, 185, 0.6);
-
-						&:hover ~ .timeTip {
-							display: inline-block;
-						}
 					}
 				}
 			}

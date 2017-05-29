@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Input, Output, EventEmitter} from "@angular/core";
-import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Input, Output, EventEmitter } from "@angular/core";
+import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
 @Component({
 	selector: 'essence-ion-videoplayer',
@@ -20,184 +20,135 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 	currentTime: string; // 视频播放的当前时间
 	totalTime: string; // 视频总时间
 	play_progress: number = 0; // 播放的进度条长度值
-	videoToolbarProgressHeight: number = 3; // 进度条高度
-	preVolume: number = 1; // 静音设置前的音量值
-	showProgressBall: boolean = false; // 是否显示进度条上滑动的球
-	progressBallDragStartClientX: number = 0; // 进度条上滑动的球初始x位置
-	isProgressBallStartMove = false; // 进度条上的球是否开始滑动
-	volumeBallDragStartClientX: number = 0; // 音量条上滑动的球初始x位置
-	isVolumeBallStartMove = false; // 音量条上的球是否开始滑动
-	timeTip: string; // 时间提示
-	timeTipOffsetX: number = 0;
+	canPlay: boolean = true; // false：加载中，true：可以播放
 
-	constructor (public domSanitizer: DomSanitizer) {
+	constructor(
+		public domSanitizer: DomSanitizer) {
 	}
 
-	ngOnInit () {
+	ngOnInit() {
 		this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.source);
 		this.ready.emit('video viewer initialize!');
 	}
 
 	/**
-	 * 视频的元数据已加载事件
+	 * 当浏览器已加载视频的元数据时
 	 * @param e
 	 */
-	onLoadedmetadata (e: any) {
+	onLoadedmetadata(e: any) {
 		this.videoElem = e.target as HTMLVideoElement;
 		this.totalTime = this.getFormatTime(this.videoElem.duration);
 		this.currentTime = this.getFormatTime(this.videoElem.currentTime);
 	}
 
 	/**
-	 * 播放结束事件
+	 * 当浏览器可以播放视频时
 	 * @param e
 	 */
-	OnPlayEnded (e: any) {
-		console.log(`播放结束：${this.videoElem.ended}`);
+	onCanPlay(e: any) {
+		console.log('can play');
 	}
 
 	/**
-	 * 开始播放事件
+	 * 当视频已开始或不再暂停时
 	 * @param e
 	 */
-	onPlay (e: any) {
+	onPlay(e: any) {
 		console.log('play');
 	}
 
 	/**
-	 * 播放时间改变事件
+	 * 当视频在已因缓冲而暂停或停止后已就绪时
 	 * @param e
 	 */
-	onTimeupdate (e: any) {
+	onPlaying(e: any) {
+		this.canPlay = false;
+		console.log('playing');
+	}
+
+	/**
+	 * 	当视频由于需要缓冲下一帧而停止
+	 * @param e
+	 */
+	onWaiting(e: any) {
+		this.canPlay = false;
+		console.log('waiting');
+	}
+
+	/**
+	 * 当目前的播放列表已结束时
+	 * @param e
+	 */
+	OnEnded(e: any) {
+		console.log('play end');
+	}
+
+	/**
+	 * 当目前的播放位置已更改时
+	 * @param e
+	 */
+	onTimeupdate(e: any) {
+		this.canPlay = true;
 		this.currentTime = this.getFormatTime(this.videoElem.currentTime);
 		this.play_progress = this.videoElem.currentTime / this.videoElem.duration * this.videoToolbar.nativeElement.clientWidth;
 	}
 
-	onProgress (e: any) {
+	/**
+	 * 当浏览器正在下载视频时
+	 * @param e 
+	 */
+	onProgress(e: any) {
 		console.log('progress');
 	}
 
-	onCanplaythrough (e: any) {
+	/**
+	 * 当浏览器可在不因缓冲而停顿的情况下进行播放时
+	 * @param e 
+	 */
+	onCanplaythrough(e: any) {
 		console.log('canplaythrough');
 	}
 
-	videoToolbarProgressClick (e: MouseEvent) {
-		this.play_progress = e.offsetX;
-		let tempCurrentTime: number = this.play_progress / this.videoToolbar.nativeElement.clientWidth * this.videoElem.duration;
-		this.videoElem.currentTime = tempCurrentTime;
-		this.currentTime = this.getFormatTime(tempCurrentTime);
-	}
-
-	videoToolbarProgressMove (e: MouseEvent) {
-		let tempCurrentTime: number = e.offsetX / this.videoToolbar.nativeElement.clientWidth * this.videoElem.duration;
-		this.timeTipOffsetX = e.offsetX;
-		this.timeTip = this.getFormatTime(tempCurrentTime);
-	}
-
-	progressBallDragStart (e: MouseEvent) {
-		e.stopPropagation();
-		this.progressBallDragStartClientX = e.clientX;
-		this.isProgressBallStartMove = true;
-	}
-
-	progressBallDrag (e: MouseEvent) {
-		e.stopPropagation();
-		if (this.isProgressBallStartMove) {
-			let offsetX: number = e.clientX - this.progressBallDragStartClientX;
-			this.progressBallDragStartClientX = e.clientX;
-			this.play_progress = (this.play_progress + offsetX);
-			if (this.play_progress >= this.videoToolbar.nativeElement.clientWidth) {
-				this.play_progress = this.videoToolbar.nativeElement.clientWidth;
-			} else if (this.play_progress <= 0) {
-				this.play_progress = 0;
-			}
-			let tempCurrentTime: number = this.play_progress / this.videoToolbar.nativeElement.clientWidth * this.videoElem.duration;
-			this.videoElem.currentTime = tempCurrentTime;
-			this.currentTime = this.getFormatTime(tempCurrentTime);
-		}
-	}
-
-	progressBallDragEnd (e: MouseEvent) {
-		e.stopPropagation();
-		this.isProgressBallStartMove = false;
-	}
-
-	volumeValClick (e: MouseEvent, width: number) {
-		console.log(e.offsetX);
-		this.videoElem.volume = e.offsetX / width;
-	}
-
-	volumeBallDragStart (e: MouseEvent) {
-		e.stopPropagation();
-		this.volumeBallDragStartClientX = e.clientX;
-		this.isVolumeBallStartMove = true;
-	}
-
-	volumeBallDrag (e: MouseEvent, width: number) {
-		e.stopPropagation();
-		if (this.isVolumeBallStartMove) {
-			let offsetX: number = e.clientX - this.volumeBallDragStartClientX;
-			this.volumeBallDragStartClientX = e.clientX;
-			let volume: number = this.videoElem.volume + offsetX / width;
-			if (volume <= 0) {
-				this.videoElem.volume = 0;
-			} else if (volume >= 1) {
-				this.videoElem.volume = 1;
-			} else {
-				this.videoElem.volume = volume;
-			}
-		}
-	}
-
-	volumeBallDragEnd (e: MouseEvent) {
-		e.stopPropagation();
-		this.isVolumeBallStartMove = false;
-	}
-
-	videoMouseover (e: any) {
-		this.videoToolbarProgressHeight = 16;
-		this.showProgressBall = true;
-	}
-
-	videoMouseout (e: any) {
-		this.videoToolbarProgressHeight = 3;
-		this.showProgressBall = false;
+	onError(e: any) {
+		console.error(e.target.networkState, e.target.readyState);
 	}
 
 	/**
 	 * 播放视频
 	 */
-	play () {
-		this.videoElem.ended && this.videoElem.load();
+	play() {
+		if (this.videoElem.ended) {
+			this.videoElem.currentTime = 0;
+		}
 		this.videoElem.play();
 	}
 
 	/**
 	 * 暂停视频
 	 */
-	pause () {
+	pause() {
 		this.videoElem.pause();
 	}
 
 	/**
 	 * 播放/暂停
 	 */
-	playOrPause () {
-		this.videoElem.paused ? this.play() : this.pause();
+	playOrPause() {
+		(this.videoElem && this.videoElem.paused) ? this.play() : this.pause();
 	}
 
-	isMuted () {
-		if (this.videoElem.muted) {
-			this.videoElem.muted = false;
-			this.videoElem.volume = this.preVolume;
-		} else {
-			this.videoElem.muted = true;
-			this.preVolume = this.videoElem.volume;
-			this.videoElem.volume = 0;
-		}
+	/**
+	 * 重新加载video元素
+	 */
+	reload(videoElem: HTMLVideoElement) {
+		videoElem.load();
 	}
 
-	getFormatTime (value: number): string {
+	/**
+	 * 将数字格式化成hh:mm:ss时间格式
+	 * @param value 
+	 */
+	getFormatTime(value: number): string {
 		let h: string = parseInt(value / 3600 + '') < 10 ? '0' + parseInt(value / 3600 + '') : '' + parseInt(value / 3600 + ''),
 			m: string = parseInt(value % 3600 / 60 + '') < 10 ? '0' + parseInt(value % 3600 / 60 + '') : '' + parseInt(value % 3600 / 60 + ''),
 			s: string;

@@ -53,12 +53,12 @@ export class NativePage {
 
 	/**
 	 * 播放视频
-	 * 
-	 * 
+	 *
+	 *
 	 * @memberof NativePage
 	 */
 	playVideo() {
-		this.videoPlayer.play('http://www.w3school.com.cn/i/movie.mp4').then(() => {
+		this.videoPlayer.play('http://www.laixiangran.cn/CDN/custom/video/test.mp4').then(() => {
 			console.log('video completed');
 		}).catch(err => {
 			console.log(err);
