@@ -31,18 +31,14 @@ essence-ion-videoplayer {
 					transition: color 0.8s;
 
 					&.time {
-						margin-left: -44px;
-						margin-top: $playBtnSize/2-10;
+						margin-left: -52px;
+						margin-top: 10px;
 						font-size: 10px;
-					}
-
-					&.loading {
-						margin-top: -$playBtnSize/2;
 					}
 
 					&.reload_info {
 						margin-left: -42px;
-						margin-top: $playBtnSize/2-10;
+						margin-top: 10px;
 						font-size: 12px;
 					}
 				}
