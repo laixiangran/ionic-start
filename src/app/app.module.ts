@@ -35,9 +35,8 @@ import { LoginService } from "./pages/login/login.service";
 import { ToolsPage } from "./pages/tools/tools";
 import { RealTimeTrafficPage } from "./pages/tools/subpages/realTimeTraffic/realTimeTraffic";
 import { WeatherReportPage } from "./pages/tools/subpages/weatherReport/weatherReport";
-import { EssenceIonAMapModule } from "./components/essence-ion-amap/essence-ion-amap.module";
-import { EssenceIonVideoplayerModule } from "./components/essence-ion-videoplayer/essence-ion-videoplayer.module";
 import { TransformService } from "./services/transform.service";
+import { EssenceIonicModule } from "./components/essence-ionic.module";
 
 @NgModule({
     imports: [
@@ -55,8 +54,7 @@ import { TransformService } from "./services/transform.service";
         }),
         IonicStorageModule.forRoot(),
         EssenceNg2ChartModule,
-        EssenceIonAMapModule,
-        EssenceIonVideoplayerModule
+        EssenceIonicModule
     ],
     declarations: [
         AppComponent,
