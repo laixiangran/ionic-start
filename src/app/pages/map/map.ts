@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {NavController, AlertController} from 'ionic-angular';
-import { EssenceIonAMapComponent } from "../../components/essence-ion-amap/essence-ion-amap.component";
+import { EssenceIonAMapComponent } from "essence-ionic";
 
 @Component({
 	selector: 'page-map',

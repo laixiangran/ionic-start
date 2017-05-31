@@ -36,7 +36,7 @@ import { ToolsPage } from "./pages/tools/tools";
 import { RealTimeTrafficPage } from "./pages/tools/subpages/realTimeTraffic/realTimeTraffic";
 import { WeatherReportPage } from "./pages/tools/subpages/weatherReport/weatherReport";
 import { TransformService } from "./services/transform.service";
-import { EssenceIonicModule } from "./components/essence-ionic.module";
+import { EssenceIonicModule } from "essence-ionic";
 
 @NgModule({
     imports: [

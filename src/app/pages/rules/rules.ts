@@ -7,7 +7,8 @@ import { NavController } from 'ionic-angular';
     templateUrl: 'rules.html'
 })
 export class RulesPage {
-    videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
+    // videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
+    videoUrl: string = 'assets/videos/test.mp4';
     items = [
         {
             name: "天气预报",

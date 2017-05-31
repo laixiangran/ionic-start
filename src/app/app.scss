@@ -15,8 +15,14 @@
 // automatically applied to the <body> element in the app.
 
 /*隐藏高德地图logo与版权信息*/
-.amap-logo, .amap-copyright {
-    display: none !important;
+.amap-logo {
+    display: none!important;
+    visibility: hidden!important;
+}
+
+.amap-copyright {
+    display: none!important;
+    visibility: hidden!important;
 }
 
 .loading-ios {
