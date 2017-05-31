@@ -9,6 +9,8 @@ import { RealTimeTrafficPage } from "./subpages/realTimeTraffic/realTimeTraffic"
     templateUrl: 'tools.html'
 })
 export class ToolsPage {
+    // videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
+    videoUrl: string = 'assets/videos/test.mp4';
 
     constructor (public navCtrl: NavController) {}
 
@@ -29,5 +31,9 @@ export class ToolsPage {
 
     itemSelected (item: any) {
         this.navCtrl.push(item.component);
+    }
+
+    videoViewerReady($event: any) {
+        console.log($event);
     }
 }

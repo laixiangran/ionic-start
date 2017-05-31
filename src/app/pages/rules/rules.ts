@@ -7,8 +7,6 @@ import { NavController } from 'ionic-angular';
     templateUrl: 'rules.html'
 })
 export class RulesPage {
-    // videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
-    videoUrl: string = 'assets/videos/test.mp4';
     items = [
         {
             name: "天气预报",
@@ -27,9 +25,4 @@ export class RulesPage {
     itemSelected(item: string) {
         console.log("Selected Item", item);
     }
-
-    videoViewerReady($event: any) {
-        console.log($event);
-    }
-
 }
