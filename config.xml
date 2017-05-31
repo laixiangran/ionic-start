@@ -6,8 +6,6 @@
     <content src="index.html"/>
     <access origin="*"/>
     <allow-navigation href="http://ionic.local/*"/>
-    <allow-navigation href="http://192.168.170.1:8101"/>
-    <allow-navigation href="http://192.168.1.114:8101"/>
     <allow-intent href="http://*/*"/>
     <allow-intent href="https://*/*"/>
     <allow-intent href="tel:*"/>
