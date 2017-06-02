@@ -37,6 +37,7 @@ import { RealTimeTrafficPage } from "./pages/tools/subpages/realTimeTraffic/real
 import { WeatherReportPage } from "./pages/tools/subpages/weatherReport/weatherReport";
 import { TransformService } from "./services/transform.service";
 import { EssenceIonicModule } from "essence-ionic";
+import { SignaturePadModule } from "angular2-signaturepad";
 
 @NgModule({
     imports: [
@@ -54,7 +55,8 @@ import { EssenceIonicModule } from "essence-ionic";
         }),
         IonicStorageModule.forRoot(),
         EssenceNg2ChartModule,
-        EssenceIonicModule
+        EssenceIonicModule,
+        SignaturePadModule
     ],
     declarations: [
         AppComponent,

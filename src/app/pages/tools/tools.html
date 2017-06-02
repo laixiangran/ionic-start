@@ -22,6 +22,11 @@
 			<ion-icon name="arrow-forward"></ion-icon>
 		</span>
 	</div>
+	<p>签名板（在区域内签名）</p>
+	<div style="width: 100%; border: 1px solid royalblue;" #signaturePadDiv>
+		<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+	</div>
+	<p>视频播放器</p>
 	<div style="width: 100%;" #videoDiv>
 		<essence-ion-videoplayer
 				(ready)="videoViewerReady($event)"
