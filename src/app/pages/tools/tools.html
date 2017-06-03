@@ -11,6 +11,20 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
+	<p>签名板（在区域内签名）</p>
+	<div style="margin: 0 2px; border: 1px solid red;" #signaturePadDiv>
+		<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+	</div>
+	<button ion-button (click)="clearSignature()">清除签名</button>
+	<p>视频播放器</p>
+	<div style="width: 100%;" #videoDiv>
+		<essence-ion-videoplayer
+				(ready)="videoViewerReady($event)"
+				[source]="videoUrl"
+				[poster]="'assets/img/post.png'"
+				[width]="videoDiv.offsetWidth">
+		</essence-ion-videoplayer>
+	</div>
 	<div class="tools_itme" *ngFor="let item of items;" (click)="itemSelected(item)">
 		<span class="item_icon" [style.background-color]="item.color">
 			<span>
@@ -21,18 +35,5 @@
 		<span>
 			<ion-icon name="arrow-forward"></ion-icon>
 		</span>
-	</div>
-	<p>签名板（在区域内签名）</p>
-	<div style="width: 100%; border: 1px solid royalblue;" #signaturePadDiv>
-		<signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
-	</div>
-	<p>视频播放器</p>
-	<div style="width: 100%;" #videoDiv>
-		<essence-ion-videoplayer
-				(ready)="videoViewerReady($event)"
-				[source]="videoUrl"
-				[poster]="'assets/img/post.png'"
-				[width]="videoDiv.offsetWidth">
-		</essence-ion-videoplayer>
 	</div>
 </ion-content>

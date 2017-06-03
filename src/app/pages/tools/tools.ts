@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { MenuController, NavController } from 'ionic-angular';
 import { WeatherReportPage } from "./subpages/weatherReport/weatherReport";
 import { RealTimeTrafficPage } from "./subpages/realTimeTraffic/realTimeTraffic";
 import { SignaturePad } from "angular2-signaturepad/signature-pad";
@@ -11,18 +11,20 @@ import { SignaturePad } from "angular2-signaturepad/signature-pad";
 })
 export class ToolsPage implements OnInit {
     @ViewChild(SignaturePad) signaturePad: SignaturePad;
-    @ViewChild('signaturePadDiv') signaturePadDiv: HTMLDivElement;
+    @ViewChild('signaturePadDiv') signaturePadDiv: ElementRef;
 
     // videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
     videoUrl: string = 'assets/videos/test.mp4';
 
     signaturePadOptions: Object;
 
-    constructor(public navCtrl: NavController) {}
+    constructor(
+    	public navCtrl: NavController,
+		public menu: MenuController) {}
 
     ngOnInit() {
         this.signaturePadOptions = {
-            canvasWidth: this.signaturePadDiv.offsetWidth,
+            canvasWidth: this.signaturePadDiv.nativeElement.clientWidth,
             canvasHeight: 200
         };
     }
@@ -50,11 +52,18 @@ export class ToolsPage implements OnInit {
         console.log($event);
     }
 
+	drawStart() {
+    	this.menu.enable(false);
+		console.log('begin drawing');
+	}
+
     drawComplete() {
-        console.log(this.signaturePad.toDataURL());
+		this.menu.enable(true);
+		console.log('drawing complete');
+        // console.log(this.signaturePad.toDataURL());
     }
 
-    drawStart() {
-        console.log('begin drawing');
+    clearSignature() {
+        this.signaturePad.clear();
     }
 }
