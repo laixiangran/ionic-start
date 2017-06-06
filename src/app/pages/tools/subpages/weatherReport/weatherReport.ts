@@ -90,6 +90,7 @@ export class WeatherReportPage {
                 let currLocation: any = this.transform.gcj2wgs(position.coords.latitude, position.coords.longitude);
                 resolve(currLocation);
             }, (error: PositionError) => {
+                console.log(error);
                 reject(error);
             }, options)
         });

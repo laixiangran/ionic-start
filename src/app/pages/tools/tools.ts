@@ -13,8 +13,7 @@ export class ToolsPage implements OnInit {
     @ViewChild(SignaturePad) signaturePad: SignaturePad;
     @ViewChild('signaturePadDiv') signaturePadDiv: ElementRef;
 
-    // videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
-    videoUrl: string = 'assets/videos/test.mp4';
+    videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
 
     signaturePadOptions: Object;
 

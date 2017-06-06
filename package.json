@@ -6,6 +6,7 @@
 	"scripts": {
 		"start": "ionic-app-scripts serve",
 		"add": "ionic cordova platform add android",
+		"resources": "ionic cordova resources android",
 		"device": "ionic cordova run android",
 		"build": "ionic cordova build android --release --prod"
 	},
