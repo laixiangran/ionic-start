@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.essence" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ionic start</name>
     <description>This is an ionic app project.</description>
@@ -29,14 +29,6 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
-        <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git">
-            <variable name="API_KEY" value="F0c645f961aa0cdae874b2073d55f3a5" />
-        </plugin>
-    </platform>
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-        <plugin name="cordova-plugin-geolocation" spec="~2.4.3" />
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <preference name="orientation" value="portrait" />
@@ -76,7 +68,11 @@
         <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
         <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
         <variable name="XWALK_MODE" value="embedded" />
+        <!--<variable name="XWALK_MODE" value="lite" />-->
         <variable name="XWALK_MULTIPLEAPK" value="true" />
     </plugin>
     <engine name="android" spec="~6.1.2" />
+    <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git">
+        <variable name="API_KEY" value="F0c645f961aa0cdae874b2073d55f3a5" />
+    </plugin>
 </widget>
