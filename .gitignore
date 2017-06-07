@@ -24,13 +24,9 @@ temp/
 hooks/
 platforms/
 plugins/
-plugins/android.json
-plugins/ios.json
 www/
 $RECYCLE.BIN/
 
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-
-platforms.zip
