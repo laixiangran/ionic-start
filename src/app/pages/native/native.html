@@ -9,7 +9,19 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-	<p style="color: red; font-size: 1.4rem; margin: 10px 10px;">注意：必须在虚拟机/真机上运行！</p>
+	<p style="color: red; font-size: 1.4rem; margin: 10px 10px;">注意：‘模拟’表示在浏览器模拟该插件，‘真机’则表示必须在虚拟机/真机上运行！</p>
+	<ion-card>
+		<ion-card-header>
+			<a href="http://ionicframework.com/docs/native/camera/" target="_blank">cordova-plugin-camera</a>
+			<p>相机插件</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>
+				<button ion-button (click)="playCamera()">模拟拍照</button>
+				<button ion-button  color="vibrant" (click)="playCamera()">真机拍照</button>
+			</p>
+		</ion-card-content>
+	</ion-card>
 	<ion-card>
 		<ion-card-header>
 			<a href="http://ionicframework.com/docs/native/video-player/" target="_blank">cordova-plugin-videoplayer</a>

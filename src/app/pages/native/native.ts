@@ -6,6 +6,7 @@ import { BatteryStatusResponse, BatteryStatus } from "@ionic-native/battery-stat
 
 import { ConfigService } from "../../services/config.service";
 import { VideoPlayer } from "@ionic-native/video-player";
+import { Camera, CameraOptions } from "@ionic-native/camera";
 
 @Component({
 	selector: 'page-native',
@@ -21,6 +22,7 @@ export class NativePage {
 		public barcodeScanner: BarcodeScanner,
 		public batteryStatus: BatteryStatus,
 		public videoPlayer: VideoPlayer,
+		public camera: Camera,
 		public configService: ConfigService) {
 	}
 
@@ -49,6 +51,20 @@ export class NativePage {
 				this.batteryStatusResponse = status;
 			});
 		}
+	}
+
+	playCamera() {
+		const options: CameraOptions = {
+			quality: 100,
+			destinationType: this.camera.DestinationType.DATA_URL,
+			encodingType: this.camera.EncodingType.JPEG,
+			mediaType: this.camera.MediaType.PICTURE
+		}
+		this.camera.getPicture(options).then((imageData) => {
+			console.log(imageData);
+		}, (err) => {
+			// Handle error
+		});
 	}
 
 	/**

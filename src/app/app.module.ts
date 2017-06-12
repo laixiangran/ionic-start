@@ -14,6 +14,8 @@ import { Transfer } from "@ionic-native/transfer";
 import { FileOpener } from "@ionic-native/file-opener";
 import { File } from "@ionic-native/file";
 import { VideoPlayer } from "@ionic-native/video-player";
+import { Camera } from '@ionic-native/camera';
+import { CameraMock } from "./mocks/native/camera-mock";
 
 import { AppComponent } from './app.component';
 
@@ -69,7 +71,7 @@ import { SignaturePadModule } from "angular2-signaturepad";
         SettingsPage,
         ToolsPage,
         RealTimeTrafficPage,
-        WeatherReportPage
+        WeatherReportPage,
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -86,7 +88,7 @@ import { SignaturePadModule } from "angular2-signaturepad";
         WeatherReportPage
     ],
     providers: [
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
         ConfigService,
         AuthService,
         TipsService,
@@ -103,7 +105,8 @@ import { SignaturePadModule } from "angular2-signaturepad";
         Transfer,
         FileOpener,
         File,
-        VideoPlayer
+        VideoPlayer,
+        {provide: Camera, useClass: CameraMock}
     ]
 })
 export class AppModule {
