@@ -41,73 +41,82 @@ import { TransformService } from "./services/transform.service";
 import { EssenceIonicModule } from "essence-ionic";
 import { SignaturePadModule } from "angular2-signaturepad";
 
-@NgModule({
-    imports: [
-        BrowserModule,
-        HttpModule,
-        IonicModule.forRoot(AppComponent, {
-            mode: 'ios',
-            iconMode: 'ios',
-            backButtonText: '返回',
-            tabsHideOnSubPages: 'true',
-            modalEnter: 'modal-slide-in',
-            modalLeave: 'modal-slide-out',
-            tabsPlacement: 'bottom',
-            pageTransition: 'ios'
-        }),
-        IonicStorageModule.forRoot(),
-        EssenceNg2ChartModule,
-        EssenceIonicModule,
-        SignaturePadModule
-    ],
-    declarations: [
-        AppComponent,
-        LoginPage,
-        TabsPage,
-        NativePage,
-        MapPage,
-        StatisticPage,
-        RulesPage,
-        SettingsPage,
-        ToolsPage,
-        RealTimeTrafficPage,
-        WeatherReportPage,
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [
-        AppComponent,
-        LoginPage,
-        TabsPage,
-        NativePage,
-        MapPage,
-        StatisticPage,
-        RulesPage,
-        SettingsPage,
-        ToolsPage,
-        RealTimeTrafficPage,
-        WeatherReportPage
-    ],
-    providers: [
-        {provide: ErrorHandler, useClass: IonicErrorHandler},
-        ConfigService,
-        AuthService,
-        TipsService,
-        LoginService,
-        RequestService,
-        TransformService,
-        AppVersion,
-        BackgroundMode,
-        BarcodeScanner,
-        BatteryStatus,
-        Network,
-        StatusBar,
-        SplashScreen,
-        Transfer,
-        FileOpener,
-        File,
-        VideoPlayer,
-        {provide: Camera, useClass: CameraMock}
-    ]
-})
-export class AppModule {
+let providers: any[] = [
+	{ provide: ErrorHandler, useClass: IonicErrorHandler },
+	ConfigService,
+	AuthService,
+	TipsService,
+	LoginService,
+	RequestService,
+	TransformService,
+	AppVersion,
+	BackgroundMode,
+	BarcodeScanner,
+	BatteryStatus,
+	Network,
+	StatusBar,
+	SplashScreen,
+	Transfer,
+	FileOpener,
+	File,
+	VideoPlayer
+];
+if (window.hasOwnProperty('cordova')) {
+	providers.push([
+		Camera
+	]);
+} else {
+	providers.push([
+		{ provide: Camera, useClass: CameraMock }
+	]);
 }
+
+@NgModule({
+	imports: [
+		BrowserModule,
+		HttpModule,
+		IonicModule.forRoot(AppComponent, {
+			mode: 'ios',
+			iconMode: 'ios',
+			backButtonText: '返回',
+			tabsHideOnSubPages: 'true',
+			modalEnter: 'modal-slide-in',
+			modalLeave: 'modal-slide-out',
+			tabsPlacement: 'bottom',
+			pageTransition: 'ios'
+		}),
+		IonicStorageModule.forRoot(),
+		EssenceNg2ChartModule,
+		EssenceIonicModule,
+		SignaturePadModule
+	],
+	declarations: [
+		AppComponent,
+		LoginPage,
+		TabsPage,
+		NativePage,
+		MapPage,
+		StatisticPage,
+		RulesPage,
+		SettingsPage,
+		ToolsPage,
+		RealTimeTrafficPage,
+		WeatherReportPage,
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		AppComponent,
+		LoginPage,
+		TabsPage,
+		NativePage,
+		MapPage,
+		StatisticPage,
+		RulesPage,
+		SettingsPage,
+		ToolsPage,
+		RealTimeTrafficPage,
+		WeatherReportPage
+	],
+	providers: providers
+})
+export class AppModule {}
