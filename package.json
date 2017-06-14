@@ -34,7 +34,7 @@
     "@ionic-native/video-player": "^3.12.1",
     "@ionic/storage": "^2.0.1",
     "angular2-signaturepad": "^2.4.0",
-    "essence-ionic": "^1.0.7",
+    "essence-ionic": "^1.0.10",
     "essence-ng2-chart": "^1.0.2",
     "ionic-angular": "3.3.0",
     "ionicons": "3.0.0",
