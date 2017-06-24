@@ -1,6 +1,6 @@
 {
-	"name": "Ionic",
-	"short_name": "Ionic",
+	"name": "ionic-start",
+	"short_name": "IS",
 	"start_url": "index.html",
 	"display": "standalone",
 	"icons": [
