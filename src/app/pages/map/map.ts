@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {NavController, AlertController} from 'ionic-angular';
-import { EssenceIonAMapComponent } from "essence-ionic";
+import { Component } from '@angular/core';
+import { NavController, AlertController } from 'ionic-angular';
+import { EssenceIonAMapComponent } from 'essence-ionic';
 
 @Component({
 	selector: 'page-map',
@@ -12,8 +12,8 @@ export class MapPage {
 	amapOpts: any; // 初始化地图参数
 	currLocation: any; // 当前位置信息
 
-	constructor (public navCtrl: NavController,
-				 public alertCtrl: AlertController) {
+	constructor(public navCtrl: NavController,
+				public alertCtrl: AlertController) {
 
 	}
 
@@ -21,12 +21,12 @@ export class MapPage {
 	 * 地图加载完成
 	 * @param $event
 	 */
-	amapReady ($event: EssenceIonAMapComponent) {
+	amapReady($event: EssenceIonAMapComponent) {
 		this.amapComponent = $event;
 		this.amap = $event.getMap();
 	}
 
-	amapDestroy ($event) {
+	amapDestroy($event) {
 		console.log($event);
 	}
 }

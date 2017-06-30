@@ -1,5 +1,5 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {MenuController} from 'ionic-angular';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MenuController } from 'ionic-angular';
 
 @Component({
 	selector: 'page-settings',
@@ -7,15 +7,15 @@ import {MenuController} from 'ionic-angular';
 })
 export class SettingsPage implements OnInit, OnDestroy {
 
-	constructor (public menu: MenuController) {
+	constructor(public menu: MenuController) {
 	}
 
-	ngOnInit () {
+	ngOnInit() {
 		this.menu.enable(false);
 		// StatusBar.backgroundColorByHexString("#4DC6F3");
 	}
 
-	ngOnDestroy () {
+	ngOnDestroy() {
 		this.menu.enable(true);
 	}
 }

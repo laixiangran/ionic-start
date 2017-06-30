@@ -4,19 +4,19 @@
  * Alert、Loading、Toast、ActionSheet统一管理服务
  */
 
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
 	AlertController, ActionSheetController, LoadingController, ToastController, Alert,
 	ActionSheet, ActionSheetOptions, Loading, LoadingOptions, Toast, ToastOptions, AlertOptions, ViewController
-} from "ionic-angular";
+} from 'ionic-angular';
 
 @Injectable()
 export class TipsService {
 
-	constructor (public alertCtrl: AlertController,
-				 public actionSheetCtrl: ActionSheetController,
-				 public loadingCtrl: LoadingController,
-				 public toastCtrl: ToastController) {
+	constructor(public alertCtrl: AlertController,
+				public actionSheetCtrl: ActionSheetController,
+				public loadingCtrl: LoadingController,
+				public toastCtrl: ToastController) {
 	}
 
 	/**
@@ -25,7 +25,7 @@ export class TipsService {
 	 *
 	 * @memberof TipsService
 	 */
-	dismiss (currentViewer: ViewController): Promise<any> {
+	dismiss(currentViewer: ViewController): Promise<any> {
 		return currentViewer && currentViewer.dismiss();
 	}
 
@@ -34,9 +34,9 @@ export class TipsService {
 	 * @param AlertOptions
 	 * @returns {Alert}
 	 */
-	alert (alertOptions: AlertOptions): Alert {
+	alert(alertOptions: AlertOptions): Alert {
 		alertOptions.enableBackdropDismiss = false;
-		let currentAlert: Alert = this.alertCtrl.create(alertOptions);
+		const currentAlert: Alert = this.alertCtrl.create(alertOptions);
 		currentAlert.present();
 		return currentAlert;
 	}
@@ -46,8 +46,8 @@ export class TipsService {
 	 * @param AlertOptions
 	 * @returns {Alert}
 	 */
-	confirm (alertOptions: AlertOptions): Alert {
-		let currentConfirm: Alert = this.alertCtrl.create(alertOptions);
+	confirm(alertOptions: AlertOptions): Alert {
+		const currentConfirm: Alert = this.alertCtrl.create(alertOptions);
 		currentConfirm.present();
 		return currentConfirm;
 	}
@@ -57,8 +57,8 @@ export class TipsService {
 	 * @param actionSheetOptions
 	 * @returns {ActionSheet}
 	 */
-	actionSheet (actionSheetOptions: ActionSheetOptions): ActionSheet {
-		let currentActionSheet: ActionSheet = this.actionSheetCtrl.create(actionSheetOptions);
+	actionSheet(actionSheetOptions: ActionSheetOptions): ActionSheet {
+		const currentActionSheet: ActionSheet = this.actionSheetCtrl.create(actionSheetOptions);
 		currentActionSheet.present();
 		return currentActionSheet;
 	}
@@ -68,9 +68,9 @@ export class TipsService {
 	 * @param loadingOptions
 	 * @returns {Loading}
 	 */
-	loader (loadingOptions: LoadingOptions = {}): Loading {
+	loader(loadingOptions: LoadingOptions = {}): Loading {
 		loadingOptions.showBackdrop = false;
-		let currentLoader: Loading = this.loadingCtrl.create(loadingOptions);
+		const currentLoader: Loading = this.loadingCtrl.create(loadingOptions);
 		currentLoader.present();
 		return currentLoader;
 	}
@@ -80,8 +80,8 @@ export class TipsService {
 	 * @param toastOptions
 	 * @returns {Toast}
 	 */
-	toast (toastOptions: ToastOptions): Toast {
-		let currentToast: Toast = this.toastCtrl.create(toastOptions);
+	toast(toastOptions: ToastOptions): Toast {
+		const currentToast: Toast = this.toastCtrl.create(toastOptions);
 		currentToast.present();
 		return currentToast;
 	}

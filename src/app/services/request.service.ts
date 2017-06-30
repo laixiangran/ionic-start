@@ -4,24 +4,24 @@
  * 请求服务
  */
 
-import {Injectable} from "@angular/core";
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import {AuthService} from "./auth.service";
-import {ConfigService} from "./config.service";
-import {TipsService} from "./tips.service";
-import {App, Loading} from "ionic-angular";
-import {LoginPage} from "../pages/login/login";
+import { AuthService } from './auth.service';
+import { ConfigService } from './config.service';
+import { TipsService } from './tips.service';
+import { App, Loading } from 'ionic-angular';
+import { LoginPage } from '../pages/login/login';
 
 @Injectable()
 export class RequestService {
 
-	constructor (private http: Http,
-				 private appCtrl: App,
-				 private tips: TipsService,
-				 private authService: AuthService,
-				 private configService: ConfigService) {
+	constructor(private http: Http,
+				private appCtrl: App,
+				private tips: TipsService,
+				private authService: AuthService,
+				private configService: ConfigService) {
 
 	}
 
@@ -35,29 +35,29 @@ export class RequestService {
 	 *
 	 * @memberof RequestService
 	 */
-	post (url: string, body: any, showLoader: boolean = true): Observable<any> {
+	post(url: string, body: any, showLoader: boolean = true): Observable<any> {
 		let loader: Loading;
 		if (showLoader) {
 			loader = this.tips.loader();
 		}
-		let headers = new Headers({
+		const headers = new Headers({
 			'Content-Type': 'application/json',
 			'URMS_LOGIN_TOKEN': this.authService.token
 		});
-		let options = new RequestOptions({headers: headers});
+		const options = new RequestOptions({headers: headers});
 		return this.http.post(this.formateUrl(url), body && JSON.stringify(body), options).map((res: Response) => {
-			let id = setTimeout(() => {
+			const id = setTimeout(() => {
 				clearTimeout(id);
 				this.tips.dismiss(loader);
 			});
 			return res.json();
 		}).catch((error: Response): Observable<any> => {
-			let id = setTimeout(() => {
+			const id = setTimeout(() => {
 				clearTimeout(id);
 				this.tips.dismiss(loader);
 			});
 			this.handlerError(error);
-			return Observable.throw(error.json().error || "Server Error");
+			return Observable.throw(error.json().error || 'Server Error');
 		});
 	}
 
@@ -70,29 +70,29 @@ export class RequestService {
 	 *
 	 * @memberof RequestService
 	 */
-	get (url: string, showLoader: boolean = true): Observable<any> {
+	get(url: string, showLoader: boolean = true): Observable<any> {
 		let loader: Loading;
 		if (showLoader) {
 			loader = this.tips.loader();
 		}
-		let headers = new Headers({
+		const headers = new Headers({
 			'Content-Type': 'application/json',
 			'URMS_LOGIN_TOKEN': this.authService.token
 		});
-		let options = new RequestOptions({headers: headers});
+		const options = new RequestOptions({headers: headers});
 		return this.http.get(this.formateUrl(url), options).map((res: Response) => {
-			let id = setTimeout(() => {
+			const id = setTimeout(() => {
 				clearTimeout(id);
 				this.tips.dismiss(loader);
 			});
 			return res.json();
 		}).catch((error: Response): Observable<any> => {
-			let id = setTimeout(() => {
+			const id = setTimeout(() => {
 				clearTimeout(id);
 				this.tips.dismiss(loader);
 			});
 			this.handlerError(error);
-			return Observable.throw(error.json().error || "Server Error");
+			return Observable.throw(error.json().error || 'Server Error');
 		});
 	}
 
@@ -100,7 +100,7 @@ export class RequestService {
 	 * 请求报错之后的操作
 	 * @param error 错误信息
 	 */
-	private handlerError (error: Response) {
+	private handlerError(error: Response) {
 		console.log(error);
 		if (error.status === 0) {
 			this.tips.alert({
@@ -108,8 +108,7 @@ export class RequestService {
 				message: '请检查网络是否已经断开了！',
 				buttons: ['确定']
 			});
-		}
-		else if (error.status === 401) {
+		} else if (error.status === 401) {
 			this.tips.alert({
 				title: '未登录',
 				message: '马上去登录！',
@@ -120,26 +119,24 @@ export class RequestService {
 					}
 				}]
 			});
-		}
-		else if (error.status === 404) {
+		} else if (error.status === 404) {
 			this.tips.alert({
 				title: '请求未找到',
 				message: '请求路径出错了，请联系开发人员！',
 				buttons: ['确定']
 			});
-		}
-		else {
+		} else {
 			this.tips.alert({
 				title: '系统出错了',
-				message: error.json().error || "Server Error",
+				message: error.json().error || 'Server Error',
 				buttons: ['确定']
 			});
 		}
 	}
 
-	private formateUrl (url: string): string {
+	private formateUrl(url: string): string {
 		let newUrl: string;
-		if (url.indexOf(".json") > 0) {
+		if (url.indexOf('.json') > 0) {
 			newUrl = url;
 		} else {
 			newUrl = this.configService.hostURL + url;

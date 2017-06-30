@@ -4,8 +4,8 @@
  * 配置服务
  */
 
-import {Injectable} from "@angular/core";
-import {AppVersion} from "@ionic-native/app-version";
+import { Injectable } from '@angular/core';
+import { AppVersion } from '@ionic-native/app-version';
 
 @Injectable()
 export class ConfigService {
@@ -98,7 +98,7 @@ export class ConfigService {
 	 */
 	mainStatusBarColor: string = '#1D89DA';
 
-	constructor (public appVersion: AppVersion) {
+	constructor(public appVersion: AppVersion) {
 	}
 
 	/**
@@ -106,7 +106,7 @@ export class ConfigService {
 	 *
 	 * @memberof ConfigService
 	 */
-	initAppInfo (): Promise<any> {
+	initAppInfo(): Promise<any> {
 
 		// 在虚拟机器或者真机上有效
 		if (this.hasCordova) {

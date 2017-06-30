@@ -3,23 +3,23 @@
  * homepage：http://www.laixiangran.cn
  */
 
-import { Component } from "@angular/core";
-import { EssenceIonAMapComponent } from "essence-ionic";
+import { Component } from '@angular/core';
+import { EssenceIonAMapComponent } from 'essence-ionic';
 
 @Component({
-    selector: 'page-realTimeTraffic',
-    templateUrl: 'realTimeTraffic.html'
+	selector: 'page-realtime-traffic',
+	templateUrl: 'realTimeTraffic.html'
 })
 export class RealTimeTrafficPage {
 
-    amapOpts: any; // 初始化地图参数
+	amapOpts: any; // 初始化地图参数
 
-    constructor() { }
+	constructor() { }
 
-    amapReady(amapComponent: EssenceIonAMapComponent) {}
+	amapReady(amapComponent: EssenceIonAMapComponent) {}
 
-    amapDestroy($event) {}
+	amapDestroy($event) {}
 
-    amapLocation($event) {}
+	amapLocation($event) {}
 
 }

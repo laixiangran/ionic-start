@@ -4,11 +4,11 @@
  * 登录服务
  */
 
-import {Injectable} from "@angular/core"
-import {Observable} from  "rxjs/Observable";
-import {RequestService} from "../../services/request.service";
-import {ServerData} from "../../models/server-data";
-import {Subscriber} from "rxjs/Subscriber";
+import { Injectable } from '@angular/core'
+import { Observable } from 'rxjs/Observable';
+import { RequestService } from '../../services/request.service';
+import { ServerData } from '../../models/server-data';
+import { Subscriber } from 'rxjs/Subscriber';
 
 @Injectable()
 export class LoginService {

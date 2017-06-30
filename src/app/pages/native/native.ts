@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 
 import { BackgroundMode, BackgroundModeConfiguration } from '@ionic-native/background-mode';
-import { BarcodeScanner } from "@ionic-native/barcode-scanner";
-import { BatteryStatusResponse, BatteryStatus } from "@ionic-native/battery-status";
-import { Camera, CameraOptions } from "@ionic-native/camera";
-import { VideoPlayer } from "@ionic-native/video-player";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BatteryStatusResponse, BatteryStatus } from '@ionic-native/battery-status';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { VideoPlayer } from '@ionic-native/video-player';
 
-import { ConfigService } from "../../services/config.service";
+import { ConfigService } from '../../services/config.service';
 
 @Component({
 	selector: 'page-native',
