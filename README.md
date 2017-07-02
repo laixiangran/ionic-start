@@ -18,7 +18,7 @@ This is an ionic app project.
 
 ## setup project（[详细教程](./SETUP.md)）
 
-- Install [Nodejs](https://nodejs.org/zh-cn/) (v6)
+- Install [Nodejs](https://nodejs.org/zh-cn/) (v6.9.x)
 
 - Install [Java JDK ](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
@@ -30,13 +30,12 @@ This is an ionic app project.
 
 - `npm install` 安装依赖包
 
-- `npm run platform:md` 添加android平台
+- `npm run add` 添加android平台
 
 ## run project
 
 - development: `npm start`
-- production: `npm run build:debug` or `npm run build:release`（debug是调试版，release是发布版）
-- ionic-app-scripts command
+- build: `npm run build`
 
 ## main dependency
 
