@@ -69,6 +69,6 @@
     <plugin name="cordova-plugin-crosswalk-webview" spec="~2.3.0">
         <variable name="XWALK_MODE" value="embedded" />
     </plugin>
-    <engine name="android" spec="~6.1.2" />
     <plugin name="cordova-plugin-camera" spec="~2.4.1" />
+    <engine name="android" spec="~6.2.3" />
 </widget>
