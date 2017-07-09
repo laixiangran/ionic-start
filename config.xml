@@ -70,4 +70,5 @@
         <variable name="XWALK_MODE" value="embedded" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="~2.4.1" />
+    <plugin name="cordova-plugin-media-capture" spec="~1.4.3" />
 </widget>

@@ -7,6 +7,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { BatteryStatusResponse, BatteryStatus } from '@ionic-native/battery-status';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { VideoPlayer } from '@ionic-native/video-player';
+import { MediaCapture, CaptureError, CaptureImageOptions, MediaFile, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
 
 import { ConfigService } from '../../services/config.service';
 
@@ -26,6 +27,7 @@ export class NativePage {
 				public batteryStatus: BatteryStatus,
 				public videoPlayer: VideoPlayer,
 				public camera: Camera,
+				public mediaCapture: MediaCapture,
 				public configService: ConfigService) {
 	}
 
@@ -84,9 +86,6 @@ export class NativePage {
 
 	/**
 	 * 播放视频
-	 *
-	 *
-	 * @memberof NativePage
 	 */
 	playVideo() {
 		this.videoPlayer.play('http://www.laixiangran.cn/CDN/custom/video/test.mp4').then(() => {
@@ -112,7 +111,6 @@ export class NativePage {
 
 	/**
 	 * 覆盖默认标题，代码和文本
-	 * @param configure
 	 */
 	setBackgroundModeConfigure(configure: BackgroundModeConfiguration) {
 		this.backgroundMode.setDefaults(configure);
@@ -120,7 +118,6 @@ export class NativePage {
 
 	/**
 	 * 修改显示的内容
-	 * @param options
 	 */
 	configureBackgroundMode(options: BackgroundModeConfiguration) {
 		this.backgroundMode.configure(options);
@@ -148,6 +145,42 @@ export class NativePage {
 	encodeToBarcodeScanner(type: string, text: any) {
 		this.barcodeScanner.encode(type, text).then((data: any) => {
 			console.log(data);
+		});
+	}
+
+	/**
+	 * 拍照
+	 */
+	captureImage() {
+		const options: CaptureImageOptions = { limit: 1 };
+		this.mediaCapture.captureImage(options).then((data: MediaFile[]) => {
+			console.log(data);
+		}, (err: CaptureError) => {
+			console.error(err);
+		});
+	}
+
+	/**
+	 * 录音
+	 */
+	captureAudio() {
+		const options: CaptureAudioOptions = { limit: 1 };
+		this.mediaCapture.captureAudio(options).then((data: MediaFile[]) => {
+			console.log(data);
+		}, (err: CaptureError) => {
+			console.error(err);
+		});
+	}
+
+	/**
+	 * 录屏
+	 */
+	captureVideo() {
+		const options: CaptureVideoOptions = { limit: 1 };
+		this.mediaCapture.captureVideo(options).then((data: MediaFile[]) => {
+			console.log(data);
+		}, (err: CaptureError) => {
+			console.error(err);
 		});
 	}
 }

@@ -14,6 +14,7 @@ import { Transfer } from '@ionic-native/transfer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
 import { VideoPlayer } from '@ionic-native/video-player';
+import { MediaCapture } from '@ionic-native/media-capture';
 import { Camera } from '@ionic-native/camera';
 import { CameraMock } from './mocks/native/camera-mock';
 
@@ -42,7 +43,7 @@ import { EssenceIonicModule } from 'essence-ionic';
 import { SignaturePadModule } from 'angular2-signaturepad';
 
 const providers: any[] = [
-	{provide: ErrorHandler, useClass: IonicErrorHandler},
+	{ provide: ErrorHandler, useClass: IonicErrorHandler },
 	ConfigService,
 	AuthService,
 	TipsService,
@@ -59,7 +60,8 @@ const providers: any[] = [
 	Transfer,
 	FileOpener,
 	File,
-	VideoPlayer
+	VideoPlayer,
+	MediaCapture,
 ];
 if (window.hasOwnProperty('cordova')) {
 	providers.push([
@@ -67,7 +69,7 @@ if (window.hasOwnProperty('cordova')) {
 	]);
 } else {
 	providers.push([
-		{provide: Camera, useClass: CameraMock}
+		{ provide: Camera, useClass: CameraMock }
 	]);
 }
 
