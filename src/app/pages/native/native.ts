@@ -88,7 +88,7 @@ export class NativePage {
 	 * 播放视频
 	 */
 	playVideo() {
-		this.videoPlayer.play('http://www.laixiangran.cn/CDN/custom/video/test.mp4').then(() => {
+		this.videoPlayer.play('rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov').then(() => {
 			console.log('video completed');
 		}).catch(err => {
 			console.log(err);
