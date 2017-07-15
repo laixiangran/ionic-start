@@ -10,6 +10,7 @@ import { VideoPlayer } from '@ionic-native/video-player';
 import { MediaCapture, CaptureError, CaptureImageOptions, MediaFile, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
 
 import { ConfigService } from '../../services/config.service';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
 	selector: 'page-native',
@@ -28,10 +29,12 @@ export class NativePage {
 				public videoPlayer: VideoPlayer,
 				public camera: Camera,
 				public mediaCapture: MediaCapture,
+				public screenOrientation: ScreenOrientation,
 				public configService: ConfigService) {
 	}
 
 	ionViewDidEnter() {
+		console.log('ionViewDidEnter');
 		if (this.configService.hasCordova) {
 
 			// 将所有的订阅放在一个数组中，方便一次性取消
@@ -88,10 +91,15 @@ export class NativePage {
 	 * 播放视频
 	 */
 	playVideo() {
-		this.videoPlayer.play('rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov').then(() => {
-			console.log('video completed');
-		}).catch(err => {
-			console.log(err);
+		this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE).then(() => {
+			const id: number = setTimeout(() => {
+				clearTimeout(id);
+				this.videoPlayer.play('rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov').then(() => {
+					this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+				}).catch((err: any) => {
+					this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+				});
+			}, 1000);
 		});
 	}
 

@@ -41,6 +41,7 @@ import { WeatherReportPage } from './pages/tools/subpages/weatherReport/weatherR
 import { TransformService } from './services/transform.service';
 import { EssenceIonicModule } from 'essence-ionic';
 import { SignaturePadModule } from 'angular2-signaturepad';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 const providers: any[] = [
 	{ provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -62,6 +63,7 @@ const providers: any[] = [
 	File,
 	VideoPlayer,
 	MediaCapture,
+	ScreenOrientation
 ];
 if (window.hasOwnProperty('cordova')) {
 	providers.push([
