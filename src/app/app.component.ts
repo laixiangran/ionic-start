@@ -24,7 +24,7 @@ export class AppComponent {
 
 	disconnectAlert: Alert = null;
 	connectAlert: Alert = null;
-	rootPage = null;
+	rootPage: any = null;
 	pages: Array<{ code: string, title: string, component: any }>;
 
 	constructor(public platform: Platform,
@@ -130,7 +130,7 @@ export class AppComponent {
 				}
 			]
 		});
-		fileTransfer.download(this.config.newAppUrl, outUrl).then((result: any) => {
+		fileTransfer.download(this.config.newAppUrl, outUrl).then(() => {
 			this.fileOpener.open(outUrl, 'application/vnd.android.package-archive').then(() => {
 				this.tipsService.dismiss(alert);
 				console.log('File is opened');
