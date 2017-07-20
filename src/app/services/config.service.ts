@@ -12,23 +12,32 @@ export class ConfigService {
 
 	/**
 	 * 是否存在cordova，即是否在设备上
-	 *
 	 * @type {boolean}
 	 * @memberof ConfigService
 	 */
 	hasCordova: boolean = window.hasOwnProperty('cordova');
 
 	/**
+	 * 浏览器开发的api路径
+	 * @type {string}
+	 */
+	devHost: string = 'http://192.168.0.8/sjqfx/';
+
+	/**
+	 * 真实设备的api路径
+	 * @type {string}
+	 */
+	prodHost: string = 'http://192.168.0.8/sjqfx/';
+
+	/**
 	 * api主路径
-	 *
 	 * @type {string}
 	 * @memberof ConfigService
 	 */
-	hostURL: string = this.hasCordova ? 'http://192.168.0.21/sjqfx/' : 'http://192.168.0.21/sjqfx/';
+	hostURL: string = this.hasCordova ? this.prodHost : this.devHost;
 
 	/**
 	 * 当前网络是否连接
-	 *
 	 * @type {boolean}
 	 * @memberof ConfigService
 	 */
@@ -36,7 +45,6 @@ export class ConfigService {
 
 	/**
 	 * 新版APP下载路径
-	 *
 	 * @type {string}
 	 * @memberof ConfigService
 	 */
@@ -44,7 +52,6 @@ export class ConfigService {
 
 	/**
 	 * APP启动时是否通过服务器检查了更新
-	 *
 	 * @type {boolean}
 	 * @memberof ConfigService
 	 */
@@ -52,7 +59,6 @@ export class ConfigService {
 
 	/**
 	 * APP名称
-	 *
 	 * @type {any}
 	 * @memberof ConfigService
 	 */
@@ -60,7 +66,6 @@ export class ConfigService {
 
 	/**
 	 * APP包名称
-	 *
 	 * @type {any}
 	 * @memberof ConfigService
 	 */
@@ -68,7 +73,6 @@ export class ConfigService {
 
 	/**
 	 * APP版本编码
-	 *
 	 * @type {any}
 	 * @memberof ConfigService
 	 */
@@ -76,7 +80,6 @@ export class ConfigService {
 
 	/**
 	 * APP版本号
-	 *
 	 * @type {any}
 	 * @memberof ConfigService
 	 */
@@ -84,7 +87,6 @@ export class ConfigService {
 
 	/**
 	 * 登录页面的状态栏颜色
-	 *
 	 * @type {string}
 	 * @memberof ConfigService
 	 */
@@ -92,7 +94,6 @@ export class ConfigService {
 
 	/**
 	 * 主页的状态栏颜色
-	 *
 	 * @type {string}
 	 * @memberof ConfigService
 	 */
@@ -103,7 +104,6 @@ export class ConfigService {
 
 	/**
 	 * 获取APP基本信息
-	 *
 	 * @memberof ConfigService
 	 */
 	initAppInfo(): Promise<any> {

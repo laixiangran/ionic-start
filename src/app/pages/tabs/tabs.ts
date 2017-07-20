@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { NativePage } from '../native/native';
 import { MapPage } from '../map/map';
@@ -7,12 +7,14 @@ import { RulesPage } from '../rules/rules';
 import { ToolsPage } from '../tools/tools';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ConfigService } from '../../services/config.service';
+import { Tabs } from 'ionic-angular';
 
 @Component({
 	selector: 'page-tabs',
 	templateUrl: 'tabs.html'
 })
 export class TabsPage {
+	@ViewChild('mainTabs') tabs: Tabs;
 	tab1Root: any = NativePage;
 	tab2Root: any = MapPage;
 	tab3Root: any = StatisticPage;

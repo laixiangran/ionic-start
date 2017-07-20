@@ -22,7 +22,6 @@ import { ConfigService } from '../../services/config.service';
 export class LoginPage {
 
 	user: any = {};
-	isShowInfo: boolean = false;
 
 	constructor(public navCtrl: NavController,
 				public platform: Platform,
@@ -30,13 +29,8 @@ export class LoginPage {
 				public statusBar: StatusBar,
 				public config: ConfigService,
 				public loginService: LoginService,
-				public tipsService: TipsService,
 				public authService: AuthService,
 				public menu: MenuController) {
-	}
-
-	ionViewDidLoad() {
-		this.isLogin();
 	}
 
 	ionViewDidEnter() {
@@ -48,24 +42,6 @@ export class LoginPage {
 		this.menu.enable(true);
 	}
 
-	/**
-	 * 验证是否已经登录
-	 *
-	 * @memberof LoginPage
-	 */
-	isLogin() {
-		const loader: Loading = this.tipsService.loader({dismissOnPageChange: true});
-		this.authService.getToken().then((token: any) => {
-			if (token) {
-				this.authService.getUserInfo().then((userInfo: any) => {
-					this.gotoTabsPage();
-				});
-			} else {
-				this.tipsService.dismiss(loader);
-			}
-		});
-	}
-
 	onLogin() {
 		this.loginService.login(this.user).subscribe((serverData: ServerData) => {
 			if (serverData.code === 'ok') {
@@ -73,16 +49,12 @@ export class LoginPage {
 					this.loginService.getUserInfo().subscribe((data: ServerData) => {
 						if (data.code === 'ok') {
 							this.authService.setUserInfo(data.result).then(() => {
-								this.gotoTabsPage();
+								this.navCtrl.setRoot(TabsPage);
 							});
 						}
 					});
 				});
 			}
 		});
-	}
-
-	gotoTabsPage() {
-		this.navCtrl.setRoot(TabsPage);
 	}
 }

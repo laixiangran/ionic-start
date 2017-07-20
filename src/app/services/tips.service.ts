@@ -21,68 +21,98 @@ export class TipsService {
 
 	/**
 	 * 隐藏控件
-	 *
-	 *
-	 * @memberof TipsService
+	 * @param currentViewer
 	 */
 	dismiss(currentViewer: ViewController): Promise<any> {
-		return currentViewer && currentViewer.dismiss();
+		return new Promise((resolve, reject) => {
+			if (currentViewer) {
+				return currentViewer.dismiss();
+			} else {
+				resolve(null);
+			}
+		});
 	}
 
 	/**
 	 * 弹出警告框
-	 * @param AlertOptions
+	 * @param alertOptions
+	 * @param callback
 	 * @returns {Alert}
 	 */
-	alert(alertOptions: AlertOptions): Alert {
+	alert(alertOptions: AlertOptions, callback?: Function): Alert {
 		alertOptions.enableBackdropDismiss = false;
 		const currentAlert: Alert = this.alertCtrl.create(alertOptions);
-		currentAlert.present();
+		currentAlert.present().then(() => {
+			if (callback) {
+				callback();
+			}
+		});
 		return currentAlert;
 	}
 
 	/**
 	 * 弹出确认框
-	 * @param AlertOptions
+	 * @param alertOptions
+	 * @param callback
 	 * @returns {Alert}
 	 */
-	confirm(alertOptions: AlertOptions): Alert {
+	confirm(alertOptions: AlertOptions, callback?: Function): Alert {
+		alertOptions.enableBackdropDismiss = false;
 		const currentConfirm: Alert = this.alertCtrl.create(alertOptions);
-		currentConfirm.present();
+		currentConfirm.present().then(() => {
+			if (callback) {
+				callback();
+			}
+		});
 		return currentConfirm;
 	}
 
 	/**
 	 * 工作表控件
 	 * @param actionSheetOptions
+	 * @param callback
 	 * @returns {ActionSheet}
 	 */
-	actionSheet(actionSheetOptions: ActionSheetOptions): ActionSheet {
+	actionSheet(actionSheetOptions: ActionSheetOptions, callback?: Function): ActionSheet {
 		const currentActionSheet: ActionSheet = this.actionSheetCtrl.create(actionSheetOptions);
-		currentActionSheet.present();
+		currentActionSheet.present().then(() => {
+			if (callback) {
+				callback();
+			}
+		});
 		return currentActionSheet;
 	}
 
 	/**
 	 * 加载控件
 	 * @param loadingOptions
+	 * @param callback
 	 * @returns {Loading}
 	 */
-	loader(loadingOptions: LoadingOptions = {}): Loading {
+	loader(loadingOptions: LoadingOptions = {}, callback?: Function): Loading {
 		loadingOptions.showBackdrop = false;
 		const currentLoader: Loading = this.loadingCtrl.create(loadingOptions);
-		currentLoader.present();
+		currentLoader.present().then(() => {
+			if (callback) {
+				callback();
+			}
+		});
 		return currentLoader;
 	}
 
 	/**
 	 * 提示横幅
 	 * @param toastOptions
+	 * @param callback
 	 * @returns {Toast}
 	 */
-	toast(toastOptions: ToastOptions): Toast {
+	toast(toastOptions: ToastOptions, callback?: Function): Toast {
 		const currentToast: Toast = this.toastCtrl.create(toastOptions);
-		currentToast.present();
+		currentToast.present().then(() => {
+			if (callback) {
+				callback();
+			}
+		});
 		return currentToast;
 	}
 }

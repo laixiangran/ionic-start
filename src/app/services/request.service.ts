@@ -27,13 +27,10 @@ export class RequestService {
 
 	/**
 	 * post请求
-	 *
 	 * @param {string} url 请求路径
 	 * @param {*} body body
 	 * @param {boolean} [showLoader=true] 是否显示加载动画
 	 * @returns {Observable<any>}
-	 *
-	 * @memberof RequestService
 	 */
 	post(url: string, body: any, showLoader: boolean = true): Observable<any> {
 		let loader: Loading;
@@ -63,12 +60,9 @@ export class RequestService {
 
 	/**
 	 * get请求
-	 *
 	 * @param {string} url 请求路径
 	 * @param {boolean} [showLoader=true] 是否显示加载动画
 	 * @returns {Observable<any>}
-	 *
-	 * @memberof RequestService
 	 */
 	get(url: string, showLoader: boolean = true): Observable<any> {
 		let loader: Loading;
@@ -115,7 +109,9 @@ export class RequestService {
 				buttons: [{
 					text: '确定',
 					handler: () => {
-						this.appCtrl.getRootNav().setRoot(LoginPage);
+						this.authService.removeToken().then(() => {
+							this.appCtrl.getRootNav().setRoot(LoginPage);
+						});
 					}
 				}]
 			});
