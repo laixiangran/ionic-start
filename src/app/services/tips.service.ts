@@ -41,7 +41,7 @@ export class TipsService {
 	 */
 	alert(alertOptions: AlertOptions, callback?: Function): Alert {
 		if (typeof alertOptions.enableBackdropDismiss === 'undefined') {
-			alertOptions.enableBackdropDismiss = false;
+			alertOptions.enableBackdropDismiss = false; // 默认点击背景不隐藏
 		}
 		const currentAlert: Alert = this.alertCtrl.create(alertOptions);
 		currentAlert.present().then(() => {
@@ -60,7 +60,7 @@ export class TipsService {
 	 */
 	confirm(alertOptions: AlertOptions, callback?: Function): Alert {
 		if (typeof alertOptions.enableBackdropDismiss === 'undefined') {
-			alertOptions.enableBackdropDismiss = false;
+			alertOptions.enableBackdropDismiss = false; // 默认点击背景不隐藏
 		}
 		const currentConfirm: Alert = this.alertCtrl.create(alertOptions);
 		currentConfirm.present().then(() => {
@@ -94,7 +94,9 @@ export class TipsService {
 	 * @returns {Loading}
 	 */
 	loader(loadingOptions: LoadingOptions = {}, callback?: Function): Loading {
-		loadingOptions.showBackdrop = false;
+		if (typeof loadingOptions.showBackdrop === 'undefined') {
+			loadingOptions.showBackdrop = false; // 默认不显示背景
+		}
 		const currentLoader: Loading = this.loadingCtrl.create(loadingOptions);
 		currentLoader.present().then(() => {
 			if (callback) {
