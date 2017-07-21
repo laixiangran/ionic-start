@@ -20,12 +20,10 @@ import { TabsPage } from './pages/tabs/tabs';
 	providers: [AppService]
 })
 export class AppComponent {
-
 	@ViewChild(Nav) nav: Nav;
-
 	disconnectAlert: Alert = null;
 	connectAlert: Alert = null;
-	rootPage = null;
+	rootPage: any = null;
 	pages: Array<{ code: string, title: string, component: any }>;
 	backButtonPressed: boolean = false;  // 用于判断返回键是否触发
 
@@ -54,15 +52,12 @@ export class AppComponent {
 	initializeApp() {
 		this.platform.ready().then(() => {
 			this.checkDisConnect(); // 检查网络是否断开
+			this.registerBackButtonAction();
 			this.config.initAppInfo().then(() => {
 				this.checkLatestVersion();
 				this.isLogin();
 			});
 		});
-	}
-
-	openPage(p: any) {
-		this.nav.push(p.component);
 	}
 
 	/**
