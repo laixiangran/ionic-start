@@ -40,7 +40,9 @@ export class TipsService {
 	 * @returns {Alert}
 	 */
 	alert(alertOptions: AlertOptions, callback?: Function): Alert {
-		alertOptions.enableBackdropDismiss = false;
+		if (typeof alertOptions.enableBackdropDismiss === 'undefined') {
+			alertOptions.enableBackdropDismiss = false;
+		}
 		const currentAlert: Alert = this.alertCtrl.create(alertOptions);
 		currentAlert.present().then(() => {
 			if (callback) {
@@ -57,7 +59,9 @@ export class TipsService {
 	 * @returns {Alert}
 	 */
 	confirm(alertOptions: AlertOptions, callback?: Function): Alert {
-		alertOptions.enableBackdropDismiss = false;
+		if (typeof alertOptions.enableBackdropDismiss === 'undefined') {
+			alertOptions.enableBackdropDismiss = false;
+		}
 		const currentConfirm: Alert = this.alertCtrl.create(alertOptions);
 		currentConfirm.present().then(() => {
 			if (callback) {
