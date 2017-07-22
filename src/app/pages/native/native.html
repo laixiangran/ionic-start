@@ -12,6 +12,18 @@
 	<p style="color: red; font-size: 1.4rem; margin: 10px 10px;">注意：‘模拟’表示在浏览器模拟该插件，‘真机’则表示必须在虚拟机/真机上运行！</p>
 	<ion-card>
 		<ion-card-header>
+			<a href="https://ionicframework.com/docs/native/streaming-media/" target="_blank">Streaming Media</a>
+			<p>播放流媒体</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>
+				<button ion-button (click)="playVideoStreaming()">播放静态视频流</button>
+				<button ion-button (click)="playVideoStreaming2()">播放动态视频流</button>
+			</p>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
 			<a href="http://ionicframework.com/docs/native/media-capture/" target="_blank">Media Capture</a>
 			<p>获取媒体（图像、音频、视频）</p>
 		</ion-card-header>
@@ -42,6 +54,7 @@
 		<ion-card-content>
 			<p>
 				<button ion-button (click)="playVideo()">播放视频</button>
+				<button ion-button (click)="playVideo2()">播放视频2</button>
 			</p>
 		</ion-card-content>
 	</ion-card>

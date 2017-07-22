@@ -104,7 +104,7 @@ export class WeatherReportPage {
 	 * @memberOf WeatherReportPage
 	 */
 	reverseGeocoding(currentPosition: string): Observable<any> {
-		let headers: Headers = new Headers();
+		const headers: Headers = new Headers();
 		const opts: RequestOptions = new RequestOptions();
 		headers.append('Content-Type', 'application/json');
 		opts.headers = headers;
@@ -124,7 +124,7 @@ export class WeatherReportPage {
 	 * @memberOf WeatherReportPage
 	 */
 	getWeatherInfo(adcode: number): Observable<any> {
-		let headers: Headers = new Headers();
+		const headers: Headers = new Headers();
 		const opts: RequestOptions = new RequestOptions();
 		headers.append('Content-Type', 'application/json');
 		opts.headers = headers;

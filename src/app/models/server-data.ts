@@ -7,8 +7,8 @@ export class ServerData {
 	 * @param code 返回的代码（"ok","error"）
 	 * @param result 返回的结果
 	 */
-	constructor (public info: string,
-				 public code: string,
-				 public result: any) {
+	constructor(public info: string,
+				public code: string,
+				public result: any) {
 	}
 }

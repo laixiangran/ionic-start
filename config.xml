@@ -73,4 +73,5 @@
     <plugin name="br.com.stek.rtsplayer" spec="https://github.com/felipew/rtsplayer.git" />
     <engine name="android" spec="~6.1.2" />
     <plugin name="cordova-plugin-screen-orientation" spec="~2.0.1" />
+    <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
 </widget>

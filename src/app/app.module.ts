@@ -10,7 +10,7 @@ import { BatteryStatus } from '@ionic-native/battery-status';
 import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Transfer } from '@ionic-native/transfer';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
 import { VideoPlayer } from '@ionic-native/video-player';
@@ -42,6 +42,7 @@ import { TransformService } from './services/transform.service';
 import { EssenceIonicModule } from 'essence-ionic';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { StreamingMedia } from '@ionic-native/streaming-media';
 
 const providers: any[] = [
 	{ provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -58,12 +59,13 @@ const providers: any[] = [
 	Network,
 	StatusBar,
 	SplashScreen,
-	Transfer,
+	FileTransfer,
 	FileOpener,
 	File,
 	VideoPlayer,
 	MediaCapture,
-	ScreenOrientation
+	ScreenOrientation,
+	StreamingMedia
 ];
 if (window.hasOwnProperty('cordova')) {
 	providers.push([

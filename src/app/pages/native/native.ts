@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 
 import { BackgroundMode, BackgroundModeConfiguration } from '@ionic-native/background-mode';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { BatteryStatusResponse, BatteryStatus } from '@ionic-native/battery-status';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { VideoPlayer } from '@ionic-native/video-player';
+import { VideoPlayer, VideoOptions } from '@ionic-native/video-player';
 import { MediaCapture, CaptureError, CaptureImageOptions, MediaFile, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 
 import { ConfigService } from '../../services/config.service';
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
 	selector: 'page-native',
@@ -22,21 +21,19 @@ export class NativePage {
 	batteryStatusResponse: BatteryStatusResponse;
 	subscriptions: Subscription[] = [];
 
-	constructor(public navCtrl: NavController,
-				public backgroundMode: BackgroundMode,
+	constructor(public backgroundMode: BackgroundMode,
 				public barcodeScanner: BarcodeScanner,
 				public batteryStatus: BatteryStatus,
 				public videoPlayer: VideoPlayer,
 				public camera: Camera,
 				public mediaCapture: MediaCapture,
-				public screenOrientation: ScreenOrientation,
+				public streamingMedia: StreamingMedia,
 				public configService: ConfigService) {
 	}
 
 	ionViewDidEnter() {
 		console.log('ionViewDidEnter');
 		if (this.configService.hasCordova) {
-
 			// 将所有的订阅放在一个数组中，方便一次性取消
 			this.subscriptions.push(
 				this.backgroundMode.on('enable').subscribe((event: any) => {
@@ -58,14 +55,11 @@ export class NativePage {
 					this.batteryStatusResponse = status;
 				})
 			);
-
-			console.log(this.subscriptions);
 		}
 	}
 
 	ionViewDidLeave() {
 		if (this.configService.hasCordova) {
-
 			// 取消所有的订阅
 			this.subscriptions.forEach((subscription: Subscription) => {
 				subscription.unsubscribe();
@@ -88,19 +82,64 @@ export class NativePage {
 	}
 
 	/**
-	 * 播放视频
+	 * 播放静态视频
 	 */
 	playVideo() {
-		this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE).then(() => {
-			const id: number = setTimeout(() => {
-				clearTimeout(id);
-				this.videoPlayer.play('rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov').then(() => {
-					this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-				}).catch((err: any) => {
-					this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-				});
-			}, 1000);
+		const videoOptions: VideoOptions = {
+			scalingMode: 1
+		};
+		this.videoPlayer.play('http://www.laixiangran.cn/CDN/custom/video/test.mp4', videoOptions).then(() => {
+			console.log('Video completed');
+		}).catch((err: any) => {
+			console.log(err);
 		});
+	}
+
+	/**
+	 * 播放实时视频
+	 */
+	playVideo2() {
+		const videoOptions: VideoOptions = {
+			scalingMode: 2
+		};
+		this.videoPlayer.play('http://www.laixiangran.cn/CDN/custom/video/test.mp4', videoOptions).then(() => {
+			console.log('Video completed');
+		}).catch((err: any) => {
+			console.log(err);
+		});
+	}
+
+	/**
+	 * 播放静态视频流
+	 */
+	playVideoStreaming() {
+		const videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
+		const options: StreamingVideoOptions = {
+			successCallback: () => {
+				console.log('Video played');
+			},
+			errorCallback: (err: any) => {
+				console.log(err);
+			}
+		};
+		this.streamingMedia.playVideo(videoUrl, options);
+	}
+
+	/**
+	 * 播放动态视频流
+	 */
+	playVideoStreaming2() {
+		const videoUrl: string = 'rtsp://admin:sjq123456@123.56.211.160:9102/MPEG-4/ch1/main/av_stream';
+		const options: StreamingVideoOptions = {
+			successCallback: () => {
+				console.log('Video played');
+			},
+			errorCallback: (err: any) => {
+				console.log(err);
+			},
+			orientation: 'landscape'
+		};
+		this.streamingMedia.playVideo(videoUrl, options);
 	}
 
 	/**

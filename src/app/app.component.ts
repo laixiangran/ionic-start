@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Alert, Nav, Platform, Events, Keyboard, IonicApp, NavController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
-import { Transfer, TransferObject, FileTransferError } from '@ionic-native/transfer';
+import { FileTransfer, FileTransferObject, FileTransferError } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
 
@@ -32,7 +32,7 @@ export class AppComponent {
 				public events: Events,
 				public keyboard: Keyboard,
 				public ionicApp: IonicApp,
-				public transfer: Transfer,
+				public fileTransfer: FileTransfer,
 				public fileOpener: FileOpener,
 				public file: File,
 				public loginService: LoginService,
@@ -183,16 +183,13 @@ export class AppComponent {
 	 * 下载新版本APP
 	 */
 	downloadNewVersion() {
-		const fileTransfer: TransferObject = this.transfer.create();
-
+		const fileTransfer: FileTransferObject = this.fileTransfer.create();
 		// this.file.externalRootDirectory在android平台才有效
 		const outUrl: string = `${this.file.externalRootDirectory}nxhh_${new Date().getTime()}.apk`;
-
 		if (this.platform.is('ios')) {
 			// TODO 在ios平台需另外处理
 			// outUrl = `${this.file.dataDirectory}nxhh_${new Date().getTime()}`;
 		}
-
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [
@@ -204,6 +201,16 @@ export class AppComponent {
 				}
 			]
 		});
+		let scale: string = '0%';
+		fileTransfer.onProgress((event: ProgressEvent) => {
+			const val: string = Math.floor((event.loaded / event.total) * 100) + '%';
+			if (scale !== val) {
+				scale = val;
+			}
+		});
+		const intervalId: number = setInterval(() => {
+			downloadAlert.setTitle(`已下载${scale}`);
+		}, 500);
 		fileTransfer.download(this.config.newAppUrl, outUrl).then((result: any) => {
 			clearInterval(intervalId);
 			this.fileOpener.open(outUrl, 'application/vnd.android.package-archive').then(() => {
@@ -239,16 +246,6 @@ export class AppComponent {
 				});
 			}
 		});
-		let scale: string = '0%';
-		fileTransfer.onProgress((event: ProgressEvent) => {
-			const val: string = Math.floor((event.loaded / event.total) * 100) + '%';
-			if (scale !== val) {
-				scale = val;
-			}
-		});
-		const intervalId: number = setInterval(() => {
-			downloadAlert.setTitle(`已下载${scale}`);
-		}, 500);
 	}
 
 	/**
