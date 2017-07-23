@@ -17,10 +17,7 @@ export class AppService {
 
 	/**
 	 * 检测服务器最新的APP版本号
-	 *
 	 * @returns {Observable<ServerData>}
-	 *
-	 * @memberof LoginService
 	 */
 	checkLatestVersion(): Observable<ServerData> {
 		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
