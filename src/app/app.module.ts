@@ -93,7 +93,10 @@ if (window.hasOwnProperty('cordova')) {
 		}),
 		IonicStorageModule.forRoot(),
 		EssenceNg2ChartModule,
-		EssenceIonicModule.initAMapAPI({apiKey: '92876784ab731cccce8ebd5a8030290f'}),
+		EssenceIonicModule.setAMapKey({
+			apiKey: '92876784ab731cccce8ebd5a8030290f',
+			webApiKey: '0df36377c23e75585d4ed4fcb4baf807'
+		}),
 		SignaturePadModule
 	],
 	declarations: [
