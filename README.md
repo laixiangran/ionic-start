@@ -1,6 +1,6 @@
 # ionic-start
 
-This is an ionic app project.
+这是一个ionic起步项目，目前只支持安卓环境。
 
 ## 实现功能
 
@@ -16,9 +16,9 @@ This is an ionic app project.
 
 - 集成高德地图、highchart，实现简单天气预报（调用高德api）
 
-## setup project（[详细教程](./SETUP.md)）
+## 搭建环境（[详细教程](./SETUP.md)）
 
-- Install [Nodejs](https://nodejs.org/zh-cn/) (v6.9.x)
+- Install [Nodejs](https://nodejs.org/zh-cn/) (>= 6.9.0)
 
 - Install [Java JDK ](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
@@ -26,22 +26,26 @@ This is an ionic app project.
 
 - Install [Android SDK]( http://developer.android.com/sdk/index.html)
 
-- `npm install -g ionic cordova` 全局安装ionic(>=3.1.2)及cordova
+- `npm install -g ionic cordova@6.5.0` - 安装全局的ionic和cordova（版本固定是6.5.0）
 
-- `npm install` 安装依赖包
+- `npm install` - 安装依赖包
 
-- `npm run add` 添加android平台
+- `npm run add` - 添加安卓平台
 
-## run project
+## 启动和构建项目
 
-- development: `npm start`
-- build: `npm run build`
+- `npm start` - 启动项目进行开发
 
-## main dependency
+- `npm run resources` - 生成图标和启动页（resources下必须有icon.png和splash.png）
+
+- `npm run device` - 构建并启动设备运行
+
+- `npm run build` - 构建APP
+
+## 其它资料
 
 - [sass](http://sass-lang.com/)
 - [karma](https://karma-runner.github.io/1.0/index.html)
 - [tslint](https://palantir.github.io/tslint/) & [codelyzer](https://github.com/mgechev/codelyzer)
 - [typescript](https://www.typescriptlang.org/) & [@types](https://www.npmjs.com/~types)
-- ...
 

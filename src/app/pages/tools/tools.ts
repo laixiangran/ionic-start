@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
+import { MenuController, NavController } from 'ionic-angular';
 import { WeatherReportPage } from './subpages/weatherReport/weatherReport';
 import { RealTimeTrafficPage } from './subpages/realTimeTraffic/realTimeTraffic';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
@@ -32,7 +32,8 @@ export class ToolsPage implements OnInit {
 		}
 	];
 
-	constructor(public navCtrl: NavController) {}
+	constructor(public navCtrl: NavController,
+				public menu: MenuController) {}
 
 	ngOnInit() {
 		this.signaturePadOptions = {
@@ -50,10 +51,12 @@ export class ToolsPage implements OnInit {
 	}
 
 	drawStart() {
+		this.menu.enable(false);
 		console.log('begin drawing');
 	}
 
 	drawComplete() {
+		this.menu.enable(true);
 		console.log('drawing complete');
 		// console.log(this.signaturePad.toDataURL());
 	}

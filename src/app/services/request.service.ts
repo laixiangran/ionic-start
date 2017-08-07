@@ -6,23 +6,23 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from './auth.service';
 import { ConfigService } from './config.service';
 import { TipsService } from './tips.service';
-import { App, Loading } from 'ionic-angular';
+import { Alert, AlertOptions, App, Loading } from 'ionic-angular';
 import { LoginPage } from '../pages/login/login';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class RequestService {
+	alertAlert: Alert = null;
 
 	constructor(private http: Http,
 				private appCtrl: App,
 				private tips: TipsService,
 				private authService: AuthService,
-				private configService: ConfigService) {
-
+				private config: ConfigService) {
 	}
 
 	/**
@@ -42,7 +42,7 @@ export class RequestService {
 			'URMS_LOGIN_TOKEN': this.authService.token
 		});
 		const options = new RequestOptions({headers: headers});
-		return this.http.post(this.formateUrl(url), body && JSON.stringify(body), options).map((res: Response) => {
+		return this.http.post(this.config.hostURL + url, body && JSON.stringify(body), options).map((res: Response) => {
 			const id = setTimeout(() => {
 				clearTimeout(id);
 				this.tips.dismiss(loader);
@@ -74,7 +74,7 @@ export class RequestService {
 			'URMS_LOGIN_TOKEN': this.authService.token
 		});
 		const options = new RequestOptions({headers: headers});
-		return this.http.get(this.formateUrl(url), options).map((res: Response) => {
+		return this.http.get(this.config.hostURL + url, options).map((res: Response) => {
 			const id = setTimeout(() => {
 				clearTimeout(id);
 				this.tips.dismiss(loader);
@@ -95,15 +95,15 @@ export class RequestService {
 	 * @param error 错误信息
 	 */
 	private handlerError(error: Response) {
-		console.log(error);
+		let alertOptions: AlertOptions = null;
 		if (error.status === 0) {
-			this.tips.alert({
+			alertOptions = {
 				title: '连接超时',
 				message: '请检查网络是否已经断开了！',
 				buttons: ['确定']
-			});
+			};
 		} else if (error.status === 401) {
-			this.tips.alert({
+			alertOptions = {
 				title: '未登录',
 				message: '马上去登录！',
 				buttons: [{
@@ -114,29 +114,26 @@ export class RequestService {
 						});
 					}
 				}]
-			});
+			};
 		} else if (error.status === 404) {
-			this.tips.alert({
+			alertOptions = {
 				title: '请求未找到',
 				message: '请求路径出错了，请联系开发人员！',
 				buttons: ['确定']
-			});
+			};
 		} else {
-			this.tips.alert({
+			alertOptions = {
 				title: '系统出错了',
 				message: error.json().error || 'Server Error',
 				buttons: ['确定']
+			};
+		}
+		if (this.alertAlert) {
+			this.alertAlert.dismiss().then(() => {
+				this.alertAlert = this.tips.alert(alertOptions);
 			});
+			return;
 		}
-	}
-
-	private formateUrl(url: string): string {
-		let newUrl: string;
-		if (url.indexOf('.json') > 0) {
-			newUrl = url;
-		} else {
-			newUrl = this.configService.hostURL + url;
-		}
-		return newUrl;
+		this.alertAlert = this.tips.alert(alertOptions);
 	}
 }

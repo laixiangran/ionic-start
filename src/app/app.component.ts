@@ -21,9 +21,7 @@ import { TabsPage } from './pages/tabs/tabs';
 })
 export class AppComponent {
 	@ViewChild(Nav) nav: Nav;
-	disconnectAlert: Alert = null;
-	connectAlert: Alert = null;
-	rootPage: any = null;
+	rootPage = null;
 	pages: Array<{ code: string, title: string, component: any }>;
 	backButtonPressed: boolean = false;  // 用于判断返回键是否触发
 
@@ -184,12 +182,15 @@ export class AppComponent {
 	 */
 	downloadNewVersion() {
 		const fileTransfer: FileTransferObject = this.fileTransfer.create();
+
 		// this.file.externalRootDirectory在android平台才有效
 		const outUrl: string = `${this.file.externalRootDirectory}nxhh_${new Date().getTime()}.apk`;
+
 		if (this.platform.is('ios')) {
 			// TODO 在ios平台需另外处理
 			// outUrl = `${this.file.dataDirectory}nxhh_${new Date().getTime()}`;
 		}
+
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [
@@ -202,15 +203,15 @@ export class AppComponent {
 			]
 		});
 		let scale: string = '0%';
+		const intervalId: number = setInterval(() => {
+			downloadAlert.setTitle(`已下载${scale}`);
+		}, 500);
 		fileTransfer.onProgress((event: ProgressEvent) => {
 			const val: string = Math.floor((event.loaded / event.total) * 100) + '%';
 			if (scale !== val) {
 				scale = val;
 			}
 		});
-		const intervalId: number = setInterval(() => {
-			downloadAlert.setTitle(`已下载${scale}`);
-		}, 500);
 		fileTransfer.download(this.config.newAppUrl, outUrl).then((result: any) => {
 			clearInterval(intervalId);
 			this.fileOpener.open(outUrl, 'application/vnd.android.package-archive').then(() => {
@@ -255,78 +256,20 @@ export class AppComponent {
 		this.network.onDisconnect().subscribe(() => {
 			this.config.network = false;
 			this.events.publish('network', this.config.network);
-			if (!this.disconnectAlert) {
-				let id: any = null;
-				this.disconnectAlert = this.tips.alert({
-					title: '无网络连接',
-					message: '请检查网络是否断开了！',
-					buttons: [
-						{
-							text: '确定',
-							handler: () => {
-								clearTimeout(id);
-								if (this.disconnectAlert) {
-									this.disconnectAlert.dismiss();
-									this.disconnectAlert = null;
-								}
-							}
-						}
-					]
-				});
-				// 3秒之后隐藏
-				id = setTimeout(() => {
-					clearTimeout(id);
-					if (this.disconnectAlert) {
-						this.disconnectAlert.dismiss();
-						this.disconnectAlert = null;
-					}
-				}, 3000);
-				this.checkConnect();
-			}
+			this.checkConnect();
 		});
 	}
 
 	/**
 	 * 检查网络是否重新连接
 	 */
-	checkConnect(): any {
-		this.connectAlert = null;
+	checkConnect() {
 		const connectSubscription: any = this.network.onConnect().subscribe(() => {
-			const timeoutId: any = setTimeout(() => {
-				clearTimeout(timeoutId);
-				this.config.network = true;
-				this.events.publish('network', this.config.network);
-				this.addAmapScript();
-				connectSubscription.unsubscribe();
-				if (!this.connectAlert) {
-					let id: any = null;
-					this.connectAlert = this.tips.alert({
-						title: '温馨提示',
-						subTitle: `网络已连接，网络类型：${this.network.type}`,
-						buttons: [{
-							text: '确定',
-							handler: () => {
-								clearTimeout(id);
-								if (this.connectAlert) {
-									this.connectAlert.dismiss();
-									this.connectAlert = null;
-								}
-							}
-						}]
-					});
-					// 3秒之后隐藏
-					id = setTimeout(() => {
-						clearTimeout(id);
-						if (this.connectAlert) {
-							this.connectAlert.dismiss();
-							this.connectAlert = null;
-						}
-					}, 3000);
-					this.disconnectAlert = null;
-				}
-			}, 1000);
+			connectSubscription.unsubscribe();
+			this.config.network = true;
+			this.events.publish('network', this.config.network);
+			this.addAmapScript();
 		});
-		return connectSubscription;
 	}
 
 	/**
