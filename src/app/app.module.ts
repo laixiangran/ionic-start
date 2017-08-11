@@ -44,6 +44,8 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { IsDebug } from '@ionic-native/is-debug';
+import { SatelliteCloudPage } from './pages/tools/subpages/satelliteCloud/satellite-cloud';
+import { RadarMapPage } from './pages/tools/subpages/radarMap/radar-map';
 
 const providers: any[] = [
 	{ provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -110,6 +112,8 @@ if (window.hasOwnProperty('cordova')) {
 		ToolsPage,
 		RealTimeTrafficPage,
 		WeatherReportPage,
+		SatelliteCloudPage,
+		RadarMapPage
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
@@ -123,7 +127,9 @@ if (window.hasOwnProperty('cordova')) {
 		SettingsPage,
 		ToolsPage,
 		RealTimeTrafficPage,
-		WeatherReportPage
+		WeatherReportPage,
+		SatelliteCloudPage,
+		RadarMapPage
 	],
 	providers: providers
 })

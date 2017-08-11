@@ -1,0 +1,44 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title>卫星云图</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="imgContainer">
+		<img [src]="httpUrl + curImg.url" alt="卫星云图" (load)="imgLoad()" (click)="fullView(true)"/>
+	</div>
+	<div class="btnContainer">
+		<div class="dateBtnContainer">
+			<button ion-button small color="light" class="date">
+				<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="DateTime" [max]="maxDate" cancelText="取消" doneText="确定" (ionChange)="selectDate()"></ion-datetime>
+			</button>
+			<button ion-button small (click)="mouseOperate()" class="play" [class.stop]="playBoolean">{{operateText}}</button>
+		</div>
+		<div class="checkBtnContainer" text-center>
+			<span (click)="preImg()" *ngIf="curStep !== 0" class="clickBtn">
+				<img src="./assets/img/tools/left.png">
+			</span>
+			<span  *ngIf="curStep === 0" disabled class="clickBtn">
+				<img src="./assets/img/tools/left.png">
+			</span>
+			<button ion-button round small color="light" class="date">
+				<span>{{curImgTime}}</span>
+			</button>
+			<span *ngIf="curStep !== dataList.length" (click)="nextImg()" class="clickBtn">
+				<img src="./assets/img/tools/right.png">
+			</span>
+			<span  *ngIf="curStep === dataList.length" disabled class="clickBtn">
+				<img src="./assets/img/tools/right.png">
+			</span>
+		</div>
+	</div>
+	<div *ngIf="fullImg" class="full_img" (click)="fullView(false)">
+		<ion-slides [zoom]="true">
+			<ion-slide>
+				<h1>{{curImgTime}}</h1>
+				<img [src]="httpUrl + curImg.url" alt="卫星云图">
+			</ion-slide>
+		</ion-slides>
+	</div>
+</ion-content>

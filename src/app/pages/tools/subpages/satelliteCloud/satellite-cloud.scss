@@ -1,0 +1,79 @@
+page-satellite-cloud {
+
+    ion-content {
+
+        .full_img {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgb(0, 0, 0);
+        }
+
+        .imgContainer {
+            min-height: 266px;
+        }
+
+        .btnContainer {
+            position: relative;
+            height: 12.5rem;
+            background: url("../assets/img/tools/bg.png") repeat;
+            .dateBtnContainer {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                right: 5px;
+                height: 5rem;
+                padding-top: 0.7rem;
+                text-align: center;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 5px;
+                .date {
+                    color: #FFFFFF;
+                    width: 13rem;
+                    height: 2.7rem;
+                    background-color: #30A1F5;
+                    border-radius: 1rem;
+                    margin-right: 4rem;
+                    /*box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);*/
+                }
+                .play {
+                    height: 2.7rem;
+                    background-color: #32DB64;
+                    border-radius: 1rem;
+                    margin-right: 1rem;
+                    padding: 0.6rem 2rem;
+                    &.stop {
+                        background-color: #FE674A;
+                    }
+                }
+            }
+            .checkBtnContainer {
+                padding-top: 6.4rem;
+                .clickBtn {
+                    display: inline-block;
+                    width: 2.7rem;
+                    height: 2.7rem;
+                    position: relative;
+                    top: 1.3rem;
+                    img {
+                        width: 2.7rem;
+                        height: 2.7rem;
+                    }
+                }
+                .date {
+                    color: #FFFFFF;
+                    width: 15rem;
+                    height: 3rem;
+                    background-color: #54AFF6;
+                    border-radius: 1rem;
+                    margin: 0 2rem;
+                }
+                .stop {
+                    color: white !important;
+                }
+            }
+        }
+    }
+}

@@ -4,6 +4,8 @@ import { MenuController, NavController } from 'ionic-angular';
 import { WeatherReportPage } from './subpages/weatherReport/weatherReport';
 import { RealTimeTrafficPage } from './subpages/realTimeTraffic/realTimeTraffic';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { RadarMapPage } from './subpages/radarMap/radar-map';
+import { SatelliteCloudPage } from './subpages/satelliteCloud/satellite-cloud';
 
 @Component({
 	selector: 'page-tools',
@@ -29,6 +31,18 @@ export class ToolsPage implements OnInit {
 			icon: 'subway',
 			color: '#FC9300',
 			component: RealTimeTrafficPage
+		},
+		{
+			name: '雷达图',
+			icon: 'md-analytics',
+			color: '#27ea71',
+			component: RadarMapPage
+		},
+		{
+			name: '卫星云图',
+			icon: 'md-cloudy',
+			color: '#3eb1fc',
+			component: SatelliteCloudPage
 		}
 	];
 
