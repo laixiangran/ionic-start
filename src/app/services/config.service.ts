@@ -6,6 +6,7 @@
 
 import { Injectable } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version';
+import { IsDebug } from '@ionic-native/is-debug';
 
 @Injectable()
 export class ConfigService {
@@ -24,17 +25,21 @@ export class ConfigService {
 	devHost: string = 'http://192.168.0.8/sjqfx/';
 
 	/**
-	 * 真实设备的api路径
+	 * 真实设备上测试的api路径
 	 * @type {string}
 	 */
-	prodHost: string = 'http://192.168.0.8/sjqfx/';
+	testHost: string = 'http://192.168.0.8/sjqfx/';
+
+	/**
+	 * 真实设备上生产的api路径
+	 * @type {string}
+	 */
+	prodHost: string = 'http://123.56.211.206/';
 
 	/**
 	 * api主路径
-	 * @type {string}
-	 * @memberof ConfigService
 	 */
-	hostURL: string = this.hasCordova ? this.prodHost : this.devHost;
+	hostURL: string = this.devHost;
 
 	/**
 	 * 当前网络是否连接
@@ -99,7 +104,19 @@ export class ConfigService {
 	 */
 	mainStatusBarColor: string = '#1D89DA';
 
-	constructor(public appVersion: AppVersion) {
+	/**
+	 * 高德地图api key
+	 * @type {string}
+	 */
+	amapApiKey: string =  '92876784ab731cccce8ebd5a8030290f';
+
+	/**
+	 * 高德地图web key
+	 * @type {string}
+	 */
+	amapWebApiKey: string = '0df36377c23e75585d4ed4fcb4baf807';
+
+	constructor(public appVersion: AppVersion, public isDebug: IsDebug) {
 	}
 
 	/**
@@ -122,6 +139,13 @@ export class ConfigService {
 				}),
 				this.appVersion.getVersionNumber().then((versionNumber: any) => {
 					this.versionNumber = versionNumber;
+				}),
+				this.isDebug.getIsDebug().then((isDebug: boolean) => {
+					if (isDebug) {
+						this.hostURL = this.testHost;
+					} else {
+						this.hostURL = this.prodHost;
+					}
 				})
 			]);
 		} else {

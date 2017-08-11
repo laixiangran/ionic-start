@@ -5,6 +5,7 @@
 
 import { Component } from '@angular/core';
 import { EssenceIonAMapComponent } from 'essence-ionic';
+import { ConfigService } from '../../../../services/config.service';
 
 @Component({
 	selector: 'page-realtime-traffic',
@@ -14,7 +15,7 @@ export class RealTimeTrafficPage {
 
 	amapOpts: any; // 初始化地图参数
 
-	constructor() { }
+	constructor(public config: ConfigService) { }
 
 	amapReady(amapComponent: EssenceIonAMapComponent) {}
 

@@ -1,13 +1,15 @@
 <ion-header>
-    <ion-navbar color="primary"></ion-navbar>
+	<ion-navbar color="primary"></ion-navbar>
 </ion-header>
 <ion-content>
-    <essence-ion-amap
-		[options]="amapOpts"
-        [showTraffic]="true"
-        [showCurrentLocation]="true"
-		(location)="amapLocation($event)"
-		(ready)="amapReady($event)"
-		(destroy)="amapDestroy($event)">
+	<essence-ion-amap
+			[apiKey]="config.amapApiKey"
+			[webApiKey]="config.amapWebApiKey"
+			[options]="amapOpts"
+			[showTraffic]="true"
+			[showCurrentLocation]="true"
+			(location)="amapLocation($event)"
+			(ready)="amapReady($event)"
+			(destroy)="amapDestroy($event)">
 	</essence-ion-amap>
 </ion-content>

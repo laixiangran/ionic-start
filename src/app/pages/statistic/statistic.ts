@@ -12,10 +12,10 @@ export class StatisticPage {
 	tabName: string = 'invitation';
 
 	tabInfos: any[] = [
-		{index: 0, code: 'invitation', css: 'Eicon icon-zhaobiao', title: '招标统计', color: '#4aa9ff'},
-		{index: 1, code: 'compact', css: 'Eicon icon-hetong', title: '合同统计', color: '#69cb79'},
-		{index: 2, code: 'project', css: 'Eicon icon-gongchengguanli', title: '工程统计', color: '#ffc239'},
-		{index: 3, code: 'capital', css: 'Eicon icon-zijin', title: '资金统计', color: '#fd7075'}
+		{index: 0, code: 'invitation', css: 'zhaobiao', title: '招标统计', color: '#4aa9ff'},
+		{index: 1, code: 'compact', css: 'hetong', title: '合同统计', color: '#69cb79'},
+		{index: 2, code: 'project', css: 'gongchengguanli', title: '工程统计', color: '#ffc239'},
+		{index: 3, code: 'capital', css: 'zijin', title: '资金统计', color: '#fd7075'}
 	];
 
 	monthWaterChart: EssenceChart = new EssenceChart({

@@ -43,6 +43,7 @@ import { EssenceIonicModule } from 'essence-ionic';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { StreamingMedia } from '@ionic-native/streaming-media';
+import { IsDebug } from '@ionic-native/is-debug';
 
 const providers: any[] = [
 	{ provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -65,7 +66,8 @@ const providers: any[] = [
 	VideoPlayer,
 	MediaCapture,
 	ScreenOrientation,
-	StreamingMedia
+	StreamingMedia,
+	IsDebug
 ];
 if (window.hasOwnProperty('cordova')) {
 	providers.push([
@@ -93,10 +95,7 @@ if (window.hasOwnProperty('cordova')) {
 		}),
 		IonicStorageModule.forRoot(),
 		EssenceNg2ChartModule,
-		EssenceIonicModule.setAMapKey({
-			apiKey: '92876784ab731cccce8ebd5a8030290f',
-			webApiKey: '0df36377c23e75585d4ed4fcb4baf807'
-		}),
+		EssenceIonicModule,
 		SignaturePadModule
 	],
 	declarations: [

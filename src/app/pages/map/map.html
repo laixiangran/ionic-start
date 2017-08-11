@@ -8,7 +8,9 @@
 </ion-header>
 <ion-content>
 	<essence-ion-amap
-		(ready)="amapReady($event)"
-		(destroy)="amapDestroy($event)">
+			[apiKey]="config.amapApiKey"
+			[webApiKey]="config.amapWebApiKey"
+			(ready)="amapReady($event)"
+			(destroy)="amapDestroy($event)">
 	</essence-ion-amap>
 </ion-content>

@@ -73,4 +73,5 @@
     <engine name="android" spec="~6.1.2" />
     <plugin name="cordova-plugin-screen-orientation" spec="~2.0.1" />
     <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
+    <plugin name="cordova-plugin-is-debug" spec="~1.0.0" />
 </widget>

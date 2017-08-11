@@ -28,6 +28,7 @@
     "@ionic-native/file": "^4.0.0",
     "@ionic-native/file-opener": "^4.0.0",
     "@ionic-native/file-transfer": "^4.0.0",
+    "@ionic-native/is-debug": "^4.1.0",
     "@ionic-native/media-capture": "^4.0.0",
     "@ionic-native/network": "^4.0.0",
     "@ionic-native/screen-orientation": "^4.0.0",

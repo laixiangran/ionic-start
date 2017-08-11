@@ -12,7 +12,7 @@
 			<ion-col width-25 *ngFor="let tabInfo of tabInfos" (click)="tabclick(tabInfo)">
 				<div [class.selected]="tabName === tabInfo.code ? true : false">
 					<p>
-						<i [class]="tabInfo.css" [style.color]="tabInfo.color"></i>
+						<ion-icon [name]="tabInfo.css" [style.color]="tabInfo.color"></ion-icon>
 					</p>
 					<p>
 						{{tabInfo.title}}

@@ -1,5 +1,10 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
+
+// 引入外部字体样式
+@import "../assets/styles/font-awesome/css/font-awesome.min.css";
+@import "../assets/font/iconfont.css";
+
 $font-path: "../assets/fonts";
 
 @import "ionic.globals";
