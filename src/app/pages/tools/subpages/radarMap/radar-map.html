@@ -11,15 +11,17 @@
 	<div class="btnContainer">
 		<div class="dateBtnContainer">
 			<button ion-button small color="light" class="date">
-				<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="DateTime" [max]="maxDate" cancelText="取消" doneText="确定" (ionChange)="selectDate()"></ion-datetime>
+				<ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="DateTime" [max]="maxDate" cancelText="取消"
+							  doneText="确定" (ionChange)="selectDate()"></ion-datetime>
 			</button>
-			<button ion-button small (click)="mouseOperate()" class="play" [class.stop]="playBoolean">{{operateText}}</button>
+			<button ion-button small (click)="mouseOperate()" class="play" [class.stop]="playBoolean">{{operateText}}
+			</button>
 		</div>
 		<div class="checkBtnContainer" text-center>
 			<span (click)="preImg()" *ngIf="curStep !== 0" class="clickBtn">
 				<img src="./assets/img/tools/left.png">
 			</span>
-			<span  *ngIf="curStep == 0" disabled class="clickBtn">
+			<span *ngIf="curStep == 0" disabled class="clickBtn">
 				<img src="./assets/img/tools/left.png">
 			</span>
 			<button ion-button round small color="light" class="date">
@@ -28,7 +30,7 @@
 			<span *ngIf="curStep !== dataList.length" (click)="nextImg()" class="clickBtn">
 				<img src="./assets/img/tools/right.png">
 			</span>
-			<span  *ngIf="curStep === dataList.length" disabled class="clickBtn">
+			<span *ngIf="curStep === dataList.length" disabled class="clickBtn">
 				<img src="./assets/img/tools/right.png">
 			</span>
 		</div>
