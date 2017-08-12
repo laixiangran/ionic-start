@@ -1,9 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { MenuController, NavController } from 'ionic-angular';
 import { WeatherReportPage } from './subpages/weatherReport/weatherReport';
 import { RealTimeTrafficPage } from './subpages/realTimeTraffic/realTimeTraffic';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { RadarMapPage } from './subpages/radarMap/radar-map';
 import { SatelliteCloudPage } from './subpages/satelliteCloud/satellite-cloud';
 
@@ -12,13 +11,6 @@ import { SatelliteCloudPage } from './subpages/satelliteCloud/satellite-cloud';
 	templateUrl: 'tools.html'
 })
 export class ToolsPage implements OnInit {
-	@ViewChild(SignaturePad) signaturePad: SignaturePad;
-	@ViewChild('signaturePadDiv') signaturePadDiv: ElementRef;
-
-	videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
-
-	signaturePadOptions: Object;
-
 	items = [
 		{
 			name: '天气预报',
@@ -50,32 +42,9 @@ export class ToolsPage implements OnInit {
 				public menu: MenuController) {}
 
 	ngOnInit() {
-		this.signaturePadOptions = {
-			canvasWidth: this.signaturePadDiv.nativeElement.clientWidth,
-			canvasHeight: 200
-		};
 	}
 
 	itemSelected(item: any) {
 		this.navCtrl.push(item.component);
-	}
-
-	videoViewerReady($event: any) {
-		console.log($event);
-	}
-
-	drawStart() {
-		this.menu.enable(false);
-		console.log('begin drawing');
-	}
-
-	drawComplete() {
-		this.menu.enable(true);
-		console.log('drawing complete');
-		// console.log(this.signaturePad.toDataURL());
-	}
-
-	clearSignature() {
-		this.signaturePad.clear();
 	}
 }

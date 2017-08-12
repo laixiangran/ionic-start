@@ -16,7 +16,7 @@ export class RadarMapPage {
 	dataList: any[] = [];
 	DateTime: string = this.nowDate.getFullYear() + (this.nowDate.getMonth() < 9 ? '-0' : '-') + (this.nowDate.getMonth() + 1) + (this.nowDate.getDate() < 10 ? '-0' : '-') + this.nowDate.getDate();
 	maxDate: string = JSON.parse(JSON.stringify(this.DateTime));
-	httpUrl: string = 'http://pi.weather.com.cn/i/product/pic/l/sevp_aoc_rdcp_sldas_ebref_ancn_l88_pi_';
+	httpUrl: string = 'http://pi.weather.com.cn/i/product/pic/l/sevp_aoc_rdcp_sldas_ebref_achn_l88_pi_';
 	curImg: any;
 	curStep: number = 0;
 	curImgTime: any;
