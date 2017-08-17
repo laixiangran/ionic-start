@@ -183,7 +183,7 @@ export class AppComponent {
 	downloadNewVersion(fileDirectory?: string) {
 		fileDirectory = fileDirectory ? fileDirectory : this.file.externalApplicationStorageDirectory; // 只适用android平台
 		const fileTransferObject: FileTransferObject = this.fileTransfer.create();
-		const outUrl: string = `${fileDirectory}ionicStart_${new Date().getTime()}.apk`;
+		const outUrl: string = `${fileDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [
@@ -273,7 +273,7 @@ export class AppComponent {
 		const head = document.getElementsByTagName('head')[0],
 			script = document.createElement('script');
 		script.type = 'text/javascript';
-		script.src = 'http://webapi.amap.com/maps?v=1.3&key=92876784ab731cccce8ebd5a8030290f';
+		script.src = `http://webapi.amap.com/maps?v=1.3&key=${this.config.amapApiKey}`;
 		if (!window['AMap']) {
 			head.appendChild(script);
 		}
