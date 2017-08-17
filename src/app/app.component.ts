@@ -100,7 +100,7 @@ export class AppComponent {
 			});
 			this.backButtonPressed = true;
 			// 2秒内没有再次点击返回则将触发标志标记为false
-			const id: number = setTimeout(() => {
+			const id: any = setTimeout(() => {
 				clearTimeout(id);
 				this.backButtonPressed = false;
 			}, 2000);
@@ -180,39 +180,32 @@ export class AppComponent {
 	/**
 	 * 下载新版本APP
 	 */
-	downloadNewVersion() {
-		const fileTransfer: FileTransferObject = this.fileTransfer.create();
-
-		// this.file.externalRootDirectory在android平台才有效
-		const outUrl: string = `${this.file.externalRootDirectory}nxhh_${new Date().getTime()}.apk`;
-
-		if (this.platform.is('ios')) {
-			// TODO 在ios平台需另外处理
-			// outUrl = `${this.file.dataDirectory}nxhh_${new Date().getTime()}`;
-		}
-
+	downloadNewVersion(fileDirectory?: string) {
+		fileDirectory = fileDirectory ? fileDirectory : this.file.externalApplicationStorageDirectory; // 只适用android平台
+		const fileTransferObject: FileTransferObject = this.fileTransfer.create();
+		const outUrl: string = `${fileDirectory}ionicStart_${new Date().getTime()}.apk`;
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [
 				{
 					text: '取消',
 					handler: () => {
-						fileTransfer.abort();
+						fileTransferObject.abort();
 					}
 				}
 			]
 		});
 		let scale: string = '0%';
-		const intervalId: number = setInterval(() => {
+		const intervalId: any = setInterval(() => {
 			downloadAlert.setTitle(`已下载${scale}`);
 		}, 500);
-		fileTransfer.onProgress((event: ProgressEvent) => {
+		fileTransferObject.onProgress((event: ProgressEvent) => {
 			const val: string = Math.floor((event.loaded / event.total) * 100) + '%';
 			if (scale !== val) {
 				scale = val;
 			}
 		});
-		fileTransfer.download(this.config.newAppUrl, outUrl).then((result: any) => {
+		fileTransferObject.download(this.config.newAppUrl, outUrl).then((result: any) => {
 			clearInterval(intervalId);
 			this.fileOpener.open(outUrl, 'application/vnd.android.package-archive').then(() => {
 				this.tips.dismiss(downloadAlert);
@@ -221,6 +214,7 @@ export class AppComponent {
 			});
 		}, (err: FileTransferError) => {
 			clearInterval(intervalId);
+			this.tips.dismiss(downloadAlert);
 			if (err.code !== 4) { // 当下载取消时不提示
 				this.tips.alert({
 					title: '下载失败，请重试！',
@@ -231,9 +225,9 @@ export class AppComponent {
 						{
 							text: '重试',
 							handler: () => {
-								const id: number = setTimeout(() => {
+								const id: any = setTimeout(() => {
 									clearTimeout(id);
-									this.downloadNewVersion();
+									this.downloadNewVersion(this.file.externalRootDirectory);
 								});
 							}
 						}
