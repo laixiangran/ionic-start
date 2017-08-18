@@ -180,10 +180,10 @@ export class AppComponent {
 	/**
 	 * 下载新版本APP
 	 */
-	downloadNewVersion(fileDirectory?: string) {
-		fileDirectory = fileDirectory ? fileDirectory : this.file.externalApplicationStorageDirectory; // 只适用android平台
+	downloadNewVersion() {
 		const fileTransferObject: FileTransferObject = this.fileTransfer.create();
-		const outUrl: string = `${fileDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
+		// 只适用android平台
+		const outUrl: string = `${this.file.externalApplicationStorageDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [
@@ -227,7 +227,7 @@ export class AppComponent {
 							handler: () => {
 								const id: any = setTimeout(() => {
 									clearTimeout(id);
-									this.downloadNewVersion(this.file.externalRootDirectory);
+									this.downloadNewVersion();
 								});
 							}
 						}
