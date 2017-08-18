@@ -183,7 +183,7 @@ export class AppComponent {
 	downloadNewVersion() {
 		const fileTransferObject: FileTransferObject = this.fileTransfer.create();
 		// 只适用android平台
-		const outUrl: string = `${this.file.externalApplicationStorageDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
+		const outUrl: string = `${this.file.externalDataDirectory || this.file.dataDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [

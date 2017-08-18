@@ -28,7 +28,7 @@ export class ConfigService {
 	 * 真实设备上测试的api路径
 	 * @type {string}
 	 */
-	testHost: string = 'http://192.168.0.8/sjqfx/';
+	testHost: string = 'http://123.56.211.206/';
 
 	/**
 	 * 真实设备上生产的api路径
@@ -146,6 +146,7 @@ export class ConfigService {
 					} else {
 						this.hostURL = this.prodHost;
 					}
+					this.newAppUrl = `${this.hostURL}appVersionAction/disposeScanCode`;
 				})
 			]);
 		} else {

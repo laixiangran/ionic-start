@@ -46,6 +46,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media';
 import { IsDebug } from '@ionic-native/is-debug';
 import { SatelliteCloudPage } from './pages/tools/subpages/satelliteCloud/satellite-cloud';
 import { RadarMapPage } from './pages/tools/subpages/radarMap/radar-map';
+import { FileDemoPage } from './pages/native/subpages/file-demo/file-demo';
 
 const providers: any[] = [
 	{ provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -105,6 +106,7 @@ if (window.hasOwnProperty('cordova')) {
 		LoginPage,
 		TabsPage,
 		NativePage,
+		FileDemoPage,
 		MapPage,
 		StatisticPage,
 		RulesPage,
@@ -121,6 +123,7 @@ if (window.hasOwnProperty('cordova')) {
 		LoginPage,
 		TabsPage,
 		NativePage,
+		FileDemoPage,
 		MapPage,
 		StatisticPage,
 		RulesPage,

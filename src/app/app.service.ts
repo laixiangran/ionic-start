@@ -20,10 +20,6 @@ export class AppService {
 	 * @returns {Observable<ServerData>}
 	 */
 	checkLatestVersion(): Observable<ServerData> {
-		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-			subscriber.next(new ServerData('检查成功！', 'ok', '1.0.0'));
-			subscriber.complete();
-		});
-		// return this.rs.post("appVersionAction/getLatestVersion", null, false);
+		return this.rs.post('appVersionAction/getLatestVersion', null, false);
 	}
 }

@@ -10,6 +10,8 @@ import { MediaCapture, CaptureError, CaptureImageOptions, MediaFile, CaptureVide
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
 
 import { ConfigService } from '../../services/config.service';
+import { NavController } from 'ionic-angular';
+import { FileDemoPage } from './subpages/file-demo/file-demo';
 
 @Component({
 	selector: 'page-native',
@@ -22,6 +24,7 @@ export class NativePage {
 	subscriptions: Subscription[] = [];
 
 	constructor(public backgroundMode: BackgroundMode,
+				public navCtrl: NavController,
 				public barcodeScanner: BarcodeScanner,
 				public batteryStatus: BatteryStatus,
 				public videoPlayer: VideoPlayer,
@@ -229,5 +232,9 @@ export class NativePage {
 		}, (err: CaptureError) => {
 			console.error(err);
 		});
+	}
+
+	fileDetail() {
+		this.navCtrl.push(FileDemoPage);
 	}
 }
