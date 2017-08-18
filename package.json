@@ -1,8 +1,27 @@
 {
   "name": "ionic-start",
-  "author": "Essence",
   "version": "1.0.0",
-  "private": true,
+  "description": "ionic start project.",
+  "keywords": [
+    "ionic",
+    "angular",
+    "laixiangran"
+  ],
+  "homepage": "https://github.com/laixiangran/ionic-start#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laixiangran/ionic-start.git"
+  },
+  "author": {
+    "name": "赖祥燃",
+    "email": "laixiangran@163.com",
+    "bolg": "http://www.cnblogs.com/laixiangran",
+    "homepage": "http://www.laixiangran.cn"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laixiangran/ionic-start/issues"
+  },
   "scripts": {
     "start": "ionic-app-scripts serve",
     "add": "ionic cordova platform add android",
@@ -37,7 +56,6 @@
     "@ionic-native/streaming-media": "^4.1.0",
     "@ionic-native/video-player": "^4.0.0",
     "@ionic/storage": "^2.0.1",
-    "angular2-signaturepad": "^2.4.0",
     "essence-ionic": "^1.2.0",
     "essence-ng2-chart": "^1.0.2",
     "ionic-angular": "3.6.0",
