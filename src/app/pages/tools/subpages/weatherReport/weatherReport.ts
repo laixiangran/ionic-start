@@ -7,9 +7,10 @@ import { Component } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { StatusBar } from '@ionic-native/status-bar';
-
 import { RequestService } from '../../../../services/request.service';
 import { TransformService } from '../../../../services/transform.service';
+import { ConfigService } from '../../../../services/config.service';
+import { MenuController } from 'ionic-angular';
 
 @Component({
 	selector: 'page-weather-report',
@@ -28,11 +29,15 @@ export class WeatherReportPage {
 
 	constructor(public http: Http,
 				public rs: RequestService,
+				public menu: MenuController,
 				public statusBar: StatusBar,
+				public config: ConfigService,
 				public transform: TransformService) {
 	}
 
 	ionViewDidEnter() {
+
+		this.menu.enable(false);
 
 		// 简单判断白天及黑夜，18：00 - 6：00算黑夜
 		if (new Date().getHours() >= 6 && new Date().getHours() < 18) {
@@ -68,15 +73,13 @@ export class WeatherReportPage {
 	}
 
 	ionViewDidLeave() {
-		this.statusBar.backgroundColorByHexString('#1D89DA');
+		this.menu.enable(true);
+		this.statusBar.backgroundColorByHexString(this.config.mainStatusBarColor);
 	}
 
 	/**
 	 * 获取当前坐标信息
-	 *
 	 * @returns {Promise<any>}
-	 *
-	 * @memberOf WeatherReportPage
 	 */
 	currentLocation(): Promise<any> {
 		const options: PositionOptions = {
@@ -97,11 +100,8 @@ export class WeatherReportPage {
 
 	/**
 	 * 逆地理编码，使用高德地图提供的服务
-	 *
 	 * @param {string} currentPosition 经纬度坐标
 	 * @returns {Observable<any>}
-	 *
-	 * @memberOf WeatherReportPage
 	 */
 	reverseGeocoding(currentPosition: string): Observable<any> {
 		const headers: Headers = new Headers();
@@ -117,11 +117,8 @@ export class WeatherReportPage {
 
 	/**
 	 * 根据行政区编码获取天气预报信息，使用高德提供的服务
-	 *
 	 * @param {number} adcode 行政区编码
 	 * @returns {Observable<any>}
-	 *
-	 * @memberOf WeatherReportPage
 	 */
 	getWeatherInfo(adcode: number): Observable<any> {
 		const headers: Headers = new Headers();
