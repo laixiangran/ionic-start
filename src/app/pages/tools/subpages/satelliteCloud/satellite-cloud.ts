@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { MenuController, NavParams } from 'ionic-angular';
 import { TipsService } from '../../../../services/tips.service';
-import { Sys } from '../../../../utils/sys';
+import { DateTimeService } from '../../../../services/datetime.service';
 
 @Component({
 	selector: 'page-satellite-cloud',
@@ -27,7 +27,8 @@ export class SatelliteCloudPage {
 
 	constructor(public params: NavParams,
 				public menu: MenuController,
-				public tipsService: TipsService, ) {
+				public datetimeService: DateTimeService,
+				public tipsService: TipsService) {
 		const curTime = new Date();
 		curTime.setHours(curTime.getHours() - 1);
 		this.initData(curTime);
@@ -61,8 +62,8 @@ export class SatelliteCloudPage {
 				}
 				const date = new Date(curTime);
 				date.setHours(date.getHours() - 8);
-				const filename = Sys.dateFormat(date, 'yyyyMMddhhmm00') + '000.jpg';
-				this.dataList.unshift({url: filename, time: Sys.dateFormat(curTime, 'yyyy-MM-dd hh:mm')});
+				const filename = this.datetimeService.dateFormat(date, 'yyyyMMddhhmm00') + '000.jpg';
+				this.dataList.unshift({url: filename, time: this.datetimeService.dateFormat(curTime, 'yyyy-MM-dd hh:mm')});
 			}
 			curTime.setHours(curTime.getHours() - 1);
 		}

@@ -1,0 +1,41 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons start>
+			<button ion-button (click)="back()">
+				<span style="font-size: 26px;">
+					<ion-icon name="arrow-back"></ion-icon>
+				</span>
+				&nbsp;返回
+			</button>
+		</ion-buttons>
+		<ion-title>消息</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item-sliding *ngFor="let talker of currentTalkers; trackBy: trackById">
+			<ion-item (click)="contact(talker)">
+				<ion-avatar item-start>
+					<img *ngIf="talker.N_SEX === 0" src="assets/images/tools/man.png">
+					<img *ngIf="talker.N_SEX === 1" src="assets/images/tools/lady.png">
+				</ion-avatar>
+				<h2>{{talker.C_REALNM}}</h2>
+				<p>{{talker.C_INFO || '暂无新消息'}}</p>
+				<ion-note item-end>
+					<div style="font-size: 12px;">
+						{{talker.N_ORDER | date:'yyyy-MM-dd HH:mm'}}
+					</div>
+					<div style="width: 100%; text-align: right; margin-top: 5px; min-height: 21px;">
+						<ion-badge *ngIf="talker.status_num !== 0" color="danger">{{talker.status_num}}</ion-badge>
+					</div>
+				</ion-note>
+			</ion-item>
+			<ion-item-options side="right">
+				<button ion-button color="danger" (click)="deleteMessage(talker.C_TALK_USERID)">
+					删除
+				</button>
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+</ion-content>

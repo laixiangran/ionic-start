@@ -1,0 +1,27 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons start>
+			<button ion-button (click)="back()">
+				<span style="font-size: 26px;">
+					<ion-icon name="arrow-back"></ion-icon>
+				</span>
+				&nbsp;返回
+			</button>
+		</ion-buttons>
+		<ion-title>联系人</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item *ngFor="let person of presons; trackBy: trackById" (click)="contact(person)">
+			<ion-avatar item-start>
+				<img *ngIf="person.N_SEX === 0" src="assets/images/tools/man.png">
+				<img *ngIf="person.N_SEX === 1" src="assets/images/tools/lady.png">
+			</ion-avatar>
+			<h2>{{person.C_REALNM}} - {{person.C_UNIT_NAME}}</h2>
+			<p>手机：{{person.C_TEL || '无'}}</p>
+			<p>邮箱：{{person.C_EMAIL || '无'}}</p>
+		</ion-item>
+	</ion-list>
+</ion-content>

@@ -131,10 +131,16 @@ export class AppComponent {
 	}
 
 	onLogout() {
-		this.loginService.logout().subscribe((serverData: ServerData) => {
-			if (serverData.code === 'ok') {
+		this.loginService.logout().subscribe((serverData: any) => {
+			if (serverData.status === 200) {
 				this.authService.removeToken().then(() => {
 					this.nav.setRoot(LoginPage);
+				});
+			} else {
+				this.tips.alert({
+					title: '温馨提示',
+					message: '登录失败，请联系技术人员处理！',
+					buttons: ['确定']
 				});
 			}
 		});

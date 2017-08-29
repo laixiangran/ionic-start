@@ -4,31 +4,19 @@ import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppVersion } from '@ionic-native/app-version';
-import { BackgroundMode } from '@ionic-native/background-mode';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { BatteryStatus } from '@ionic-native/battery-status';
 import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
-import { VideoPlayer } from '@ionic-native/video-player';
-import { MediaCapture } from '@ionic-native/media-capture';
-import { Camera } from '@ionic-native/camera';
-import { CameraMock } from './mocks/native/camera-mock';
-
 import { AppComponent } from './app.component';
-
-// page
 import { LoginPage } from './pages/login/login';
 import { TabsPage } from './pages/tabs/tabs';
-import { NativePage } from './pages/native/native';
 import { MapPage } from './pages/map/map';
 import { StatisticPage } from './pages/statistic/statistic';
 import { RulesPage } from './pages/rules/rules';
 import { SettingsPage } from './pages/settings/settings';
-
 import { AuthService } from './services/auth.service';
 import { RequestService } from './services/request.service';
 import { ConfigService } from './services/config.service';
@@ -42,45 +30,16 @@ import { TransformService } from './services/transform.service';
 import { EssenceIonicModule } from 'essence-ionic';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { StreamingMedia } from '@ionic-native/streaming-media';
 import { IsDebug } from '@ionic-native/is-debug';
 import { SatelliteCloudPage } from './pages/tools/subpages/satelliteCloud/satellite-cloud';
 import { RadarMapPage } from './pages/tools/subpages/radarMap/radar-map';
-import { FileDemoPage } from './pages/native/subpages/file-demo/file-demo';
-
-const providers: any[] = [
-	{ provide: ErrorHandler, useClass: IonicErrorHandler },
-	ConfigService,
-	AuthService,
-	TipsService,
-	LoginService,
-	RequestService,
-	TransformService,
-	AppVersion,
-	BackgroundMode,
-	BarcodeScanner,
-	BatteryStatus,
-	Network,
-	StatusBar,
-	SplashScreen,
-	FileTransfer,
-	FileOpener,
-	File,
-	VideoPlayer,
-	MediaCapture,
-	ScreenOrientation,
-	StreamingMedia,
-	IsDebug
-];
-if (window.hasOwnProperty('cordova')) {
-	providers.push([
-		Camera
-	]);
-} else {
-	providers.push([
-		{ provide: Camera, useClass: CameraMock }
-	]);
-}
+import { DateTimeService } from './services/datetime.service';
+import { FilePathService } from './services/filepath.service';
+import { InstantCommPage } from './pages/tools/subpages/instantComm/instant-comm';
+import { MessagePage } from './pages/tools/subpages/instantComm/subpages/message/message';
+import { PersonPage } from './pages/tools/subpages/instantComm/subpages/person/person';
+import { ContactPage } from './pages/tools/subpages/instantComm/subpages/contact/contact';
+import { InstantCommService } from './pages/tools/subpages/instantComm/instant-comm.service';
 
 @NgModule({
 	imports: [
@@ -105,8 +64,6 @@ if (window.hasOwnProperty('cordova')) {
 		AppComponent,
 		LoginPage,
 		TabsPage,
-		NativePage,
-		FileDemoPage,
 		MapPage,
 		StatisticPage,
 		RulesPage,
@@ -115,15 +72,17 @@ if (window.hasOwnProperty('cordova')) {
 		RealTimeTrafficPage,
 		WeatherReportPage,
 		SatelliteCloudPage,
-		RadarMapPage
+		RadarMapPage,
+		InstantCommPage,
+		MessagePage,
+		PersonPage,
+		ContactPage
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
 		AppComponent,
 		LoginPage,
 		TabsPage,
-		NativePage,
-		FileDemoPage,
 		MapPage,
 		StatisticPage,
 		RulesPage,
@@ -132,9 +91,33 @@ if (window.hasOwnProperty('cordova')) {
 		RealTimeTrafficPage,
 		WeatherReportPage,
 		SatelliteCloudPage,
-		RadarMapPage
+		RadarMapPage,
+		InstantCommPage,
+		MessagePage,
+		PersonPage,
+		ContactPage
 	],
-	providers: providers
+	providers: [
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		ConfigService,
+		AuthService,
+		TipsService,
+		LoginService,
+		RequestService,
+		DateTimeService,
+		FilePathService,
+		TransformService,
+		InstantCommService,
+		AppVersion,
+		Network,
+		StatusBar,
+		SplashScreen,
+		FileTransfer,
+		FileOpener,
+		File,
+		ScreenOrientation,
+		IsDebug
+	]
 })
 export class AppModule {
 }

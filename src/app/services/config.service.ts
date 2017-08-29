@@ -28,13 +28,13 @@ export class ConfigService {
 	 * 真实设备上测试的api路径
 	 * @type {string}
 	 */
-	testHost: string = 'http://123.56.211.206/';
+	testHost: string = 'http://192.168.0.8/sjqfx/';
 
 	/**
 	 * 真实设备上生产的api路径
 	 * @type {string}
 	 */
-	prodHost: string = 'http://123.56.211.206/';
+	prodHost: string = 'http://192.168.0.8/sjqfx/';
 
 	/**
 	 * api主路径

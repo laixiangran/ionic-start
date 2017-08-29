@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { MenuController, NavParams } from 'ionic-angular';
 import { TipsService } from '../../../../services/tips.service';
-import { Sys } from '../../../../utils/sys';
+import { DateTimeService } from '../../../../services/datetime.service';
 
 @Component({
 	selector: 'page-radar-map',
@@ -16,7 +16,7 @@ export class RadarMapPage {
 	dataList: any[] = [];
 	DateTime: string = this.nowDate.getFullYear() + (this.nowDate.getMonth() < 9 ? '-0' : '-') + (this.nowDate.getMonth() + 1) + (this.nowDate.getDate() < 10 ? '-0' : '-') + this.nowDate.getDate();
 	maxDate: string = JSON.parse(JSON.stringify(this.DateTime));
-	httpUrl: string = 'http://pi.weather.com.cn/i/product/pic/l/sevp_aoc_rdcp_sldas_ebref_achn_l88_pi_';
+	httpUrl: string = 'http://pi.weather.com.cn/i/product/pic/l/sevp_aoc_rdcp_sldas_ebref_ancn_l88_pi_';
 	curImg: any;
 	curStep: number = 0;
 	curImgTime: any;
@@ -27,6 +27,7 @@ export class RadarMapPage {
 
 	constructor(public params: NavParams,
 				public menu: MenuController,
+				public datetimeService: DateTimeService,
 				public tipsService: TipsService) {
 		const curTime = new Date();
 		curTime.setHours(curTime.getHours() - 1);
@@ -57,8 +58,8 @@ export class RadarMapPage {
 				curTime.setMinutes(j * 6);
 				const date = new Date(curTime);
 				date.setHours(date.getHours() - 8);
-				const filename = Sys.dateFormat(date, 'yyyyMMddhhmm00') + '001.png';
-				this.dataList.unshift({url: filename, time: Sys.dateFormat(curTime, 'yyyy-MM-dd hh:mm')});
+				const filename = this.datetimeService.dateFormat(date, 'yyyyMMddhhmm00') + '001.png';
+				this.dataList.unshift({url: filename, time: this.datetimeService.dateFormat(curTime, 'yyyy-MM-dd hh:mm')});
 			}
 			curTime.setHours(curTime.getHours() - 1);
 		}

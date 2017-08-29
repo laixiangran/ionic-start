@@ -17,19 +17,11 @@ export class LoginService {
 	}
 
 	login(user: any): Observable<ServerData> {
-		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-			subscriber.next(new ServerData('登录成功', 'ok', {token: '123456789'}));
-			subscriber.complete();
-		});
-		// return this.rs.post("LoginAction/Login", user);
+		return this.rs.post('LoginAction/Login', user);
 	}
 
 	logout(): Observable<ServerData> {
-		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-			subscriber.next(new ServerData('退出成功', 'ok', null));
-			subscriber.complete();
-		});
-		// return this.rs.post("LoginAction/Logout", null);
+		return this.rs.post('LoginAction/Logout', null);
 	}
 
 	/**
@@ -37,10 +29,6 @@ export class LoginService {
 	 * @returns {Observable<any>}
 	 */
 	getUserInfo(): Observable<ServerData> {
-		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
-			subscriber.next(new ServerData('退出成功', 'ok', {name: '管理员'}));
-			subscriber.complete();
-		});
-		// return this.rs.post("SysUserAction/getMyInfo", null);
+		return this.rs.post('SysUserAction/queryCurrentUserInfo', null);
 	}
 }
