@@ -14,7 +14,7 @@ import { Tabs } from 'ionic-angular';
 	templateUrl: 'tabs.html'
 })
 export class TabsPage {
-	@ViewChild('mainTabs') tabs: Tabs;
+	@ViewChild('mainTabs') mainTabs: Tabs;
 	tab1Root: any = NativePage;
 	tab2Root: any = MapPage;
 	tab3Root: any = StatisticPage;

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Alert, Nav, Platform, Events, Keyboard, IonicApp, NavController } from 'ionic-angular';
+import { Alert, Nav, Platform, Events, Keyboard, IonicApp, NavController, Tabs } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
 import { FileTransfer, FileTransferObject, FileTransferError } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
@@ -14,6 +14,7 @@ import { LoginService } from './pages/login/login.service';
 import { ServerData } from './models/server-data';
 import { AppService } from './app.service';
 import { TabsPage } from './pages/tabs/tabs';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
 	templateUrl: 'app.html',
@@ -37,6 +38,7 @@ export class AppComponent {
 				public tips: TipsService,
 				public config: ConfigService,
 				public appService: AppService,
+				public screenOrientation: ScreenOrientation,
 				public authService: AuthService) {
 
 		this.initializeApp();
@@ -75,14 +77,25 @@ export class AppComponent {
 				activePortal.onDidDismiss();
 				return;
 			}
-			// 根据当前root是否为TabsPage进行不同的处理（tabs对象是在TabsPage定义的ion-tabs）
-			let activeNav: NavController;
-			if (this.nav.getActive().instance.tabs) {
-				activeNav = this.nav.getActive().instance.tabs.getSelected();
+			// 设置竖屏
+			this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+			// 根据当前导航进行不同的处理（mainTabs对象是在TabsPage定义的ion-tabs，instantTabs对象是在InstantCommPage定义的ion-tabs）
+			const mainTabs: Tabs = this.nav.getActive().instance.mainTabs;
+			if (mainTabs) {
+				const mainNav: NavController = mainTabs.getSelected();
+				const instantTabs: Tabs = mainNav.getActive().instance.instantTabs;
+				if (instantTabs) {
+					const instantNav: NavController = instantTabs.getSelected();
+					instantNav.canGoBack() ? instantNav.pop() : mainNav.pop();
+					return;
+				} else {
+					mainNav.canGoBack() ? mainNav.pop() : this.showExit();
+					return;
+				}
 			} else {
-				activeNav = this.nav;
+				this.nav.canGoBack() ? this.nav.pop() : this.showExit();
 			}
-			return activeNav.canGoBack() ? activeNav.pop() : this.showExit();
+			return;
 		}, 1);
 	}
 
