@@ -17,19 +17,19 @@
 		</div>
 		<div class="checkBtnContainer" text-center>
 			<span (click)="preImg()" *ngIf="curStep !== 0" class="clickBtn">
-				<img src="./assets/img/tools/left.png">
+				<img src="./assets/images/tools/left.png">
 			</span>
 			<span  *ngIf="curStep == 0" disabled class="clickBtn">
-				<img src="./assets/img/tools/left.png">
+				<img src="./assets/images/tools/left.png">
 			</span>
 			<button ion-button round small color="light" class="date">
 				<span>{{curImgTime}}</span>
 			</button>
 			<span *ngIf="curStep !== dataList.length" (click)="nextImg()" class="clickBtn">
-				<img src="./assets/img/tools/right.png">
+				<img src="./assets/images/tools/right.png">
 			</span>
 			<span  *ngIf="curStep === dataList.length" disabled class="clickBtn">
-				<img src="./assets/img/tools/right.png">
+				<img src="./assets/images/tools/right.png">
 			</span>
 		</div>
 	</div>
