@@ -292,7 +292,7 @@ export class AppComponent {
 		const head = document.getElementsByTagName('head')[0],
 			script = document.createElement('script');
 		script.type = 'text/javascript';
-		script.src = `http://webapi.amap.com/maps?v=1.3&key=${this.config.amapApiKey}`;
+		script.src = `http://webapi.amap.com/maps?v=1.3&key=${this.config.amapApiKey}&plugin=AMap.MarkerClusterer`;
 		if (!window['AMap']) {
 			head.appendChild(script);
 		}
