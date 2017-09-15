@@ -1,8 +1,14 @@
 {
-  "name": "ionic-start",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+	"name": "ionic-start",
+	"app_id": "",
+	"type": "ionic-angular",
+	"integrations": {
+		"cordova": {}
+	},
+	"proxies": [
+		{
+			"path": "/drainage",
+			"proxyUrl": "http://192.168.0.8/drainage/"
+		}
+	]
 }

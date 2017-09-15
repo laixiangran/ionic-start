@@ -22,19 +22,19 @@ export class ConfigService {
 	 * 浏览器开发的api路径
 	 * @type {string}
 	 */
-	devHost: string = 'http://192.168.0.8/sjqfx/';
+	devHost: string = '/drainage/';
 
 	/**
 	 * 真实设备上测试的api路径
 	 * @type {string}
 	 */
-	testHost: string = 'http://192.168.0.8/sjqfx/';
+	testHost: string = 'http://192.168.0.8/drainage/';
 
 	/**
 	 * 真实设备上生产的api路径
 	 * @type {string}
 	 */
-	prodHost: string = 'http://192.168.0.8/sjqfx/';
+	prodHost: string = 'http://192.168.0.8/drainage/';
 
 	/**
 	 * api主路径

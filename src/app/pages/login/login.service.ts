@@ -29,6 +29,6 @@ export class LoginService {
 	 * @returns {Observable<any>}
 	 */
 	getUserInfo(): Observable<ServerData> {
-		return this.rs.post('SysUserAction/queryCurrentUserInfo', null);
+		return this.rs.post('SysUserAction/getMyInfo', null);
 	}
 }

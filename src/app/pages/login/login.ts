@@ -45,49 +45,50 @@ export class LoginPage {
 	}
 
 	onLogin(isValid: boolean) {
-		if (isValid) {
-			if (this.config.network) {
-				this.loginService.login({
-					username: this.user.username,
-					password: Md5.hashStr(this.user.password)
-				}).subscribe((serverData: any) => {
-					if (serverData.status === 1 || serverData.status === -1 || serverData.status === 200) {
-						this.authService.setToken(serverData.token).then(() => {
-							this.loginService.getUserInfo().subscribe((data: ServerData) => {
-								if (data.code === 'ok') {
-									this.authService.setUserInfo(data.result).then(() => {
-										this.navCtrl.setRoot(TabsPage);
-									});
-								}
-							});
-						});
-					} else {
-						this.tips.alert({
-							title: '登录失败',
-							message: '用户名或密码错误！',
-							buttons: ['确定']
-						});
-					}
-				}, (error: any) => {
-					this.tips.alert({
-						title: '登录失败',
-						message: error,
-						buttons: ['确定']
-					});
-				});
-			} else {
-				this.tips.alert({
-					title: '无网络连接',
-					message: '请检查网络是否断开了！',
-					buttons: ['确定']
-				});
-			}
-		} else {
-			this.tips.alert({
-				title: '温馨提示',
-				message: '必须输入用户名和密码！',
-				buttons: ['确定']
-			});
-		}
+		this.navCtrl.setRoot(TabsPage);
+		// if (isValid) {
+		// 	if (this.config.network) {
+		// 		this.loginService.login({
+		// 			username: this.user.username,
+		// 			password: Md5.hashStr(this.user.password)
+		// 		}).subscribe((serverData: any) => {
+		// 			if (serverData.status === 1 || serverData.status === -1 || serverData.status === 200) {
+		// 				this.authService.setToken(serverData.token).then(() => {
+		// 					this.loginService.getUserInfo().subscribe((data: ServerData) => {
+		// 						if (data.code === 'ok') {
+		// 							this.authService.setUserInfo(data.result).then(() => {
+		// 								this.navCtrl.setRoot(TabsPage);
+		// 							});
+		// 						}
+		// 					});
+		// 				});
+		// 			} else {
+		// 				this.tips.alert({
+		// 					title: '登录失败',
+		// 					message: '用户名或密码错误！',
+		// 					buttons: ['确定']
+		// 				});
+		// 			}
+		// 		}, (error: any) => {
+		// 			this.tips.alert({
+		// 				title: '登录失败',
+		// 				message: error,
+		// 				buttons: ['确定']
+		// 			});
+		// 		});
+		// 	} else {
+		// 		this.tips.alert({
+		// 			title: '无网络连接',
+		// 			message: '请检查网络是否断开了！',
+		// 			buttons: ['确定']
+		// 		});
+		// 	}
+		// } else {
+		// 	this.tips.alert({
+		// 		title: '温馨提示',
+		// 		message: '必须输入用户名和密码！',
+		// 		buttons: ['确定']
+		// 	});
+		// }
 	}
 }

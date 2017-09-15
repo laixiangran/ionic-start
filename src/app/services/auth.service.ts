@@ -9,7 +9,7 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
-	userInfo: any = {name: '管理员'}; // 用户信息
+	userInfo: any; // 用户信息
 	userInfoItemName: string = 'IONIC_USERINFO'; // 保存用户信息的key
 	token: string; // 令牌
 	tokenItemName: string = 'IONIC_URMS_LOGIN_TOKEN'; // 保存令牌的key
