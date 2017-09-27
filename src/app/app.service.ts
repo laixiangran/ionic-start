@@ -8,11 +8,12 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { RequestService } from './services/request.service';
 import { ServerData } from './models/server-data';
+import { ConfigService } from './services/config.service';
 
 @Injectable()
 export class AppService {
 
-	constructor(private rs: RequestService) {
+	constructor(private rs: RequestService, private config: ConfigService) {
 	}
 
 	/**
@@ -20,6 +21,6 @@ export class AppService {
 	 * @returns {Observable<ServerData>}
 	 */
 	checkLatestVersion(): Observable<ServerData> {
-		return this.rs.post('appVersionAction/getLatestVersion', null, false);
+		return this.rs.post(this.config.checkNewAppUrl, null, false);
 	}
 }

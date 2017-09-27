@@ -36,7 +36,7 @@ export class NativePage {
 
 	ionViewDidEnter() {
 		console.log('ionViewDidEnter');
-		if (this.configService.hasCordova) {
+		if (!this.configService.isDev) {
 			// 将所有的订阅放在一个数组中，方便一次性取消
 			this.subscriptions.push(
 				this.backgroundMode.on('enable').subscribe((event: any) => {
@@ -62,7 +62,7 @@ export class NativePage {
 	}
 
 	ionViewDidLeave() {
-		if (this.configService.hasCordova) {
+		if (!this.configService.isDev) {
 			// 取消所有的订阅
 			this.subscriptions.forEach((subscription: Subscription) => {
 				subscription.unsubscribe();

@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
 import { RequestService } from '../../services/request.service';
 import { ServerData } from '../../models/server-data';
-import { Subscriber } from 'rxjs/Subscriber';
 
 @Injectable()
 export class LoginService {
@@ -17,11 +16,11 @@ export class LoginService {
 	}
 
 	login(user: any): Observable<ServerData> {
-		return this.rs.post('LoginAction/Login', user);
+		return this.rs.post('/LoginAction/Login', user);
 	}
 
 	logout(): Observable<ServerData> {
-		return this.rs.post('LoginAction/Logout', null);
+		return this.rs.post('/LoginAction/Logout', null);
 	}
 
 	/**
@@ -29,6 +28,6 @@ export class LoginService {
 	 * @returns {Observable<any>}
 	 */
 	getUserInfo(): Observable<ServerData> {
-		return this.rs.post('SysUserAction/getMyInfo', null);
+		return this.rs.post('/SysUserAction/getMyInfo', null);
 	}
 }

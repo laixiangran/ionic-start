@@ -40,6 +40,14 @@ import { MessagePage } from './pages/tools/subpages/instantComm/subpages/message
 import { PersonPage } from './pages/tools/subpages/instantComm/subpages/person/person';
 import { ContactPage } from './pages/tools/subpages/instantComm/subpages/contact/contact';
 import { InstantCommService } from './pages/tools/subpages/instantComm/instant-comm.service';
+import { NativePage } from './pages/native/native';
+import { BackgroundMode } from '@ionic-native/background-mode';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BatteryStatus } from '@ionic-native/battery-status';
+import { VideoPlayer } from '@ionic-native/video-player';
+import { Camera } from '@ionic-native/camera';
+import { MediaCapture } from '@ionic-native/media-capture';
+import { StreamingMedia } from '@ionic-native/streaming-media';
 
 @NgModule({
 	imports: [
@@ -69,6 +77,7 @@ import { InstantCommService } from './pages/tools/subpages/instantComm/instant-c
 		RulesPage,
 		SettingsPage,
 		ToolsPage,
+		NativePage,
 		RealTimeTrafficPage,
 		WeatherReportPage,
 		SatelliteCloudPage,
@@ -88,6 +97,7 @@ import { InstantCommService } from './pages/tools/subpages/instantComm/instant-c
 		RulesPage,
 		SettingsPage,
 		ToolsPage,
+		NativePage,
 		RealTimeTrafficPage,
 		WeatherReportPage,
 		SatelliteCloudPage,
@@ -116,7 +126,14 @@ import { InstantCommService } from './pages/tools/subpages/instantComm/instant-c
 		FileOpener,
 		File,
 		ScreenOrientation,
-		IsDebug
+		IsDebug,
+		BackgroundMode,
+		BarcodeScanner,
+		BatteryStatus,
+		VideoPlayer,
+		Camera,
+		MediaCapture,
+		StreamingMedia
 	]
 })
 export class AppModule {

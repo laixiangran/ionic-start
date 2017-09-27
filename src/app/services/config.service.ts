@@ -12,95 +12,103 @@ import { IsDebug } from '@ionic-native/is-debug';
 export class ConfigService {
 
 	/**
-	 * 是否存在cordova，即是否在设备上
+	 * app是否运行在浏览器上
 	 * @type {boolean}
-	 * @memberof ConfigService
 	 */
-	hasCordova: boolean = window.hasOwnProperty('cordova');
+	isDev: boolean = !window.hasOwnProperty('cordova');
 
 	/**
-	 * 浏览器开发的api路径
+	 * app运行在设备上的版本是否是debug版
+	 * @type {boolean}
+	 */
+	isTest: boolean = true;
+
+	/**
+	 * 模拟的api域名
 	 * @type {string}
 	 */
-	devHost: string = '/drainage/';
+	mockDomain: string = '/mockjsdata/3';
 
 	/**
-	 * 真实设备上测试的api路径
+	 * 浏览器开发的api域名
 	 * @type {string}
 	 */
-	testHost: string = 'http://192.168.0.8/drainage/';
+	devDomain: string = '/drainage';
 
 	/**
-	 * 真实设备上生产的api路径
+	 * 真实设备上测试的api域名
 	 * @type {string}
 	 */
-	prodHost: string = 'http://192.168.0.8/drainage/';
+	testDomain: string = 'http://192.168.0.8/drainage';
 
 	/**
-	 * api主路径
+	 * 真实设备上生产的api域名
+	 * @type {string}
 	 */
-	hostURL: string = this.devHost;
+	prodDomain: string = 'http://101.200.104.224';
+
+	/**
+	 * 根据环境确定的api域名
+	 */
+	domain: string = this.devDomain;
 
 	/**
 	 * 当前网络是否连接
 	 * @type {boolean}
-	 * @memberof ConfigService
 	 */
 	network: boolean = true;
 
 	/**
+	 * 检测服务器最新的APP版本号路径
+	 * @type {string}
+	 */
+	checkNewAppUrl: string = '/appVersionAction/getLatestVersion';
+
+	/**
 	 * 新版APP下载路径
 	 * @type {string}
-	 * @memberof ConfigService
 	 */
-	newAppUrl: string = `${this.hostURL}appVersionAction/disposeScanCode`;
+	newAppUrl: string = `${this.domain}/appVersionAction/disposeScanCode`;
 
 	/**
 	 * APP启动时是否通过服务器检查了更新
 	 * @type {boolean}
-	 * @memberof ConfigService
 	 */
 	isCheckNewVersion: boolean = false;
 
 	/**
 	 * APP名称
 	 * @type {any}
-	 * @memberof ConfigService
 	 */
 	appName: any = 'ionic start';
 
 	/**
 	 * APP包名称
 	 * @type {any}
-	 * @memberof ConfigService
 	 */
 	packageName: any = 'io.ionic.essence';
 
 	/**
 	 * APP版本编码
 	 * @type {any}
-	 * @memberof ConfigService
 	 */
 	versionCode: any = 10000;
 
 	/**
 	 * APP版本号
 	 * @type {any}
-	 * @memberof ConfigService
 	 */
 	versionNumber: any = '99.99.99';
 
 	/**
 	 * 登录页面的状态栏颜色
 	 * @type {string}
-	 * @memberof ConfigService
 	 */
 	loginStatusBarColor: string = '#50C6F4';
 
 	/**
 	 * 主页的状态栏颜色
 	 * @type {string}
-	 * @memberof ConfigService
 	 */
 	mainStatusBarColor: string = '#1D89DA';
 
@@ -126,7 +134,7 @@ export class ConfigService {
 	initAppInfo(): Promise<any> {
 
 		// 在虚拟机器或者真机上有效
-		if (this.hasCordova) {
+		if (!this.isDev) {
 			return Promise.all([
 				this.appVersion.getAppName().then((appName: any) => {
 					this.appName = appName;
@@ -140,13 +148,15 @@ export class ConfigService {
 				this.appVersion.getVersionNumber().then((versionNumber: any) => {
 					this.versionNumber = versionNumber;
 				}),
+				// 监测是否在debug环境
 				this.isDebug.getIsDebug().then((isDebug: boolean) => {
-					if (isDebug) {
-						this.hostURL = this.testHost;
+					this.isTest = isDebug;
+					if (this.isTest) {
+						this.domain = this.testDomain;
 					} else {
-						this.hostURL = this.prodHost;
+						this.domain = this.prodDomain;
 					}
-					this.newAppUrl = `${this.hostURL}appVersionAction/disposeScanCode`;
+					this.newAppUrl = `${this.domain}/appVersionAction/disposeScanCode`;
 				})
 			]);
 		} else {
