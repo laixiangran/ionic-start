@@ -6,15 +6,16 @@
 
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { ConfigService } from './config.service';
 
 @Injectable()
 export class AuthService {
-	userInfo: any; // 用户信息
-	userInfoItemName: string = 'IONIC_USERINFO'; // 保存用户信息的key
-	token: string; // 令牌
-	tokenItemName: string = 'IONIC_URMS_LOGIN_TOKEN'; // 保存令牌的key
+	userInfo: any = null; // 用户信息
+	userInfoItemName: string = this.config.userInfoItemName; // 保存用户信息的key
+	token: string = null; // 令牌
+	tokenItemName: string = this.config.tokenItemName; // 保存令牌的key
 
-	constructor(private storage: Storage) {}
+	constructor(private storage: Storage, private config: ConfigService) {}
 
 	setToken(value: any): Promise<any> {
 		this.token = value;

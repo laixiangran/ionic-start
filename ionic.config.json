@@ -7,12 +7,12 @@
 	},
 	"proxies": [
 		{
-			"path": "/drainage",
-			"proxyUrl": "http://192.168.0.8/drainage"
+			"path": "/projectStart",
+			"proxyUrl": "http://192.168.0.8/projectStart"
 		},
 		{
-			"path": "/mockjsdata/3",
-			"proxyUrl": "http://192.168.0.172:8080/mockjsdata/3"
+			"path": "/mockjsdata/11",
+			"proxyUrl": "http://192.168.0.172:8080/mockjsdata/11"
 		}
 	]
 }

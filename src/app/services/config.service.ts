@@ -24,33 +24,46 @@ export class ConfigService {
 	isTest: boolean = true;
 
 	/**
-	 * 模拟的api域名
+	 * 模拟的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	mockDomain: string = '/mockjsdata/3';
+	mockDomain: string = '/mockjsdata/11';
 
 	/**
-	 * 浏览器开发的api域名
+	 * 浏览器开发的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	devDomain: string = '/drainage';
+	devDomain: string = '/projectStart';
 
 	/**
-	 * 真实设备上测试的api域名
+	 * 真实设备上测试的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	testDomain: string = 'http://192.168.0.8/drainage';
+	testDomain: string = 'http://192.168.0.8/projectStart';
 
 	/**
-	 * 真实设备上生产的api域名
+	 * 真实设备上生产的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	prodDomain: string = 'http://101.200.104.224';
+	prodDomain: string = 'http://192.168.0.8/projectStart';
 
 	/**
 	 * 根据环境确定的api域名
+	 * @type {string}
 	 */
 	domain: string = this.devDomain;
+
+	/**
+	 * storage保存用户信息对应的key（请根据实际项目进行修改，规则：xxx_USERINFO）
+	 * @type {string}
+	 */
+	userInfoItemName: string = 'IONIC_USERINFO';
+
+	/**
+	 * storage保存令牌对应的key（请根据实际项目进行修改，规则：xxx_URMS_LOGIN_TOKEN）
+	 * @type {string}
+	 */
+	tokenItemName: string = 'IONIC_URMS_LOGIN_TOKEN';
 
 	/**
 	 * 当前网络是否连接
@@ -77,13 +90,13 @@ export class ConfigService {
 	isCheckNewVersion: boolean = false;
 
 	/**
-	 * APP名称
+	 * APP名称（请根据实际项目进行修改）
 	 * @type {any}
 	 */
 	appName: any = 'ionic start';
 
 	/**
-	 * APP包名称
+	 * APP包名称（请根据实际项目进行修改）
 	 * @type {any}
 	 */
 	packageName: any = 'io.ionic.essence';
@@ -101,13 +114,13 @@ export class ConfigService {
 	versionNumber: any = '99.99.99';
 
 	/**
-	 * 登录页面的状态栏颜色
+	 * 登录页面的状态栏颜色（请根据实际项目进行修改）
 	 * @type {string}
 	 */
 	loginStatusBarColor: string = '#50C6F4';
 
 	/**
-	 * 主页的状态栏颜色
+	 * 主页的状态栏颜色（请根据实际项目进行修改）
 	 * @type {string}
 	 */
 	mainStatusBarColor: string = '#1D89DA';
