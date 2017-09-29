@@ -15,7 +15,6 @@ import { AppService } from './app.service';
 import { TabsPage } from './pages/tabs/tabs';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ServerData } from './models/server-data.model';
-import { SendMessage } from './models/send-message.model';
 
 @Component({
 	templateUrl: 'app.html',
