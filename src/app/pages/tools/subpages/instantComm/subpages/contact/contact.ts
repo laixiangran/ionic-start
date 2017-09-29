@@ -4,8 +4,8 @@ import { ConfigService } from '../../../../../../services/config.service';
 import { Content, NavParams } from 'ionic-angular';
 import { InstantCommService } from '../../instant-comm.service';
 import { Subscription } from 'rxjs/Subscription';
-import { ServerData } from '../../../../../../models/server-data';
 import { SendMessage } from '../../../../../../models/send-message.model';
+import { ServerData } from '../../../../../../models/server-data.model';
 
 @Component({
 	selector: 'page-contact',
@@ -57,7 +57,8 @@ export class ContactPage implements AfterViewChecked {
 	}
 
 	send(messageInput: HTMLInputElement) {
-		const message: SendMessage = new SendMessage(messageInput.value, [this.person.C_TALK_USERID]);
+		const message: SendMessage = new SendMessage();
+		[message.info, message.recipients] = [messageInput.value, [this.person.C_TALK_USERID]];
 		messageInput.value = '';
 		const sub: Subscription = this.instantCommService.sendMessage(message).subscribe((serverData: ServerData) => {
 			sub.unsubscribe();

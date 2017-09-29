@@ -7,7 +7,7 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
 import { RequestService } from '../../services/request.service';
-import { ServerData } from '../../models/server-data';
+import { ServerData } from '../../models/server-data.model';
 
 @Injectable()
 export class LoginService {

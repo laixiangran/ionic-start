@@ -7,8 +7,8 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
 import { RequestService } from '../../../../services/request.service';
-import { ServerData } from '../../../../models/server-data';
 import { SendMessage } from '../../../../models/send-message.model';
+import { ServerData } from '../../../../models/server-data.model';
 
 @Injectable()
 export class InstantCommService {
@@ -18,7 +18,8 @@ export class InstantCommService {
 
 	/**
 	 * 查询交流人员
-	 * @returns {Observable<any>}
+	 * @param {boolean} showLoader 是否显示加载动画
+	 * @returns {Observable<ServerData>}
 	 */
 	queryRecentTalkUsers(showLoader: boolean): Observable<ServerData> {
 		return this.rs.post('MessageController/queryRecentTalkUsers', null, showLoader);
@@ -26,8 +27,9 @@ export class InstantCommService {
 
 	/**
 	 * 获取交流内容
-	 * @param userId
-	 * @returns {Observable<any>}
+	 * @param {string} userId 用户id
+	 * @param {boolean} showLoader 是否显示加载动画
+	 * @returns {Observable<ServerData>}
 	 */
 	queryRecentTalkContent(userId: string, showLoader: boolean): Observable<ServerData> {
 		return this.rs.post('MessageController/queryRecentTalkContent', {'userId': userId}, showLoader);
@@ -35,8 +37,8 @@ export class InstantCommService {
 
 	/**
 	 * 添加交流人
-	 * @param talkUserid
-	 * @returns {Observable<any>}
+	 * @param {string} talkUserid 交流人员id
+	 * @returns {Observable<ServerData>}
 	 */
 	addSysMessageTalk(talkUserid: string): Observable<ServerData> {
 		return this.rs.post('SysMessageTalkAction/addSysMessageTalk', {'talkUserid': talkUserid}, false);
@@ -44,8 +46,8 @@ export class InstantCommService {
 
 	/**
 	 * 删除交流人
-	 * @param talkUserid
-	 * @returns {Observable<any>}
+	 * @param {string} talkUserid 交流人员id
+	 * @returns {Observable<ServerData>}
 	 */
 	deleteSysMessageTalk(talkUserid: string): Observable<ServerData> {
 		return this.rs.post('SysMessageTalkAction/deleteSysMessageTalk', {'talkUserid': talkUserid});
@@ -53,8 +55,8 @@ export class InstantCommService {
 
 	/**
 	 * 发送消息
-	 * @param message
-	 * @returns {Observable<any>}
+	 * @param {SendMessage} message 发送的消息对象
+	 * @returns {Observable<ServerData>}
 	 */
 	sendMessage(message: SendMessage): Observable<ServerData> {
 		return this.rs.post('MessageController/sendMessage', message, false);
@@ -62,8 +64,8 @@ export class InstantCommService {
 
 	/**
 	 * 查询联系人
-	 * @param condition
-	 * @returns {Observable<any>}
+	 * @param {string} condition 查询关键字
+	 * @returns {Observable<ServerData>}
 	 */
 	queryUsers(condition: string = ''): Observable<ServerData> {
 		return this.rs.post('SysUserAction/queryUserByCondition', {'condition': condition});

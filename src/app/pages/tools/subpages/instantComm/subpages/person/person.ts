@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Events, NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
 import { InstantCommService } from '../../instant-comm.service';
-import { ServerData } from '../../../../../../models/server-data';
 import { ContactPage } from '../contact/contact';
+import { ServerData } from '../../../../../../models/server-data.model';
 
 @Component({
 	selector: 'page-person',

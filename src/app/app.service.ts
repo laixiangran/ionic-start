@@ -5,10 +5,9 @@
 
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
 import { RequestService } from './services/request.service';
-import { ServerData } from './models/server-data';
 import { ConfigService } from './services/config.service';
+import { ServerData } from './models/server-data.model';
 
 @Injectable()
 export class AppService {

@@ -3,7 +3,7 @@ import { Events, NavController } from 'ionic-angular';
 import { ContactPage } from '../contact/contact';
 import { InstantCommService } from '../../instant-comm.service';
 import { Subscription } from 'rxjs/Subscription';
-import { ServerData } from '../../../../../../models/server-data';
+import { ServerData } from '../../../../../../models/server-data.model';
 
 @Component({
 	selector: 'page-message',

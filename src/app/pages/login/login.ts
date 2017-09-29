@@ -5,16 +5,14 @@
  */
 
 import { Component } from '@angular/core';
-import { MenuController, NavController, Platform, Loading } from 'ionic-angular';
+import { MenuController, NavController, Platform } from 'ionic-angular';
 import { LoginService } from './login.service';
 import { TabsPage } from '../tabs/tabs';
-import { ServerData } from '../../models/server-data';
 import { AuthService } from '../../services/auth.service';
 import { TipsService } from '../../services/tips.service';
 import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ConfigService } from '../../services/config.service';
-import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
 	selector: 'page-login',

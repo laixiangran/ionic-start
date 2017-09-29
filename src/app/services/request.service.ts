@@ -12,11 +12,11 @@ import { ConfigService } from './config.service';
 import { TipsService } from './tips.service';
 import { Alert, AlertOptions, App, Loading } from 'ionic-angular';
 import { LoginPage } from '../pages/login/login';
-import { ServerData } from '../models/server-data';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { ServerData } from '../models/server-data.model';
 
 @Injectable()
 export class RequestService {
