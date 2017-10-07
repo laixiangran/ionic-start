@@ -27,25 +27,25 @@ export class ConfigService {
 	 * 模拟的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	mockDomain: string = '/mockjsdata/11';
+	mockDomain: string = '/mockjsdata/26879';
 
 	/**
 	 * 浏览器开发的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	devDomain: string = '/projectStart';
+	devDomain: string = '/mockjsdata/26879';
 
 	/**
 	 * 真实设备上测试的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	testDomain: string = 'http://192.168.0.8/projectStart';
+	testDomain: string = 'http://rapapi.org/mockjsdata/26879';
 
 	/**
 	 * 真实设备上生产的api域名（请根据实际项目进行修改）
 	 * @type {string}
 	 */
-	prodDomain: string = 'http://192.168.0.8/projectStart';
+	prodDomain: string = 'http://rapapi.org/mockjsdata/26879';
 
 	/**
 	 * 根据环境确定的api域名
