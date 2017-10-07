@@ -128,7 +128,7 @@ keytool -genkey -v -keystore demo.jks -alias demo -keyalg RSA -keysize 2048 -val
 
 以上命令在cmd运行如下：
 
-![cmd运行](./src/assets/img/readme/cmd.png)
+![cmd运行](./src/assets/images/readme/cmd.png)
 
 #### 自动签名
 
