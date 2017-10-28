@@ -1,6 +1,6 @@
 # ionic-start
 
-这是一个ionic起步项目，目前只支持安卓环境。
+[ionic 3.x](http://ionicframework.com/docs/)的起步项目，欢迎下载使用，持续维护中...
 
 ## 实现功能
 
