@@ -1,6 +1,6 @@
 # ionic-start
 
-[ionic 3.x](http://ionicframework.com/docs/)的起步项目，欢迎下载使用，持续维护中...
+[Ionic](http://ionicframework.com/docs/)的起步项目，欢迎下载使用，持续维护中...
 
 ## 实现功能
 
