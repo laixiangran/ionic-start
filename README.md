@@ -51,3 +51,7 @@
 - [tslint](https://palantir.github.io/tslint/) & [codelyzer](https://github.com/mgechev/codelyzer)
 - [typescript](https://www.typescriptlang.org/) & [@types](https://www.npmjs.com/~types)
 
+# License
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)
+
