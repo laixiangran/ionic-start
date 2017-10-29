@@ -16,6 +16,8 @@
 
 - 集成高德地图、highchart，实现简单天气预报（调用高德api）
 
+- ...
+
 ## 搭建环境（[详细教程](./SETUP.md)）
 
 - Install [Nodejs](https://nodejs.org/zh-cn/) (>= 6.9.0)
