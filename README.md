@@ -2,6 +2,11 @@
 
 [Ionic](http://ionicframework.com/docs/)的起步项目，欢迎下载使用，持续维护中...
 
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)
+
+[![GitHub forks](https://img.shields.io/github/forks/laixiangran/ionic-start.svg?style=social&label=Fork)](https://github.com/laixiangran/ionic-start/fork)
+[![GitHub stars](https://img.shields.io/github/stars/laixiangran/ionic-start.svg?style=social&label=Star)](https://github.com/laixiangran/ionic-start)
+
 ## 实现功能
 
 - 统一配置API路径、新版本APP下载路径，获取是否连接网络、获取APP基本信息等（`config.service.ts`）
@@ -50,8 +55,4 @@
 - [karma](https://karma-runner.github.io/1.0/index.html)
 - [tslint](https://palantir.github.io/tslint/) & [codelyzer](https://github.com/mgechev/codelyzer)
 - [typescript](https://www.typescriptlang.org/) & [@types](https://www.npmjs.com/~types)
-
-# License
-
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)
 
