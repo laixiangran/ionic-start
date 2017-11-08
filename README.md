@@ -1,6 +1,6 @@
 # ionic-start
 
-[Ionic3.x](http://ionicframework.com/docs/)起步项目，持续维护中...
+[Ionic](http://ionicframework.com/docs/)起步项目，目前更新到Ionic3.x
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)
 
