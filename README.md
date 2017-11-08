@@ -1,6 +1,6 @@
 # ionic-start
 
-[Ionic](http://ionicframework.com/docs/)的起步项目，欢迎下载使用，持续维护中...
+[Ionic3.x](http://ionicframework.com/docs/)的起步项目，欢迎下载使用，持续维护中...
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)
 
