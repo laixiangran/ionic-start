@@ -5,8 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { ConfigService } from './config.service';
 import { TipsService } from './tips.service';
@@ -14,15 +13,13 @@ import { Alert, AlertOptions, App, Loading } from 'ionic-angular';
 import { LoginPage } from '../pages/login/login';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import { ServerData } from '../models/server-data.model';
 
 @Injectable()
 export class RequestService {
 	alertAlert: Alert = null;
 
-	constructor(private http: Http,
+	constructor(private http: HttpClient,
 				private appCtrl: App,
 				private tips: TipsService,
 				private authService: AuthService,
@@ -38,27 +35,26 @@ export class RequestService {
 	 * @returns {Observable<any>}
 	 */
 	post(url: string, body: any, showLoader: boolean = true, isMock: boolean = false): Observable<ServerData> {
+		console.log('dd');
 		let loader: Loading;
 		if (showLoader) {
 			loader = this.tips.loader();
 		}
-		const headers = new Headers({
-			'Content-Type': 'application/json',
-			'URMS_LOGIN_TOKEN': this.authService.token
-		}),
-			options = new RequestOptions({headers: headers}),
+		const headers = new HttpHeaders({
+				'Content-Type': 'application/json',
+				'URMS_LOGIN_TOKEN': this.authService.token
+			}),
+			options = {headers: headers},
 			requesUrl: string = (isMock ? this.config.mockDomain : this.config.domain) + url;
 		return new Observable<ServerData>((subscriber: Subscriber<any>) => {
-			this.http.post(requesUrl, body && JSON.stringify(body), options).map((res: Response) => {
-				return res.json();
-			}).subscribe((serverData: ServerData) => {
+			this.http.post(requesUrl, body && JSON.stringify(body), options).subscribe((serverData: ServerData) => {
 				const id = setTimeout(() => {
 					clearTimeout(id);
 					this.tips.dismiss(loader);
 				});
 				subscriber.next(serverData);
 				subscriber.complete();
-			}, (error: Response) => {
+			}, (error: HttpErrorResponse) => {
 				const id = setTimeout(() => {
 					clearTimeout(id);
 					this.tips.dismiss(loader);
@@ -76,27 +72,26 @@ export class RequestService {
 	 * @returns {Observable<any>}
 	 */
 	get(url: string, showLoader: boolean = true, isMock: boolean = false): Observable<any> {
+		console.log('dd');
 		let loader: Loading;
 		if (showLoader) {
 			loader = this.tips.loader();
 		}
-		const headers = new Headers({
-			'Content-Type': 'application/json',
-			'URMS_LOGIN_TOKEN': this.authService.token
-		}),
-			options = new RequestOptions({headers: headers}),
+		const headers = new HttpHeaders({
+				'Content-Type': 'application/json',
+				'URMS_LOGIN_TOKEN': this.authService.token
+			}),
+			options = {headers: headers},
 			requesUrl: string = (isMock ? this.config.mockDomain : this.config.domain) + url;
 		return new Observable<ServerData>((subscriber: Subscriber<any>) => {
-			this.http.get(requesUrl, options).map((res: Response) => {
-				return res.json();
-			}).subscribe((serverData: ServerData) => {
+			this.http.get(requesUrl, options).subscribe((serverData: ServerData) => {
 				const id = setTimeout(() => {
 					clearTimeout(id);
 					this.tips.dismiss(loader);
 				});
 				subscriber.next(serverData);
 				subscriber.complete();
-			}, (error: Response) => {
+			}, (error: HttpErrorResponse) => {
 				const id = setTimeout(() => {
 					clearTimeout(id);
 					this.tips.dismiss(loader);
@@ -109,14 +104,14 @@ export class RequestService {
 	/**
 	 * 请求出错之后的处理
 	 * @param {string} type 请求类型（post or get）
-	 * @param {Response} error 错误对象
+	 * @param {HttpErrorResponse} error 错误对象
 	 * @param {string} url 请求路径
 	 * @param {any} obj 请求body
 	 * @param {boolean} showLoader 是否显示加载动画
 	 * @param {boolean} isMock 是否模拟请求
 	 * @param {Subscriber} subscriber 当前请求的订阅对象
 	 */
-	private handlerError(type: string, error: Response, url: string, obj?: any, showLoader?: boolean, isMock?: boolean, subscriber?: Subscriber<any>) {
+	private handlerError(type: string, error: HttpErrorResponse, url: string, obj?: any, showLoader?: boolean, isMock?: boolean, subscriber?: Subscriber<any>) {
 		let alertOptions: AlertOptions = null;
 		if (error.status === 0) {
 			alertOptions = {
@@ -163,7 +158,7 @@ export class RequestService {
 		} else {
 			alertOptions = {
 				title: '系统出错了',
-				message: error.json().error || 'Server Error',
+				message: error.message || 'Server Error',
 				buttons: ['确定']
 			};
 		}

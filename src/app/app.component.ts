@@ -54,7 +54,7 @@ export class AppComponent {
 			this.checkDisConnect(); // 检查网络是否断开
 			this.registerBackButtonAction();
 			this.config.initAppInfo().then(() => {
-				this.checkLatestVersion();
+				// this.checkLatestVersion();
 				this.isLogin();
 			});
 		});

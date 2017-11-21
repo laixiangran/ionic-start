@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { AppVersion } from '@ionic-native/app-version';
@@ -28,7 +28,6 @@ import { RealTimeTrafficPage } from './pages/tools/subpages/realTimeTraffic/real
 import { WeatherReportPage } from './pages/tools/subpages/weatherReport/weatherReport';
 import { TransformService } from './services/transform.service';
 import { EssenceIonicModule } from 'essence-ionic';
-import { SignaturePadModule } from 'angular2-signaturepad';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { IsDebug } from '@ionic-native/is-debug';
 import { SatelliteCloudPage } from './pages/tools/subpages/satelliteCloud/satellite-cloud';
@@ -52,7 +51,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media';
 @NgModule({
 	imports: [
 		BrowserModule,
-		HttpModule,
+		HttpClientModule,
 		IonicModule.forRoot(AppComponent, {
 			mode: 'ios',
 			iconMode: 'ios',
@@ -65,8 +64,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media';
 		}),
 		IonicStorageModule.forRoot(),
 		EssenceNg2ChartModule,
-		EssenceIonicModule,
-		SignaturePadModule
+		EssenceIonicModule
 	],
 	declarations: [
 		AppComponent,
