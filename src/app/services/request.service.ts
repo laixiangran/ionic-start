@@ -41,7 +41,7 @@ export class RequestService {
 		}
 		const headers = new HttpHeaders({
 				'Content-Type': 'application/json',
-				'URMS_LOGIN_TOKEN': this.authService.token
+				'URMS_LOGIN_TOKEN': this.authService.token || ''
 			}),
 			options = {headers: headers},
 			requesUrl: string = (isMock ? this.config.mockDomain : this.config.domain) + url;
@@ -77,7 +77,7 @@ export class RequestService {
 		}
 		const headers = new HttpHeaders({
 				'Content-Type': 'application/json',
-				'URMS_LOGIN_TOKEN': this.authService.token
+				'URMS_LOGIN_TOKEN': this.authService.token || ''
 			}),
 			options = {headers: headers},
 			requesUrl: string = (isMock ? this.config.mockDomain : this.config.domain) + url;

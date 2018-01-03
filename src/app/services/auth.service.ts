@@ -12,7 +12,7 @@ import { ConfigService } from './config.service';
 export class AuthService {
 	userInfo: any = null; // 用户信息
 	userInfoItemName: string = this.config.userInfoItemName; // 保存用户信息的key
-	token: string = null; // 令牌
+	token: string = ''; // 令牌
 	tokenItemName: string = this.config.tokenItemName; // 保存令牌的key
 
 	constructor(private storage: Storage, private config: ConfigService) {}

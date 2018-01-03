@@ -6,6 +6,7 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { StatusBar } from '@ionic-native/status-bar';
 import { RequestService } from '../../../../services/request.service';
 import { TransformService } from '../../../../services/transform.service';
@@ -92,7 +93,6 @@ export class WeatherReportPage {
 				const currLocation: any = this.transform.gcj2wgs(position.coords.latitude, position.coords.longitude);
 				resolve(currLocation);
 			}, (error: PositionError) => {
-				console.log(error);
 				reject(error);
 			}, options)
 		});
@@ -108,7 +108,7 @@ export class WeatherReportPage {
 			'Content-Type': 'application/json'
 		}), options = {headers: headers};
 		return this.http.get(`http://restapi.amap.com/v3/geocode/regeo?key=0df36377c23e75585d4ed4fcb4baf807&location=${currentPosition}&extensions=all`, options).catch((error: HttpErrorResponse) => {
-			return Observable.throw(error || 'Server Error');
+			return ErrorObservable.create(error || 'Server Error');
 		});
 	}
 
@@ -122,7 +122,7 @@ export class WeatherReportPage {
 			'Content-Type': 'application/json'
 		}), options = {headers: headers};
 		return this.http.get(`http://restapi.amap.com/v3/weather/weatherInfo?key=0df36377c23e75585d4ed4fcb4baf807&city=${adcode}&extensions=all`, options).catch((error: HttpErrorResponse) => {
-			return Observable.throw(error || 'Server Error');
+			return ErrorObservable.create(error || 'Server Error');
 		});
 	}
 }
