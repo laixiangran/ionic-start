@@ -20,7 +20,6 @@ import { SettingsPage } from './pages/settings/settings';
 import { AuthService } from './services/auth.service';
 import { RequestService } from './services/request.service';
 import { ConfigService } from './services/config.service';
-import { EssenceNg2ChartModule } from 'essence-ng2-chart';
 import { TipsService } from './services/tips.service';
 import { LoginService } from './pages/login/login.service';
 import { ToolsPage } from './pages/tools/tools';
@@ -47,6 +46,7 @@ import { VideoPlayer } from '@ionic-native/video-player';
 import { Camera } from '@ionic-native/camera';
 import { MediaCapture } from '@ionic-native/media-capture';
 import { StreamingMedia } from '@ionic-native/streaming-media';
+import { ENgxChartModule } from 'e-ngx-chart';
 
 @NgModule({
 	imports: [
@@ -63,7 +63,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media';
 			pageTransition: 'ios'
 		}),
 		IonicStorageModule.forRoot(),
-		EssenceNg2ChartModule,
+		ENgxChartModule,
 		EssenceIonicModule
 	],
 	declarations: [

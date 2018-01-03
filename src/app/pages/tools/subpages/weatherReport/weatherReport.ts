@@ -4,7 +4,7 @@
  */
 
 import { Component } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { StatusBar } from '@ionic-native/status-bar';
 import { RequestService } from '../../../../services/request.service';
@@ -27,7 +27,7 @@ export class WeatherReportPage {
 	dayType: string = 'day';
 	weekArr: string[] = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
 
-	constructor(public http: Http,
+	constructor(private http: HttpClient,
 				public rs: RequestService,
 				public menu: MenuController,
 				public statusBar: StatusBar,
@@ -104,14 +104,11 @@ export class WeatherReportPage {
 	 * @returns {Observable<any>}
 	 */
 	reverseGeocoding(currentPosition: string): Observable<any> {
-		const headers: Headers = new Headers();
-		const opts: RequestOptions = new RequestOptions();
-		headers.append('Content-Type', 'application/json');
-		opts.headers = headers;
-		return this.http.get(`http://restapi.amap.com/v3/geocode/regeo?key=0df36377c23e75585d4ed4fcb4baf807&location=${currentPosition}&extensions=all`, opts).map(
-			(res: Response) => res.json()
-		).catch((error: Response) => {
-			return Observable.throw(error.json().error || 'Server Error');
+		const headers: HttpHeaders = new HttpHeaders({
+			'Content-Type': 'application/json'
+		}), options = {headers: headers};
+		return this.http.get(`http://restapi.amap.com/v3/geocode/regeo?key=0df36377c23e75585d4ed4fcb4baf807&location=${currentPosition}&extensions=all`, options).catch((error: HttpErrorResponse) => {
+			return Observable.throw(error || 'Server Error');
 		});
 	}
 
@@ -121,14 +118,11 @@ export class WeatherReportPage {
 	 * @returns {Observable<any>}
 	 */
 	getWeatherInfo(adcode: number): Observable<any> {
-		const headers: Headers = new Headers();
-		const opts: RequestOptions = new RequestOptions();
-		headers.append('Content-Type', 'application/json');
-		opts.headers = headers;
-		return this.http.get(`http://restapi.amap.com/v3/weather/weatherInfo?key=0df36377c23e75585d4ed4fcb4baf807&city=${adcode}&extensions=all`, opts).map(
-			(res: Response) => res.json()
-		).catch((error: Response) => {
-			return Observable.throw(error.json().error || 'Server Error');
+		const headers: HttpHeaders = new HttpHeaders({
+			'Content-Type': 'application/json'
+		}), options = {headers: headers};
+		return this.http.get(`http://restapi.amap.com/v3/weather/weatherInfo?key=0df36377c23e75585d4ed4fcb4baf807&city=${adcode}&extensions=all`, options).catch((error: HttpErrorResponse) => {
+			return Observable.throw(error || 'Server Error');
 		});
 	}
 }

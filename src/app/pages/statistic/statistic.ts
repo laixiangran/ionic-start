@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { EssenceChart } from 'essence-ng2-chart';
+import { ENgxChartOptions } from 'e-ngx-chart';
 
 @Component({
 	selector: 'page-statistic',
@@ -18,7 +18,7 @@ export class StatisticPage {
 		{index: 3, code: 'capital', css: 'zijin', title: '资金统计', color: '#fd7075'}
 	];
 
-	monthWaterChart: EssenceChart = new EssenceChart({
+	monthWaterChart: ENgxChartOptions = new ENgxChartOptions({
 		chart: {
 			type: 'pie'
 		},
@@ -40,7 +40,7 @@ export class StatisticPage {
 		}
 	});
 
-	monthWaterChart1: EssenceChart = new EssenceChart({
+	monthWaterChart1: ENgxChartOptions = new ENgxChartOptions({
 		chart: {
 			type: 'pie'
 		},
