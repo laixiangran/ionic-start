@@ -35,7 +35,6 @@ export class RequestService {
 	 * @returns {Observable<any>}
 	 */
 	post(url: string, body: any, showLoader: boolean = true, isMock: boolean = false): Observable<ServerData> {
-		console.log('dd');
 		let loader: Loading;
 		if (showLoader) {
 			loader = this.tips.loader();
@@ -72,7 +71,6 @@ export class RequestService {
 	 * @returns {Observable<any>}
 	 */
 	get(url: string, showLoader: boolean = true, isMock: boolean = false): Observable<any> {
-		console.log('dd');
 		let loader: Loading;
 		if (showLoader) {
 			loader = this.tips.loader();
