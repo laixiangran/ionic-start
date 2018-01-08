@@ -47,6 +47,8 @@ import { Camera } from '@ionic-native/camera';
 import { MediaCapture } from '@ionic-native/media-capture';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { ENgxChartModule } from 'e-ngx-chart';
+import { FileDemoPage } from './pages/native/subpages/file-demo/file-demo';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 @NgModule({
 	imports: [
@@ -76,6 +78,7 @@ import { ENgxChartModule } from 'e-ngx-chart';
 		SettingsPage,
 		ToolsPage,
 		NativePage,
+		FileDemoPage,
 		RealTimeTrafficPage,
 		WeatherReportPage,
 		SatelliteCloudPage,
@@ -96,6 +99,7 @@ import { ENgxChartModule } from 'e-ngx-chart';
 		SettingsPage,
 		ToolsPage,
 		NativePage,
+		FileDemoPage,
 		RealTimeTrafficPage,
 		WeatherReportPage,
 		SatelliteCloudPage,
@@ -131,7 +135,8 @@ import { ENgxChartModule } from 'e-ngx-chart';
 		VideoPlayer,
 		Camera,
 		MediaCapture,
-		StreamingMedia
+		StreamingMedia,
+		NativeGeocoder
 	]
 })
 export class AppModule {

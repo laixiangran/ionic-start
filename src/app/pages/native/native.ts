@@ -8,6 +8,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { VideoPlayer, VideoOptions } from '@ionic-native/video-player';
 import { MediaCapture, CaptureError, CaptureImageOptions, MediaFile, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
 import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
 import { ConfigService } from '../../services/config.service';
 import { NavController } from 'ionic-angular';
@@ -18,12 +19,12 @@ import { FileDemoPage } from './subpages/file-demo/file-demo';
 	templateUrl: 'native.html'
 })
 export class NativePage {
-
 	barcodeData: any;
 	batteryStatusResponse: BatteryStatusResponse;
 	subscriptions: Subscription[] = [];
 
 	constructor(public backgroundMode: BackgroundMode,
+				public nativeGeocoder: NativeGeocoder,
 				public navCtrl: NavController,
 				public barcodeScanner: BarcodeScanner,
 				public batteryStatus: BatteryStatus,
@@ -48,10 +49,10 @@ export class NativePage {
 				this.backgroundMode.on('activate').subscribe((event: any) => {
 					console.log('进入后台模式！');
 				}),
-				this.backgroundMode.on('failure').subscribe((event: any) => {
-					console.log('已退出后台模式！');
-				}),
 				this.backgroundMode.on('deactivate').subscribe((event: any) => {
+					console.log('退出后台模式！');
+				}),
+				this.backgroundMode.on('failure').subscribe((event: any) => {
 					console.log('后台模式失败！');
 				}),
 				this.batteryStatus.onChange().subscribe((status: BatteryStatusResponse) => {
@@ -234,7 +235,36 @@ export class NativePage {
 		});
 	}
 
+	/**
+	 * 文件详细
+	 */
 	fileDetail() {
 		this.navCtrl.push(FileDemoPage);
+	}
+
+	/**
+	 * 逆地理编码
+	 */
+	reverseGeocode() {
+		this.nativeGeocoder.reverseGeocode(39.5, 116.5)
+			.then((result: NativeGeocoderReverseResult) => {
+				console.log(JSON.stringify(result));
+			})
+			.catch((error: any) => {
+				console.log(error);
+			});
+	}
+
+	/**
+	 * 正地理编码
+	 */
+	forwardGeocode() {
+		this.nativeGeocoder.forwardGeocode('beijing')
+			.then((coordinates: NativeGeocoderForwardResult) => {
+				console.log('The coordinates are latitude=' + coordinates.latitude + ' and longitude=' + coordinates.longitude);
+			})
+			.catch((error: any) => {
+				console.log(error);
+			});
 	}
 }

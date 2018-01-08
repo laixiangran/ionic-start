@@ -74,4 +74,5 @@
     <plugin name="cordova-plugin-screen-orientation" spec="~2.0.1" />
     <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
     <plugin name="cordova-plugin-is-debug" spec="~1.0.0" />
+    <plugin name="cordova-plugin-nativegeocoder" spec="~2.0.4" />
 </widget>

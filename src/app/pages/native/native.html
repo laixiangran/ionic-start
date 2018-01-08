@@ -12,6 +12,18 @@
 	<p style="color: red; font-size: 1.4rem; margin: 10px 10px;">注意：必须在虚拟机/真机上运行！</p>
 	<ion-card>
 		<ion-card-header>
+			<a href="https://ionicframework.com/docs/native/native-geocoder/" target="_blank">native-geocoder</a>
+			<p>地理编码</p>
+		</ion-card-header>
+		<ion-card-content>
+			<p>
+				<button ion-button (click)="reverseGeocode()">逆地理编码</button>
+				<button ion-button (click)="forwardGeocode()">正地理编码</button>
+			</p>
+		</ion-card-content>
+	</ion-card>
+	<ion-card>
+		<ion-card-header>
 			<a href="http://ionicframework.com/docs/native/file/" target="_blank">File</a>
 			<p>文件操作</p>
 		</ion-card-header>

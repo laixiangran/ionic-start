@@ -84,9 +84,9 @@ export class WeatherReportPage {
 	 */
 	currentLocation(): Promise<any> {
 		const options: PositionOptions = {
-			enableHighAccuracy: true,  // 是否使用 GPS
-			maximumAge: 30000,         // 缓存时间
-			timeout: 27000            // 超时时间
+			enableHighAccuracy: true, // 是否使用 GPS
+			maximumAge: 0, // 缓存时间
+			timeout: 30000 // 超时时间
 		};
 		return new Promise<any>((resolve, reject) => {
 			navigator.geolocation.getCurrentPosition((position: Position) => {
@@ -106,7 +106,7 @@ export class WeatherReportPage {
 	reverseGeocoding(currentPosition: string): Observable<any> {
 		const headers: HttpHeaders = new HttpHeaders({
 			'Content-Type': 'application/json'
-		}), options = {headers: headers};
+		}), options = { headers: headers };
 		return this.http.get(`http://restapi.amap.com/v3/geocode/regeo?key=0df36377c23e75585d4ed4fcb4baf807&location=${currentPosition}&extensions=all`, options).catch((error: HttpErrorResponse) => {
 			return ErrorObservable.create(error || 'Server Error');
 		});
@@ -120,7 +120,7 @@ export class WeatherReportPage {
 	getWeatherInfo(adcode: number): Observable<any> {
 		const headers: HttpHeaders = new HttpHeaders({
 			'Content-Type': 'application/json'
-		}), options = {headers: headers};
+		}), options = { headers: headers };
 		return this.http.get(`http://restapi.amap.com/v3/weather/weatherInfo?key=0df36377c23e75585d4ed4fcb4baf807&city=${adcode}&extensions=all`, options).catch((error: HttpErrorResponse) => {
 			return ErrorObservable.create(error || 'Server Error');
 		});
