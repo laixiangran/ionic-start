@@ -61,6 +61,7 @@
     "immutable": "^3.8.1",
     "ionic-angular": "^3.9.2",
     "ionicons": "^3.0.0",
+    "lodash": "^4.17.4",
     "rxjs": "^5.5.2",
     "sw-toolbox": "^3.6.0",
     "ts-md5": "^1.2.0",
@@ -68,8 +69,9 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.1.7",
-    "ionic": "^3.19.0",
+    "@types/lodash": "^4.14.92",
     "codelyzer": "^4.0.1",
+    "ionic": "^3.19.0",
     "stylelint": "^8.2.0",
     "stylelint-scss": "^2.1.0",
     "tslint": "^5.7.0",
