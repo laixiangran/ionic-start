@@ -47,8 +47,8 @@ export class MapPage {
 	}
 
 	watchPosition() {
-		navigator.geolocation.watchPosition((position: Position) => {
-			const coordinate: number[] = [position.coords.longitude, position.coords.latitude];
+		navigator.geolocation.getCurrentPosition((position: Position) => {
+			const coordinate: number[] = [position.coords.longitude, position.coords.latitude, position.coords['addr']];
 			const isPush: boolean = this.coordinates.every((c: number[]) => {
 				return c.join() !== coordinate.join();
 			});
