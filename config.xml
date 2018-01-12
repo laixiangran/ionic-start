@@ -77,8 +77,8 @@
     <plugin name="cordova-plugin-screen-orientation" spec="~2.0.1" />
     <plugin name="cordova-plugin-is-debug" spec="~1.0.0" />
     <plugin name="cordova-plugin-nativegeocoder" spec="~2.0.4" />
+    <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
     <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/laixiangran/cordova-plugin-baidu-geolocation">
         <variable name="API_KEY" value="F0c645f961aa0cdae874b2073d55f3a5" />
     </plugin>
-    <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
 </widget>

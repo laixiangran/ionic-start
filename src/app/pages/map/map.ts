@@ -47,8 +47,10 @@ export class MapPage {
 	}
 
 	watchPosition() {
-		navigator.geolocation.getCurrentPosition((position: Position) => {
-			const coordinate: number[] = [position.coords.longitude, position.coords.latitude, position.coords['addr']];
+		navigator.geolocation.getCurrentPosition((...args: any[]) => {
+			const position: Position = args[0];
+			const extra: any = args[1];
+			const coordinate: number[] = [position.coords.longitude, position.coords.latitude, extra.addr];
 			const isPush: boolean = this.coordinates.every((c: number[]) => {
 				return c.join() !== coordinate.join();
 			});
