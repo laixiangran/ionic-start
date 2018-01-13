@@ -100,6 +100,42 @@ export class RequestService {
 	}
 
 	/**
+	 * delete请求
+	 * @param {string} url 请求路径
+	 * @param {boolean} [showLoader=true] 是否显示加载动画
+	 * @param {boolean} [isMock=false] 是否模拟请求
+	 * @returns {Observable<any>}
+	 */
+	delete(url: string, showLoader: boolean = true, isMock: boolean = false): Observable<any> {
+		let loader: Loading;
+		if (showLoader) {
+			loader = this.tips.loader();
+		}
+		const headers = new HttpHeaders({
+				'Content-Type': 'application/json',
+				'URMS_LOGIN_TOKEN': this.authService.token || ''
+			}),
+			options = {headers: headers},
+			requesUrl: string = (isMock ? this.config.mockDomain : this.config.domain) + url;
+		return new Observable<ServerData>((subscriber: Subscriber<any>) => {
+			this.http.delete(requesUrl, options).subscribe((serverData: ServerData) => {
+				const id = setTimeout(() => {
+					clearTimeout(id);
+					this.tips.dismiss(loader);
+				});
+				subscriber.next(serverData);
+				subscriber.complete();
+			}, (error: HttpErrorResponse) => {
+				const id = setTimeout(() => {
+					clearTimeout(id);
+					this.tips.dismiss(loader);
+				});
+				this.handlerError('delete', error, url, null, showLoader, isMock, subscriber);
+			});
+		});
+	}
+
+	/**
 	 * 请求出错之后的处理
 	 * @param {string} type 请求类型（post or get）
 	 * @param {HttpErrorResponse} error 错误对象
@@ -146,6 +182,11 @@ export class RequestService {
 						});
 					} else if (type === 'get') {
 						this.get(url, showLoader, isMock).subscribe((data: ServerData) => {
+							subscriber.next(data);
+							subscriber.complete();
+						});
+					} else if (type === 'delete') {
+						this.delete(url, showLoader, isMock).subscribe((data: ServerData) => {
 							subscriber.next(data);
 							subscriber.complete();
 						});
