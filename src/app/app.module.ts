@@ -49,6 +49,7 @@ import { StreamingMedia } from '@ionic-native/streaming-media';
 import { ENgxChartModule } from 'e-ngx-chart';
 import { FileDemoPage } from './pages/native/subpages/file-demo/file-demo';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
+import { GeolocationService } from './services/geolocation.service';
 
 @NgModule({
 	imports: [
@@ -119,6 +120,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 		DateTimeService,
 		FilePathService,
 		TransformService,
+		GeolocationService,
 		InstantCommService,
 		AppVersion,
 		Network,
