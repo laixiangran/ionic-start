@@ -2,11 +2,14 @@
  * Created by laixiangran on 2018/1/25.
  * homepage：http://www.laixiangran.cn.
  * 定位服务
- * 安卓手机需要安装cordova-plugin-baidu-geolocation插件。安装方法：cordova plugin add https://github.com/laixiangran/cordova-plugin-baidu-geolocation --variable API_KEY=百度分配的AK --save
+ * 安卓手机需要安装cordova-plugin-baidu-geolocation插件。
+ * 安装方法：cordova plugin add https://github.com/laixiangran/cordova-plugin-baidu-geolocation --variable API_KEY=百度分配的AK --save
  */
 
 import { Injectable } from '@angular/core';
 import { ServerData } from '../models/server-data.model';
+import { Observable } from 'rxjs/Observable';
+import { Subscriber } from 'rxjs/Subscriber';
 
 /**
  * 定位返回的扩展信息
@@ -32,10 +35,10 @@ export class GeolocationService {
 	/**
 	 * 获取当前位置
 	 * @param {PositionOptions} positionOptions
-	 * @returns {Promise<ServerData>}
+	 * @returns {Observable<ServerData>}
 	 */
-	getCurrentPosition(positionOptions: PositionOptions): Promise<ServerData> {
-		return new Promise<any>((resolve, reject) => {
+	getCurrentPosition(positionOptions: PositionOptions): Observable<ServerData> {
+		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
 			navigator.geolocation.getCurrentPosition((...args: any[]) => {
 				const position: Position = args[0],
 					extra: Extra = args[1],
@@ -43,13 +46,13 @@ export class GeolocationService {
 						position: position,
 						extra: extra
 					};
-				resolve({
+				subscriber.next({
 					code: 'ok',
 					info: '定位成功！',
 					result: location
 				});
 			}, (error: PositionError) => {
-				resolve({
+				subscriber.error({
 					code: 'error',
 					info: '定位失败！',
 					result: error
@@ -61,10 +64,10 @@ export class GeolocationService {
 	/**
 	 * 持续追踪位置变更
 	 * @param {PositionOptions} positionOptions
-	 * @returns {Promise<ServerData>}
+	 * @returns {Observable<ServerData>}
 	 */
-	watchPosition(positionOptions: PositionOptions): Promise<ServerData> {
-		return new Promise<any>((resolve, reject) => {
+	watchPosition(positionOptions: PositionOptions): Observable<ServerData> {
+		return new Observable<ServerData>((subscriber: Subscriber<ServerData>) => {
 			const watchId: number = navigator.geolocation.watchPosition((...args: any[]) => {
 				const position: Position = args[0],
 					extra: any = args[1],
@@ -73,17 +76,18 @@ export class GeolocationService {
 						position: position,
 						extra: extra
 					};
-				resolve({
+				subscriber.next({
 					code: 'ok',
 					info: '定位成功！',
 					result: location
 				});
 			}, (error: PositionError) => {
-				resolve({
+				subscriber.error({
 					code: 'error',
 					info: '定位失败！',
 					result: error
 				});
+				subscriber.complete();
 			}, positionOptions);
 		});
 	}
