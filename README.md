@@ -21,9 +21,11 @@
 
 - 集成高德地图、highchart，实现简单天气预报（调用高德api）
 
+- 通过 URL Scheme 可以在外部（如浏览器）通过代码打开 APP（使用 `ionicStart://任意值` 即可）
+
 - ...
 
-## 搭建环境（[详细教程](./SETUP.md)）
+## 搭建环境（[详细教程](http://www.cnblogs.com/laixiangran/p/8944435.html)）
 
 - Install [Nodejs](https://nodejs.org/zh-cn/) (>= 6.9.0)
 

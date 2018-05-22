@@ -25,6 +25,7 @@ export class AppComponent {
 	rootPage = null;
 	pages: Array<{ code: string, title: string, component: any }>;
 	backButtonPressed: boolean = false;  // 用于判断返回键是否触发
+	schemeUrl: string;
 
 	constructor(public platform: Platform,
 				public network: Network,
@@ -41,19 +42,24 @@ export class AppComponent {
 				public screenOrientation: ScreenOrientation,
 				public authService: AuthService) {
 
-		this.initializeApp();
-
 		this.pages = [
 			{code: 'setting', title: '设置', component: SettingsPage},
 			{code: 'notice', title: '通知', component: SettingsPage}
 		];
+
+		// （通过 URL Scheme 打开 APP）定义 handleOpenURL 方法，用于获取 URL 上的数据
+		(window as any).handleOpenURL = (schemeUrl: string) => {
+			this.schemeUrl = schemeUrl;
+		};
+
+		this.initializeApp();
 	}
 
 	initializeApp() {
 		this.platform.ready().then(() => {
-			this.checkDisConnect(); // 检查网络是否断开
-			this.registerBackButtonAction();
 			this.config.initAppInfo().then(() => {
+				this.checkDisConnect();
+				this.registerBackButtonAction();
 				// this.checkLatestVersion();
 				this.isLogin();
 			});
@@ -65,11 +71,13 @@ export class AppComponent {
 	 */
 	registerBackButtonAction() {
 		this.platform.registerBackButtonAction(() => {
+
 			// 如果键盘开启则隐藏键盘
 			if (this.keyboard.isOpen()) {
 				this.keyboard.close();
 				return;
 			}
+
 			// 隐藏加载动画
 			const activePortal: any = this.ionicApp._loadingPortal.getActive();
 			if (activePortal) {
@@ -77,8 +85,10 @@ export class AppComponent {
 				activePortal.onDidDismiss();
 				return;
 			}
+
 			// 设置竖屏
 			this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
 			// 根据当前导航进行不同的处理（mainTabs对象是在TabsPage定义的ion-tabs，instantTabs对象是在InstantCommPage定义的ion-tabs）
 			const mainTabs: Tabs = this.nav.getActive().instance.mainTabs;
 			if (mainTabs) {
@@ -93,6 +103,8 @@ export class AppComponent {
 					return;
 				}
 			} else {
+
+				// this.showExit() 为退出 APP，如果不退出 APP 而是让 APP 后台运行可使用 this.backgroundMode.moveToBackground()
 				this.nav.canGoBack() ? this.nav.pop() : this.showExit();
 			}
 			return;
