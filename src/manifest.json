@@ -5,11 +5,11 @@
 	"display": "standalone",
 	"icons": [
 		{
-			"src": "assets/img/login/logo.png",
+			"src": "assets//login/logo.png",
 			"sizes": "512x512",
 			"type": "image/png"
-		}
+		}images
 	],
-	"background_color": "#4e8ef7",
-	"theme_color": "#4e8ef7"
+	"background_color": "#50C6F4",
+	"theme_color": "#50C6F4"
 }
