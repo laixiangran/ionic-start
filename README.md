@@ -35,11 +35,11 @@
 
 - Install [Android SDK]( http://developer.android.com/sdk/index.html)
 
-- `npm install -g ionic cordova@6.5.0` - 安装全局的ionic和cordova（版本固定是6.5.0）
+- `npm install -g ionic cordova@^7.0.0` - 安装全局的ionic和cordova
 
 - `npm install` - 安装依赖包
 
-- `npm run add` - 添加安卓平台
+- `npm run add` - 添加安卓平台（cordova-android = 6.3.0）
 
 ## 启动和构建项目
 
