@@ -39,7 +39,7 @@
 
 - `npm install` - 安装依赖包
 
-- `npm run add` - 添加安卓平台（cordova-android = 6.3.0）
+- `npm run add` - 添加安卓平台（cordova-android 固定为 6.3.0）
 
 ## 启动和构建项目
 
@@ -47,9 +47,9 @@
 
 - `npm run resources` - 生成图标和启动页（resources下必须有icon.png和splash.png）
 
-- `npm run device` - 构建并启动设备运行
+- `npm run device` - 构建并启动设备运行（需要配置 `signing` 下的文件，查看 `signing` 目录下的 `README.md`）
 
-- `npm run build` - 构建APP
+- `npm run build` - 构建APP（需要配置 `signing` 下的文件，查看 `signing` 目录下的 `README.md`）
 
 ## 其它资料
 
