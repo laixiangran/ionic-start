@@ -60,8 +60,8 @@
     "cordova-android": "~6.3.0",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-background-mode": "^0.7.2",
-    "cordova-plugin-baidu-geolocation": "git+https://github.com/laixiangran/cordova-plugin-baidu-geolocation.git",
     "cordova-plugin-battery-status": "^2.0.2",
+    "cordova-plugin-bd-geolocation": "^8.0.1",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-crosswalk-webview": "^2.4.0",
@@ -142,11 +142,11 @@
         "ANDROID_HOST": " ",
         "ANDROID_PATHPREFIX": "/"
       },
-      "cordova-plugin-baidu-geolocation": {
-        "API_KEY": "F0c645f961aa0cdae874b2073d55f3a5"
-      },
       "cordova-plugin-videoplayer": {},
-      "com.hutchind.cordova.plugins.streamingmedia": {}
+      "com.hutchind.cordova.plugins.streamingmedia": {},
+      "cordova-plugin-bd-geolocation": {
+        "API_KEY": "F0c645f961aa0cdae874b2073d55f3a5"
+      }
     },
     "platforms": [
       "android"

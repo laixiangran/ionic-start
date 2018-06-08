@@ -85,10 +85,10 @@
         <variable name="ANDROID_HOST" value=" " />
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
-    <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/laixiangran/cordova-plugin-baidu-geolocation">
-        <variable name="API_KEY" value="F0c645f961aa0cdae874b2073d55f3a5" />
-    </plugin>
     <plugin name="cordova-plugin-videoplayer" spec="^0.1.4" />
     <plugin name="com.hutchind.cordova.plugins.streamingmedia" spec="~0.1.4" />
-    <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-bd-geolocation" spec="^8.0.1">
+        <variable name="API_KEY" value="F0c645f961aa0cdae874b2073d55f3a5" />
+    </plugin>
+    <engine name="android" spec="6.3.0" />
 </widget>
