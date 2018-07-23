@@ -3,7 +3,7 @@
  * homepage：http://www.laixiangran.cn
  */
 
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
@@ -15,7 +15,8 @@ import { MenuController } from 'ionic-angular';
 
 @Component({
 	selector: 'page-weather-report',
-	templateUrl: 'weatherReport.html'
+	templateUrl: 'weatherReport.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherReportPage {
 
@@ -29,6 +30,7 @@ export class WeatherReportPage {
 	weekArr: string[] = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
 
 	constructor(private http: HttpClient,
+				public changeDetector: ChangeDetectorRef,
 				public rs: RequestService,
 				public menu: MenuController,
 				public statusBar: StatusBar,
@@ -66,6 +68,7 @@ export class WeatherReportPage {
 								this.weatherType = 'cloudy';
 								this.statusBar.backgroundColorByHexString('#4b5967');
 							}
+							this.changeDetector.detectChanges();
 						}
 					});
 				}
