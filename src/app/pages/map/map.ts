@@ -10,9 +10,6 @@ export class MapPage {
 	amapComponent: EssenceIonAMapComponent; // 当前地图控件对象
 	amap: any; // 当前地图对象
 	options: PositionOptions;
-	coordinates: any[] = [];
-	watchId: number;
-	polyline: any;
 	marker: any;
 
 	constructor(public config: ConfigService) {
@@ -23,13 +20,11 @@ export class MapPage {
 
 	ionViewDidEnter() {
 		if (this.amap) {
-			this.watchPosition();
+			this.getPosition();
 		}
 	}
 
 	ionViewDidLeave() {
-		clearInterval(this.watchId);
-		this.coordinates = [];
 	}
 
 	/**
@@ -39,48 +34,32 @@ export class MapPage {
 	amapReady($event: EssenceIonAMapComponent) {
 		this.amapComponent = $event;
 		this.amap = $event.getMap();
-		this.watchPosition();
+		this.getPosition();
 	}
 
 	amapDestroy($event) {
 		console.log($event);
 	}
 
-	watchPosition() {
+	getPosition() {
 		navigator.geolocation.getCurrentPosition((...args: any[]) => {
 			const position: Position = args[0];
 			const extra: any = args[1];
-			const coordinate: number[] = [position.coords.longitude, position.coords.latitude, extra.addr];
-			const isPush: boolean = this.coordinates.every((c: number[]) => {
-				return c.join() !== coordinate.join();
-			});
-			if (isPush) {
-				this.coordinates.push(coordinate);
-				if (this.polyline) {
-					this.polyline.setPath(JSON.parse(JSON.stringify(this.coordinates)));
-				} else {
-					this.polyline = new this.amapComponent.eAMap.Polyline({
-						path: JSON.parse(JSON.stringify(this.coordinates)), // 设置线覆盖物路径
-						strokeColor: '#3366FF', // 线颜色
-						strokeOpacity: 1, // 线透明度
-						strokeWeight: 2, // 线宽
-						strokeStyle: 'solid', // 线样式
-						strokeDasharray: [10, 5], // 补充线样式
-					});
-					this.polyline.setMap(this.amap);
-				}
-				if (this.marker) {
-					this.amap.remove([this.marker]);
-				}
-				this.marker = new this.amapComponent.eAMap.Marker({
-					icon: './assets/images/map/loc.png',
-					position: [position.coords.longitude, position.coords.latitude]
-				});
-				this.marker.setMap(this.amap);
-				this.amap.setFitView([this.marker]);
+			if (extra.type === 162 || extra.type === 62) {
+				this.getPosition();
+				return;
 			}
+			if (this.marker) {
+				this.amap.remove([this.marker]);
+			}
+			this.marker = new this.amapComponent.eAMap.Marker({
+				icon: './assets/images/map/loc.png',
+				position: [position.coords.longitude, position.coords.latitude]
+			});
+			this.marker.setMap(this.amap);
+			this.amap.setFitView([this.marker]);
 		}, (error: PositionError) => {
-			console.log(error);
+			console.error(error);
 		}, this.options);
 	}
 }

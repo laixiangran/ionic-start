@@ -13,9 +13,4 @@
 			(ready)="amapReady($event)"
 			(destroy)="amapDestroy($event)">
 	</essence-ion-amap>
-	<div style="position: absolute; top: 0; left: 0; height: 100px;">
-		<div *ngFor="let coordinate of coordinates">
-			<span>{{coordinate | json}}</span>
-		</div>
-	</div>
 </ion-content>

@@ -9,8 +9,8 @@ $login-border-radius-5: 0.5rem;
 page-login {
 
     ion-content {
-        background: url("../assets/images/login/login_bg.jpg") top center no-repeat;
-        background-size: 100%;
+        background: url("../assets/images/login/login_bg.jpg") center no-repeat;
+        background-size: cover;
     }
 
     .login-content {

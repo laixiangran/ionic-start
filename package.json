@@ -126,13 +126,6 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file-opener2": {},
       "cordova-plugin-file": {},
-      "cordova-plugin-crosswalk-webview": {
-        "XWALK_VERSION": "23+",
-        "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
-        "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
-        "XWALK_MODE": "embedded",
-        "XWALK_MULTIPLEAPK": "true"
-      },
       "phonegap-plugin-barcodescanner": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
@@ -146,6 +139,13 @@
       "com.hutchind.cordova.plugins.streamingmedia": {},
       "cordova-plugin-bd-geolocation": {
         "API_KEY": "F0c645f961aa0cdae874b2073d55f3a5"
+      },
+      "cordova-plugin-crosswalk-webview": {
+        "XWALK_VERSION": "23+",
+        "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+        "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+        "XWALK_MODE": "embedded",
+        "XWALK_MULTIPLEAPK": "true"
       }
     },
     "platforms": [
