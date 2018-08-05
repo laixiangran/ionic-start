@@ -50,6 +50,7 @@ import { ENgxChartModule } from 'e-ngx-chart';
 import { FileDemoPage } from './pages/native/subpages/file-demo/file-demo';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { GeolocationService } from './services/geolocation.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @NgModule({
 	imports: [
@@ -138,7 +139,8 @@ import { GeolocationService } from './services/geolocation.service';
 		Camera,
 		MediaCapture,
 		StreamingMedia,
-		NativeGeocoder
+		NativeGeocoder,
+		AndroidPermissions
 	]
 })
 export class AppModule {

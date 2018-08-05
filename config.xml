@@ -91,4 +91,5 @@
         <variable name="XWALK_MULTIPLEAPK" value="true" />
     </plugin>
     <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
 </widget>

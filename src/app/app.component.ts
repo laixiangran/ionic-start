@@ -15,6 +15,7 @@ import { AppService } from './app.service';
 import { TabsPage } from './pages/tabs/tabs';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ServerData } from './models/server-data.model';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
 	templateUrl: 'app.html',
@@ -36,6 +37,7 @@ export class AppComponent {
 				public fileOpener: FileOpener,
 				public file: File,
 				public loginService: LoginService,
+				public androidPermissions: AndroidPermissions,
 				public tips: TipsService,
 				public config: ConfigService,
 				public appService: AppService,
@@ -58,12 +60,25 @@ export class AppComponent {
 	initializeApp() {
 		this.platform.ready().then(() => {
 			this.config.initAppInfo().then(() => {
+				this.requestPermissions();
 				this.checkDisConnect();
 				this.registerBackButtonAction();
 				// this.checkLatestVersion();
 				this.isLogin();
 			});
 		});
+	}
+
+	/**
+	 * 提前获取部分权限（android）
+	 */
+	requestPermissions() {
+		const permissions: string[] = [
+			this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+			this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+			this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+		];
+		this.androidPermissions.requestPermissions(permissions);
 	}
 
 	/**
