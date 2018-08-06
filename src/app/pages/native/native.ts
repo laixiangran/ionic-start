@@ -72,14 +72,8 @@ export class NativePage {
 	}
 
 	playCamera() {
-		const options: CameraOptions = {
-			quality: 100,
-			destinationType: this.camera.DestinationType.DATA_URL,
-			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE
-		};
-		this.camera.getPicture(options).then((imageData) => {
-			console.log(imageData);
+		this.camera.getPicture().then((imageUrl) => {
+			console.log(imageUrl);
 		}, (err) => {
 			console.error(err);
 		});

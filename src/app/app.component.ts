@@ -15,6 +15,7 @@ import { AppService } from './app.service';
 import { TabsPage } from './pages/tabs/tabs';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ServerData } from './models/server-data.model';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
 	templateUrl: 'app.html',
@@ -36,6 +37,7 @@ export class AppComponent {
 				public fileOpener: FileOpener,
 				public file: File,
 				public loginService: LoginService,
+				public androidPermissions: AndroidPermissions,
 				public tips: TipsService,
 				public config: ConfigService,
 				public appService: AppService,
@@ -58,12 +60,25 @@ export class AppComponent {
 	initializeApp() {
 		this.platform.ready().then(() => {
 			this.config.initAppInfo().then(() => {
+				this.requestPermissions();
 				this.checkDisConnect();
 				this.registerBackButtonAction();
 				// this.checkLatestVersion();
 				this.isLogin();
 			});
 		});
+	}
+
+	/**
+	 * 提前获取部分权限（android）
+	 */
+	requestPermissions() {
+		const permissions: string[] = [
+			this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+			this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+			this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+		];
+		this.androidPermissions.requestPermissions(permissions);
 	}
 
 	/**
@@ -156,19 +171,20 @@ export class AppComponent {
 	}
 
 	onLogout() {
-		this.loginService.logout().subscribe((serverData: any) => {
-			if (serverData.status === 200) {
-				this.authService.removeToken().then(() => {
-					this.nav.setRoot(LoginPage);
-				});
-			} else {
-				this.tips.alert({
-					title: '温馨提示',
-					message: '登录失败，请联系技术人员处理！',
-					buttons: ['确定']
-				});
-			}
-		});
+		this.nav.setRoot(LoginPage);
+		// this.loginService.logout().subscribe((serverData: any) => {
+		// 	if (serverData.status === 200) {
+		// 		this.authService.removeToken().then(() => {
+		// 			this.nav.setRoot(LoginPage);
+		// 		});
+		// 	} else {
+		// 		this.tips.alert({
+		// 			title: '温馨提示',
+		// 			message: '登录失败，请联系技术人员处理！',
+		// 			buttons: ['确定']
+		// 		});
+		// 	}
+		// });
 	}
 
 	/**

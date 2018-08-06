@@ -4,8 +4,8 @@
  * 登录页面（组件）
  */
 
-import { Component } from '@angular/core';
-import { MenuController, NavController, Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Content, MenuController, NavController, Platform } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from '../../services/auth.service';
 import { Network } from '@ionic-native/network';
@@ -17,6 +17,7 @@ import { ConfigService } from '../../services/config.service';
 	templateUrl: 'login.html'
 })
 export class LoginPage {
+	@ViewChild(Content) content: Content;
 
 	user: any = {};
 
@@ -32,6 +33,7 @@ export class LoginPage {
 	ionViewDidEnter() {
 		this.menu.enable(false); // 禁用侧边菜单栏
 		this.statusBar.backgroundColorByHexString(this.config.loginStatusBarColor);
+		this.content.setScrollElementStyle('overflow', 'hidden')
 	}
 
 	ionViewDidLeave() {
