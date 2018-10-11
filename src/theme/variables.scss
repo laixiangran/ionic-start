@@ -1,6 +1,5 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
-
 // 引入外部字体样式
 @import "../assets/fonts/iconfont";
 
@@ -8,16 +7,12 @@ $font-path: "../assets/fonts";
 
 @import "ionic.globals";
 
-
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
-
-
-
 
 // Named Color Variables
 // --------------------------------------------------
@@ -28,26 +23,25 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-    primary: #1D89DA,
-    secondary: #32DB64,
-    danger: #F53D3D,
-    light: #F1F1F1,
-    dark: #222222,
-    energized: #FFC527,
-    royal: #7E60FF,
-    subtle: #444444,
-    vibrant: rebeccapurple,
-    bright: #FFC125,
-    custom-primary: #3C6FD8,
-    custom-light: #777777,
-    custom-border-color: #dedede,
+	primary: #1D89DA,
+	secondary: #32DB64,
+	danger: #F53D3D,
+	light: #F1F1F1,
+	dark: #222222,
+	energized: #FFC527,
+	royal: #7E60FF,
+	subtle: #444444,
+	vibrant: rebeccapurple,
+	bright: #FFC125,
+	custom-primary: #3C6FD8,
+	custom-light: #777777,
+	custom-border-color: #DEDEDE,
 	custom-white: #FFFFFF,
-    weather-fine: #0f69bd,
-    weather-cloudy: #4b5967
+	weather-fine: #0F69BD,
+	weather-cloudy: #4B5967
 );
 
 $text-input-placeholder-color: #FFFFFF;
-
 
 // App iOS Variables
 // --------------------------------------------------
@@ -55,24 +49,15 @@ $text-input-placeholder-color: #FFFFFF;
 
 $loading-ios-text-color: #FFFFFF;
 $loading-ios-spinner-color: #FFFFFF;
-$loading-ios-background: rgba(0,0,0,0.8);
-
-
-
+$loading-ios-background: rgba(0, 0, 0, 0.8);
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
-
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
-
 
 // App Theme
 // --------------------------------------------------
@@ -83,14 +68,12 @@ $loading-ios-background: rgba(0,0,0,0.8);
 
 @import "ionic.theme.default";
 
-
 // Ionicons
 // --------------------------------------------------
 // The premium icon font for Ionic. For more info, please see:
 // http://ionicframework.com/docs/v2/ionicons/
 
 @import "ionic.ionicons";
-
 
 // Fonts
 // --------------------------------------------------

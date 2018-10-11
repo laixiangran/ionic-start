@@ -1,52 +1,51 @@
 page-statistic {
+	ion-content {
+		background-color: #F5F5F5 !important;
+	}
 
-    ion-content {
-        background-color: #F5F5F5 !important;
-    }
+	.statisTabsContainer {
+		border-bottom: 1px solid #DDDDDD;
+		background-color: #FFFFFF;
+		width: 100%;
+		text-align: center;
 
-    .statisTabsContainer {
-        border-bottom: 1px solid #DDDDDD;
-        background-color: #FFFFFF;
-        width: 100%;
-        text-align: center;
+		p {
+			padding: 0;
+			margin: 0;
+		}
 
-        p {
-            padding: 0;
-            margin: 0;
-        }
+		ion-col {
+			cursor: pointer;
+			padding: 0;
 
-        ion-col {
-            cursor: pointer;
-            padding: 0;
+			ion-icon {
+				font-size: 3rem;
+			}
 
-            ion-icon {
-                font-size: 3rem;
-            }
+			div {
+				padding: 10px 0;
+				font-size: 1.4rem;
+			}
 
-            div {
-                padding: 10px 0;
-                font-size: 1.4rem;
-            }
+			div.selected {
+				border-bottom: 2px solid #1D89DA;
+			}
+		}
+	}
 
-            div.selected {
-                border-bottom: 2px solid #1D89DA;
-            }
-        }
-    }
+	.statisChartContainer {
+		background-color: #FFFFFF;
 
-    .statisChartContainer {
-        background-color: #FFFFFF;
+		div.e-ngx-chart {
+			width: 100%;
+			height: 300px;
+			padding: 0;
+			float: left;
+			margin: 10px auto 10px auto;
+		}
 
-        div.e-ngx-chart {
-            width: 100%;
-            height: 300px;
-            padding: 0;
-            float: left;
-            margin: 10px auto 10px auto;
-        }
-
-        div.e-ngx-chart:last-child {
-            margin-top: 0;
-        }
-    }
+		div.e-ngx-chart:last-child {
+			margin-top: 0;
+		}
+	}
 }

@@ -111,7 +111,7 @@ export class NativePage {
 	 * 播放静态视频流
 	 */
 	playVideoStreaming() {
-		const videoUrl: string = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
+		const videoUrl = 'http://www.laixiangran.cn/CDN/custom/video/test.mp4';
 		const options: StreamingVideoOptions = {
 			successCallback: () => {
 				console.log('Video played');
@@ -127,7 +127,7 @@ export class NativePage {
 	 * 播放动态视频流
 	 */
 	playVideoStreaming2() {
-		const videoUrl: string = 'rtsp://admin:sjq123456@123.56.211.160:9102/MPEG-4/ch1/main/av_stream';
+		const videoUrl = 'rtsp://admin:sjq123456@123.56.211.160:9102/MPEG-4/ch1/main/av_stream';
 		const options: StreamingVideoOptions = {
 			successCallback: () => {
 				console.log('Video played');

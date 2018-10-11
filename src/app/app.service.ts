@@ -3,7 +3,7 @@
  * homepage：http://www.laixiangran.cn
  */
 
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { RequestService } from './services/request.service';
 import { ConfigService } from './services/config.service';

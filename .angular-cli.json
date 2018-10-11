@@ -1,0 +1,61 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"project": {
+		"name": "ionic-start"
+	},
+	"apps": [
+		{
+			"root": "src",
+			"outDir": "dist",
+			"assets": [
+				"assets",
+				"theme",
+				"favicon.ico",
+				"manifest.json",
+				"service-worker.js"
+			],
+			"index": "index.html",
+			"main": "main.ts",
+			"polyfills": "polyfills.ts",
+			"tsconfig": "tsconfig.app.json",
+			"prefix": "",
+			"styles": [],
+			"scripts": [],
+			"environmentSource": "environments/environment.ts",
+			"environments": {
+				"dev": "environments/environment.ts",
+				"test": "environments/environment.test.ts",
+				"prod": "environments/environment.prod.ts"
+			}
+		}
+	],
+	"lint": [
+		{
+			"project": "src/tsconfig.json"
+		}
+	],
+	"defaults": {
+		"styleExt": "scss",
+		"class": {
+			"spec": false
+		},
+		"component": {
+			"spec": false
+		},
+		"directive": {
+			"spec": false
+		},
+		"guard": {
+			"spec": false
+		},
+		"module": {
+			"spec": false
+		},
+		"pipe": {
+			"spec": false
+		},
+		"service": {
+			"spec": false
+		}
+	}
+}

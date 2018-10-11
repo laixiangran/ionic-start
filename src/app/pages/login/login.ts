@@ -33,7 +33,7 @@ export class LoginPage {
 	ionViewDidEnter() {
 		this.menu.enable(false); // 禁用侧边菜单栏
 		this.statusBar.backgroundColorByHexString(this.config.loginStatusBarColor);
-		this.content.setScrollElementStyle('overflow', 'hidden')
+		this.content.setScrollElementStyle('overflow', 'hidden');
 	}
 
 	ionViewDidLeave() {

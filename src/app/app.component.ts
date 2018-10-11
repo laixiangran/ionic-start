@@ -230,7 +230,7 @@ export class AppComponent {
 	downloadNewVersion() {
 		const fileTransferObject: FileTransferObject = this.fileTransfer.create();
 		// 只适用android平台
-		const outUrl: string = `${this.file.externalDataDirectory || this.file.dataDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
+		const outUrl = `${this.file.externalDataDirectory || this.file.dataDirectory}ionicStart_${this.config.versionNumber}_${new Date().getTime()}.apk`;
 		const downloadAlert: Alert = this.tips.alert({
 			title: '下载中...',
 			buttons: [
@@ -242,7 +242,7 @@ export class AppComponent {
 				}
 			]
 		});
-		let scale: string = '0%';
+		let scale = '0%';
 		const intervalId: any = setInterval(() => {
 			downloadAlert.setTitle(`已下载${scale}`);
 		}, 500);

@@ -1,5 +1,4 @@
 page-rules {
-
 	ion-content {
 		background-color: #F9F9F9 !important;
 
@@ -24,12 +23,9 @@ page-rules {
 			white-space: nowrap;
 			overflow: hidden;
 
-			> span {
+			& > span {
 				display: inline-block;
-
-				& {
-					margin-left: 20px;
-				}
+				margin-left: 20px;
 
 				&:nth-child(1) {
 					position: absolute;

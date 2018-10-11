@@ -90,7 +90,7 @@ export class RadarMapPage {
 			this.operateText = '播放';
 			this.playBoolean = false;
 			if (this.timer === null) {
-				return
+				return;
 			}
 			clearTimeout(this.timer);
 			this.timer = null;

@@ -8,8 +8,8 @@
 import { Injectable } from '@angular/core';
 
 interface Location {
-	lat: number,
-	lng: number
+	lat: number;
+	lng: number;
 }
 
 @Injectable()
@@ -51,7 +51,7 @@ export class TransformService {
 		lat += -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * xy + 0.2 * absX;
 		lng += 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * xy + 0.1 * absX;
 
-		return {lat: lat, lng: lng}
+		return {lat: lat, lng: lng};
 	}
 
 	private delta(lat: number, lng: number): Location {

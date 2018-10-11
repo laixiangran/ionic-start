@@ -1,12 +1,11 @@
 page-native {
+	ion-content {
+		background-color: #F9F9F9 !important;
+	}
 
-    ion-content {
-        background-color: #F9F9F9 !important;
-    }
-
-    ion-note {
-        font-size: 12px;
-        align-self: flex-start;
-        margin-top: 14px;
-    }
+	ion-note {
+		font-size: 12px;
+		align-self: flex-start;
+		margin-top: 14px;
+	}
 }

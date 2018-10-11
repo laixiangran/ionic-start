@@ -97,7 +97,7 @@ export class WeatherReportPage {
 				resolve(currLocation);
 			}, (error: PositionError) => {
 				reject(error);
-			}, options)
+			}, options);
 		});
 	}
 

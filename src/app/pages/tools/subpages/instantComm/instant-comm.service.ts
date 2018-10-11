@@ -4,7 +4,7 @@
  * 登录服务
  */
 
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { RequestService } from '../../../../services/request.service';
 import { SendMessage } from '../../../../models/send-message.model';
